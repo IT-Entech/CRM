@@ -385,11 +385,11 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
+          <!--li>
             <a href="forms-elements.html">
               <i class="bi bi-circle"></i><span>Form Elements</span>
             </a>
-          </li>
+          </li-->
           <li>
             <a href="forms-appoint.php">
               <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
@@ -400,11 +400,11 @@ if($staff === 0 || $level <= 1){
               <i class="bi bi-circle"></i><span>บันทึก Order</span>
             </a>
           </li>
-          <li>
+          <!--li>
             <a href="forms-validation.html">
               <i class="bi bi-circle"></i><span>Form Validation</span>
             </a>
-          </li>
+          </li-->
         </ul>
       </li>
 
@@ -431,7 +431,7 @@ if($staff === 0 || $level <= 1){
         </ul>
       </li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -452,9 +452,9 @@ if($staff === 0 || $level <= 1){
             </a>
           </li>
         </ul>
-      </li>
+      </li-->
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -475,16 +475,16 @@ if($staff === 0 || $level <= 1){
             </a>
           </li>
         </ul>
-      </li>
+      </li-->
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
-      </li>
+      </li-->
 
       <li class="nav-item">
         <a class="nav-link collapsed" href="permission.php">
@@ -493,7 +493,7 @@ if($staff === 0 || $level <= 1){
         </a>
       </li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
@@ -526,7 +526,7 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-calendar-day"></i>
           <span>Blank</span>
         </a>
-      </li>
+      </li-->
 
     </ul>
 

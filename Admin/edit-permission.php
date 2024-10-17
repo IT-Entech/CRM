@@ -1,5 +1,5 @@
 <?php
-include_once('./connectDB.php');
+include_once('C:\xampp\htdocs\connectDB\connectDB.php');
 $objCon = connectDB();
 /*
 $sales = isset($_GET['channel']) ? $_GET['channel'] : NULL;

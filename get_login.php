@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('./connectDB.php');
+include_once('C:\xampp\htdocs\connectDB\connectDB.php');
 $objCon = connectDB();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {

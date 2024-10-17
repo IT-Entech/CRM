@@ -1,5 +1,5 @@
 <?php
-include_once('./connectDB.php');
+include_once('C:\xampp\htdocs\connectDB\connectDB.php');
 $objCon = connectDB();
 
 $staff = isset($_POST['staff']) ? $_POST['staff'] : NULL;

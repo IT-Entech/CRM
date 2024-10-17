@@ -1,5 +1,5 @@
 <?php
-include_once('./connectDB.php'); // Include your database connection script
+include_once('C:\xampp\htdocs\connectDB\connectDB.php');
 $objCon = connectDB(); // Connect to the database
 
 if ($objCon === false) {

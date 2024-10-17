@@ -3,7 +3,7 @@
 	error_reporting(~0);
 
 	session_start();
-  include_once('./connectDB.php');
+	include_once('C:\xampp\htdocs\connectDB\connectDB.php');
 $objCon = connectDB();
 $data = $_POST;
 $username = $data["username"];

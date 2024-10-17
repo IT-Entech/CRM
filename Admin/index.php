@@ -302,7 +302,7 @@ if($staff === 0 || $level <= 1){
         </ul>
       </li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -378,7 +378,7 @@ if($staff === 0 || $level <= 1){
             </a>
           </li>
         </ul>
-      </li>
+      </li-->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">

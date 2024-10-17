@@ -1,30 +1,46 @@
 <?php
 function connectDB()
 {
-    // Database connection parameters
-    $serverName = "203.151.66.176,55449";  // IP address or hostname of the SQL Server
-    $userName = "sa";             // SQL Server login username
-    $userPassword = "System2560";      // SQL Server login password
-    $dbName = "EntechWebDB";            // Name of the database to connect to
+    $serverName = "En_Technology_Win2016,55449";
+    $userName = "sa";
+    $userPassword = "System2560";
+    $dbName = "EntechDB";
+    
+    $connectionInfo = array("Database"=>$dbName, "UID"=>$userName, "PWD"=>$userPassword, "ReturnDatesAsStrings"=>true, "MultipleActiveResultSets"=>true, "CharacterSet"  => 'UTF-8');
+    $conn = sqlsrv_connect( $serverName, $connectionInfo);
 
-    // Connection options
-    $connectionInfo = array(
-        "Database" => $dbName,
-        "UID" => $userName,
-        "PWD" => $userPassword,
-        "ReturnDatesAsStrings" => true,        // Return date values as strings
-        "MultipleActiveResultSets" => true,    // Allow multiple active result sets
-        "CharacterSet" => 'UTF-8'             // Set character encoding to UTF-8
-    );
-
-    // Attempt to establish a connection
-    $objCon = sqlsrv_connect($serverName, $connectionInfo);
-
-    return $objCon;  // Return the connection object (or FALSE if connection fails)
+    return $conn;
 }
-if($objCon = connectDB())
-	{
-		//echo "Database Connected.";
-       
-	}
-?>
+
+function date_th($date)
+{
+    if ($date == '0000-00-00')
+        return '-';
+
+    $date_array = explode('-', $date);
+    $th_date = $date_array[2] .
+        '/' . $date_array[1] . '/' .
+        ($date_array[0] + 543);
+
+    return $th_date;
+}
+
+function date_en($date)
+{
+    $date_array = explode('/', $date);
+    $en_date = ($date_array[2] - 543) . '-' .
+        $date_array[1] . '-' . $date_array[0];
+    return $en_date;
+}
+
+function randomString($length = 5)
+{
+    $str = "";
+    $characters = array_merge(range('0', '9'));
+    $max = count($characters) - 1;
+    for ($i = 0; $i < $length; $i++) {
+        $rand = mt_rand(0, $max);
+        $str .= $characters[$rand];
+    }
+    return $str;
+}

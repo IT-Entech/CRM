@@ -5,7 +5,7 @@ $staff = htmlspecialchars($staff);
 $level = htmlspecialchars($level);
 $Role = htmlspecialchars($role);
 if($staff === 0 || $level <= 1){
-  echo '<script>alert("Can not enter this site");window.location="/CRM/pages-login.html";</script>';
+  echo '<script>alert("Can not enter this site");window.location="https://entech-app.com/pages-login.html";</script>';
 }
 ?>
 <!DOCTYPE html>
@@ -264,7 +264,7 @@ if($staff === 0 || $level <= 1){
             </li-->
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="/CRM/log_out.php">
+              <a class="dropdown-item d-flex align-items-center" href="https://entech-app.com/log_out.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>

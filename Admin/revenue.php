@@ -78,9 +78,9 @@ ORDER BY
   C.customer_segment_name AS segment,
   COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
   COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-  COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-  COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-  COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+  COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+  COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+  COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
   COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
 FROM 
   View_SO_SUM A
@@ -154,9 +154,9 @@ GROUP BY
        C.customer_segment_name AS segment,
        COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
        COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-       COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-       COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-       COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+       COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+       COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+       COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
        COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
      FROM 
        View_SO_SUM A
@@ -229,9 +229,9 @@ GROUP BY
     C.customer_segment_name AS segment,
     COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
     COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-    COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-    COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-    COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+    COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+    COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+    COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
     COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
   FROM 
     View_SO_SUM A
@@ -303,9 +303,9 @@ GROUP BY
            C.customer_segment_name AS segment,
            COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
            COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-           COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-           COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-           COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+           COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+           COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+           COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
            COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
          FROM 
            View_SO_SUM A
@@ -382,9 +382,9 @@ GROUP BY
            C.customer_segment_name AS segment,
            COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
            COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-           COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-           COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-           COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+           COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+           COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+           COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
            COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
          FROM 
            View_SO_SUM A
@@ -461,9 +461,9 @@ GROUP BY
          C.customer_segment_name AS segment,
          COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
          COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-         COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-         COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-         COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+         COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+         COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+         COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
          COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
        FROM 
          View_SO_SUM A
@@ -539,9 +539,9 @@ GROUP BY
         C.customer_segment_name AS segment,
         COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
         COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-        COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-        COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-        COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+        COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+        COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+        COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
         COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
         FROM 
           View_SO_SUM A
@@ -624,9 +624,9 @@ GROUP BY
           C.customer_segment_name AS segment,
           COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
           COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-          COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-          COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-          COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+          COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+          COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+          COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
           COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
           FROM 
             View_SO_SUM A
@@ -701,9 +701,9 @@ GROUP BY
          C.customer_segment_name AS segment,
          COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
          COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-         COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-         COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-         COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+         COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+         COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+         COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
          COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
          FROM 
            View_SO_SUM A
@@ -786,9 +786,9 @@ GROUP BY
     C.customer_segment_name AS segment,
     COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
     COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-    COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-    COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-    COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+    COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+    COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+    COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
     COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
     FROM 
       View_SO_SUM A
@@ -868,9 +868,9 @@ GROUP BY
      C.customer_segment_name AS segment,
      COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
      COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-     COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-     COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-     COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+     COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+     COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+     COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
      COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
      FROM 
        View_SO_SUM A
@@ -948,9 +948,9 @@ GROUP BY
      C.customer_segment_name AS segment,
      COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
      COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-     COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-     COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-     COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+     COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+     COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+     COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
      COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
      FROM 
        View_SO_SUM A
@@ -1034,9 +1034,9 @@ GROUP BY
                   C.customer_segment_name AS segment,
                   COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
                   COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-                  COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-                  COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-                  COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+                  COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+                  COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+                  COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
                   COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
                   FROM 
                   View_SO_SUM A
@@ -1120,9 +1120,9 @@ GROUP BY
                   C.customer_segment_name AS segment,
                   COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
                   COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-                  COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-                  COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-                  COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+                  COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+                  COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+                  COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
                   COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
                   FROM 
                     View_SO_SUM A
@@ -1207,9 +1207,9 @@ GROUP BY
     C.customer_segment_name AS segment,
     COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
     COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-    COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-    COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-    COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+    COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+    COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+    COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
     COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
     FROM 
       View_SO_SUM A
@@ -1298,9 +1298,9 @@ GROUP BY
         C.customer_segment_name AS segment,
         COUNT(CASE WHEN B.zone_code = '01' THEN A.province_code END) AS 'North',
         COUNT(CASE WHEN B.zone_code = '02' THEN A.province_code END) AS 'Central',
-        COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'East',
-        COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'North_East',
-        COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'West',
+        COUNT(CASE WHEN B.zone_code = '03' THEN A.province_code END) AS 'North_East',
+        COUNT(CASE WHEN B.zone_code = '04' THEN A.province_code END) AS 'West',
+        COUNT(CASE WHEN B.zone_code = '05' THEN A.province_code END) AS 'East',
         COUNT(CASE WHEN B.zone_code = '06' THEN A.province_code END) AS 'South'
         FROM 
           View_SO_SUM A

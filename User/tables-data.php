@@ -563,7 +563,7 @@ if($staff === 0 || $level < 1){
               <div class="col-xxl-3 col-md-6">
                 <div class="form-floating mb-3">
                   <select class="form-select" id="month" aria-label="Month"onchange="fetchData()">
-                   
+                  <option value="0">-</option>
                   </select>
                   <label for="month">Month</label>
                 </div>

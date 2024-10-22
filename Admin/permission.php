@@ -271,7 +271,7 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
             </li>
 
             <li>
-              <a class="dropdown-item d-flex align-items-center" href="/CRM/log_out.php">
+              <a class="dropdown-item d-flex align-items-center" href="https://entech-app.com/log_out.php">
                 <i class="bi bi-box-arrow-right"></i>
                 <span>Sign Out</span>
               </a>

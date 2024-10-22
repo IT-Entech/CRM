@@ -3,7 +3,7 @@ $name = htmlspecialchars($name);
 $staff = htmlspecialchars($staff);
 $level = htmlspecialchars($level);
 if($staff === 0 || $level <= 1){
-  echo '<script>alert("Can not enter this site");window.location="/CRM/pages-login.html";</script>';
+  echo '<script>alert("Can not enter this site");window.location="https://entech-app.com/pages-login.html";</script>';
 }
 ?>
 <!DOCTYPE html>
@@ -378,16 +378,16 @@ if($staff === 0 || $level <= 1){
     </ul>
   </li-->
 
-  <li class="nav-item">
+  <!--li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-      <!--li>
+      <li>
         <a href="forms-elements.html">
           <i class="bi bi-circle"></i><span>Form Elements</span>
         </a>
-      </li-->
+      </li>
       <li>
         <a href="forms-appoint.php">
           <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
@@ -398,13 +398,13 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-circle"></i><span>บันทึก Order</span>
         </a>
       </li>
-      <!--li>
+      <li>
         <a href="forms-validation.html">
           <i class="bi bi-circle"></i><span>Form Validation</span>
         </a>
-      </li-->
+      </li>
     </ul>
-  </li>
+  </li-->
 
   <li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">

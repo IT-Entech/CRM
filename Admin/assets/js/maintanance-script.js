@@ -213,7 +213,8 @@ for (let year = currentYear; year >= startYear; year--) {
 }
 function updateReport(data) {
   const formatDate = data.graphData.map(item => item.format_date);
-  const total_amount_2024 = data.graphData.map(item => item.total_amount);
+  const total_amount_2024 = data.graphData.map(item => item.total_amount1);
+  const total_ALL = data.graphData.map(item => item.total_amount);
   const monthNames = [
     "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
     "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
@@ -228,8 +229,11 @@ function updateReport(data) {
       name: 'เป้าหมายค่าซ่อม',
       data: target,
     }, {
-      name: 'ค่าซ่อมจริง',
+      name: 'ค่าซ่อมที่เกิดตามเป้า',
       data: total_amount_2024,
+    },{
+      name: 'ค่าซ่อมทั้งหมด',
+      data: total_ALL,
     }],
     chart: {
       height: 350,

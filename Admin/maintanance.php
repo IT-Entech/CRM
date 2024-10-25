@@ -192,9 +192,14 @@ SELECT
 }
 $sqlgraph = "SELECT 
     FORMAT(A.repair_date, 'MMM') AS format_date, 
+    MONTH(A.repair_date) AS month_number,
+    SUM(CASE 
+        WHEN A.repair_type_code NOT IN ('001', '002') AND A.vehicle_code IS NOT NULL 
+        THEN COALESCE(A.total_before_vat, 0) + COALESCE(brw_summary.stock_amount, 0)
+        ELSE 0 
+    END) AS total_amount1,
     SUM(COALESCE(A.total_before_vat, 0) + COALESCE(brw_summary.stock_amount, 0)) AS total_amount,
-    '160000.0000' AS target_ma,
-    MONTH(A.repair_date) AS month_number
+    '160000.0000' AS target_ma
 FROM repair_head A
 LEFT JOIN (
     SELECT A.repair_no, SUM(B.total_amount) AS stock_amount
@@ -205,8 +210,6 @@ LEFT JOIN (
 ) brw_summary ON A.repair_no = brw_summary.repair_no
 WHERE A.is_status <> 'C' 
 AND YEAR(A.repair_date) = 2024 
-AND vehicle_code IS NOT NULL
-AND A.repair_type_code NOT IN ('001','002')
 GROUP BY 
     FORMAT(A.repair_date, 'MMM'), 
     MONTH(A.repair_date)

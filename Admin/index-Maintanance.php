@@ -406,7 +406,7 @@ if($staff === 0 || $level <= 1){
     </ul>
   </li-->
 
-  <li class="nav-item">
+  <!--li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
       <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
@@ -427,7 +427,7 @@ if($staff === 0 || $level <= 1){
         </a>
       </li>
     </ul>
-  </li>
+  </li-->
 
   <!--li class="nav-item">
     <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
@@ -626,7 +626,7 @@ if($staff === 0 || $level <= 1){
         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
           <i class="bx bxs-truck"></i>
         </div>
-        <div class="ps-3">
+        <div class="ps-5">
           <h6 id="tp_number"></h6>
           <span id="tp_value" class="text-success large pt-2 fw-bold"></span> <span class="text-muted small pt-2 ps-1">THB</span>
 
@@ -660,7 +660,7 @@ if($staff === 0 || $level <= 1){
         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
           <i class="bx bxs-truck"></i>
         </div>
-        <div class="ps-3">
+        <div class="ps-5">
           <h6 id="oc_number"></h6>
           <span id="oc_value" class="text-success large pt-2 fw-bold"></span> <span class="text-muted small pt-2 ps-1">THB</span>
 
@@ -694,7 +694,7 @@ if($staff === 0 || $level <= 1){
         <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
           <i class="bx bxs-truck"></i>
         </div>
-        <div class="ps-3">
+        <div class="ps-5">
           <h6 id="cl_number"></h6>
           <span id="cl_value" class="text-success large pt-2 fw-bold"></span> <span class="text-muted small pt-2 ps-1">THB</span>
 

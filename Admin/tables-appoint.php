@@ -411,11 +411,11 @@ if($staff === 0 || $level <= 1){
               <i class="bi bi-circle"></i><span>Update Status</span>
             </a>
           </li>
-          <li>
+          <!--li>
             <a href="tables-activity.php">
               <i class="bi bi-circle"></i><span>Activity</span>
             </a>
-          </li>
+          </li-->
         </ul>
       </li><!-- End Tables Nav -->
 

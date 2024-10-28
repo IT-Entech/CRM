@@ -291,13 +291,25 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+      <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
+          <span>Dashboard</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
+        <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <li>
+            <a href="index.php">
+              <i class="bi bi-circle"></i><span>CRM</span>
+            </a>
+          </li>
+          <li>
+            <a href="index-Maintanance.php">
+              <i class="bi bi-circle"></i><span>Maintanance</span>
+            </a>
+          </li>
+        </ul>
       </li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -373,33 +385,33 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
             </a>
           </li>
         </ul>
-      </li>
+      </li-->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
+          <!--li>
             <a href="forms-elements.html">
               <i class="bi bi-circle"></i><span>Form Elements</span>
             </a>
-          </li>
+          </li-->
           <li>
             <a href="forms-appoint.php">
-              <i class="bi bi-circle"></i><span>Form Appoint</span>
+              <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
             </a>
           </li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
+          <!--li>
+            <a href="forms-order.php">
+              <i class="bi bi-circle"></i><span>บันทึก Order</span>
             </a>
-          </li>
-          <li>
+          </li-->
+          <!--li>
             <a href="forms-validation.html">
               <i class="bi bi-circle"></i><span>Form Validation</span>
             </a>
-          </li>
+          </li-->
         </ul>
       </li>
 
@@ -408,25 +420,25 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <li>
+          <!--li>
             <a href="tables-general.html">
               <i class="bi bi-circle"></i><span>General Tables</span>
             </a>
-          </li>
+          </li-->
           <li>
             <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>Data Appoint</span>
+              <i class="bi bi-circle"></i><span>Update Status</span>
             </a>
           </li>
-          <li>
+          <!--li>
             <a href="tables-CS.html">
               <i class="bi bi-circle"></i><span>Data Cost sheet</span>
             </a>
-          </li>
+          </li-->
         </ul>
       </li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -447,9 +459,9 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
             </a>
           </li>
         </ul>
-      </li>
+      </li-->
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -470,25 +482,25 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
             </a>
           </li>
         </ul>
-      </li>
+      </li-->
 
       <li class="nav-heading">Pages</li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" href="users-profile.html">
           <i class="bi bi-person"></i>
           <span>Profile</span>
         </a>
-      </li>
+      </li-->
 
       <li class="nav-item">
-        <a class="nav-link" href="permission.php">
+        <a class="nav-link " href="permission.php">
           <i class="bi bi-question-circle"></i>
           <span>Permission</span>
         </a>
       </li>
 
-      <li class="nav-item">
+      <!--li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>
           <span>Contact</span>
@@ -521,11 +533,11 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
           <i class="bi bi-calendar-day"></i>
           <span>Blank</span>
         </a>
-      </li>
+      </li-->
 
     </ul>
 
-  </aside><!-- End Sidebar-->
+  </aside>
 
   <main id="main" class="main">
 

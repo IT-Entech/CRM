@@ -143,8 +143,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   GROUP BY 
                   FORMAT(qt_date, 'dd-MM')
@@ -218,8 +218,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND sales_channels_group_code = ?
                   GROUP BY 
                   FORMAT(qt_date, 'dd-MM')
@@ -292,8 +292,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND staff_id = ?
                   GROUP BY 
                   FORMAT(qt_date, 'dd-MM')
@@ -371,8 +371,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND is_new = ?
                   GROUP BY 
                   FORMAT(qt_date, 'dd-MM')
@@ -449,8 +449,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   AND sales_channels_group_code = ?
                   GROUP BY 
@@ -527,8 +527,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   AND staff_id = ?
                   GROUP BY 
@@ -611,8 +611,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' 
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' 
                   AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   AND is_new = ?
@@ -689,8 +689,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND sales_channels_group_code = ?
                   AND staff_id = ?
                   GROUP BY 
@@ -774,8 +774,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?   
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?   
                   AND sales_channels_group_code = ?
                   AND is_new = ?
                   GROUP BY 
@@ -856,8 +856,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?   
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?   
                   AND staff_id = ?
                   AND is_new = ?
                   GROUP BY 
@@ -935,8 +935,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   AND sales_channels_group_code = ?
                   AND staff_id = ?
@@ -1021,8 +1021,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                  WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   AND sales_channels_group_code = ?
                   AND is_new = ?
@@ -1107,8 +1107,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?    
                   AND staff_id = ?
                   AND is_new = ?
@@ -1193,8 +1193,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' 
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' 
                   AND YEAR(qt_date) = ? 
                   AND sales_channels_group_code = ?
                   AND staff_id = ?
@@ -1284,8 +1284,8 @@ GROUP BY
                   COUNT(qt_no) AS qt_no
                   FROM 
                   cost_sheet_head
-                  WHERE 
-                  is_status <> 'C' AND YEAR(qt_date) = ?
+                   WHERE   is_prospect != '00' 
+                  AND  is_status <> 'C' AND YEAR(qt_date) = ?
                   AND MONTH(qt_date) = ?
                   AND sales_channels_group_code = ?
                   AND staff_id = ?

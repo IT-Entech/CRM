@@ -413,11 +413,11 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <!--li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
+        <li>
+            <a href="tables-appoint.html">
+              <i class="bi bi-circle"></i><span>Tables Appoint</span>
             </a>
-          </li-->
+          </li>
           <li>
             <a href="tables-data.php">
               <i class="bi bi-circle"></i><span>Update Status</span>

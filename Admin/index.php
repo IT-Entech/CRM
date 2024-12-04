@@ -414,7 +414,7 @@ if($staff === 0 || $level <= 1){
         </a>
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="tables-appoint.html">
+            <a href="tables-appoint.php">
               <i class="bi bi-circle"></i><span>Tables Appoint</span>
             </a>
           </li>

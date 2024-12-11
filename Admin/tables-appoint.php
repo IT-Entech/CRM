@@ -402,7 +402,7 @@ if($staff === 0 || $level <= 1){
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
         <li>
             <a href="tables-appoint.php"class="active">
-              <i class="bi bi-circle"></i><span>Tables Appoint</span>
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
             </a>
           </li>
           <li>
@@ -577,7 +577,12 @@ if($staff === 0 || $level <= 1){
               
             </div>
           </div>
-
+          <form action="edit_status_appoint.php" method="post" enctype="multipart/form-data" class="row g-3">
+          <div class="text-center">
+                <button type="submit" class="btn btn-primary" onclick="return confirmUpdate();">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <input type="hidden" id="staff" name="staff" value="<?php echo $staff;?>">
+                </div>
               <!-- Table with stripped rows -->
                 <div class="modal-body">
               <table id="tableAP" class="table table-hover">
@@ -587,6 +592,9 @@ if($staff === 0 || $level <= 1){
                     <th scope="col">วันที่ติดต่อ</th>
                     <th scope="col">Customer</th>
                     <th scope="col">AP No</th>
+                    <th scope="col">สถานะ</th>
+                    <th scope="col">หมายเหตุ</th>
+                    <th scope="col">ติดตามล่าสุด</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -595,6 +603,7 @@ if($staff === 0 || $level <= 1){
                 </tbody>
               </table>
               </div>
+              </form>
               <!-- End Table with stripped rows -->
 
             </div>

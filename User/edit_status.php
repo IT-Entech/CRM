@@ -1,5 +1,5 @@
 <?php
-include_once('C:\xampp\htdocs\connectDB\connectDB.php');
+include_once '../../connectDB/connectWebDB.php';
 $objCon = connectDB();
 
 $timezone = new DateTimeZone('Asia/Bangkok'); // Setting the timezone
@@ -8,7 +8,7 @@ $record_datetime = $date->format('Y-m-d H:i:s'); // Current date and time
 
 $data = $_POST;
 $sales = $data['staff'];
-
+print_r($data);
 // Fetch the user ID associated with the staff
 $uidQuery = "SELECT usrid FROM xuser WHERE staff_id LIKE ?";
 $uidParams = ["%$sales%"];
@@ -52,7 +52,7 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
         }
 
         // Only perform update if data has changed
-        if ($dataChanged) {
+        /*if ($dataChanged) {
             $sql = "UPDATE cost_sheet_head SET ";
             $params = [];
 
@@ -90,9 +90,9 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
             } else {
                 echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
             }
-        }
+        }*/
     }
 }
 
 sqlsrv_close($objCon);
-?>
+

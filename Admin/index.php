@@ -415,12 +415,12 @@ if($staff === 0 || $level <= 1){
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
             <a href="tables-appoint.php">
-              <i class="bi bi-circle"></i><span>Tables Appoint</span>
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
             </a>
           </li>
           <li>
             <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>Update Status</span>
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
           <!--li>

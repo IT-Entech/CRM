@@ -2,13 +2,24 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-include_once('C:\xampp\htdocs\connectDB\connectDB.php');
+include_once '../../connectDB/connectDB.php';
+include_once '.././header.php';
 $objCon = connectDB(); // Connect to the database
 
 if ($objCon === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
+// Retrieve level from session data
+$level = isset($_SESSION['level']) ? $_SESSION['level'] : null;
+$staff = isset($_SESSION["staff_id"]) ? $_SESSION["staff_id"] : null;
+if ($level == 1){
+    $sql = "SELECT A.staff_id, B.fname_e, B.nick_name 
+            FROM xuser AS A
+            LEFT JOIN hr_staff B ON A.staff_id = B.staff_id
+            WHERE A.staff_id = $staff
+              AND isactive = 'Y' 
+              AND A.staff_id <> ''";
+}else{
 $sql = "SELECT A.staff_id, B.fname_e, B.nick_name 
             FROM xuser AS A
             LEFT JOIN hr_staff B ON A.staff_id = B.staff_id
@@ -18,6 +29,7 @@ $sql = "SELECT A.staff_id, B.fname_e, B.nick_name
                                 127, 128, 129, 131, 132, 133, 135, 140, 150) 
               AND isactive = 'Y' 
               AND A.staff_id <> ''";
+}
 $stmt1 = sqlsrv_query($objCon, $sql);
 $sales_data = array();
 while ($row = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC)) {
@@ -26,4 +38,3 @@ while ($row = sqlsrv_fetch_array($stmt1, SQLSRV_FETCH_ASSOC)) {
 sqlsrv_close($objCon);
 header('Content-Type: application/json');
 echo json_encode($sales_data);
-?>

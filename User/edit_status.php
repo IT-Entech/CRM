@@ -52,7 +52,7 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
         }
 
         // Only perform update if data has changed
-        /*if ($dataChanged) {
+        if ($dataChanged) {
             $sql = "UPDATE cost_sheet_head SET ";
             $params = [];
 
@@ -90,7 +90,7 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
             } else {
                 echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
             }
-        }*/
+        }
     }
 }
 

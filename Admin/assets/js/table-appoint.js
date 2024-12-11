@@ -38,7 +38,7 @@ function updateTable(data) {
       <th scope='row'>${index+1}</th>
       <td>${row.format_date ? row.format_date : ''}</td>
       <td>${row.customer_name}</td>
-      <td>${row.appoint_no}</td>
+       <td><input type="text" class="form-control" id="appoint_no${index + 1}"name="appoint_no${index + 1}"value="${row.appoint_no}" readonly></td>
     <td>
   <select id="status-${row.appoint_no}" name="status${index+1}" class="form-select text-center ${row.is_status == 0 ? 'bg-secondary text-white' : row.is_status == 3 ? 'bg-warning text-muted' : ''}"  onchange="handleSelectChange('${row.appoint_no}')">
     <option value="${row.is_status}">

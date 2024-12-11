@@ -1,5 +1,5 @@
 <?php
-include_once '../../connectDB/connectWebDB.php';
+include_once '../../connectDB/connectDB.php';
 $objCon = connectDB();
 
 $timezone = new DateTimeZone('Asia/Bangkok'); // Setting the timezone

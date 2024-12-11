@@ -72,9 +72,9 @@ echo $appoint_no;
 
             if ($stmt === false) {
                 die(print_r(sqlsrv_errors(), true));
-            } /*else {
+            } else {
                 echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-appoint.php";</script>';
-            }*/
+            }
         }
     }
 }

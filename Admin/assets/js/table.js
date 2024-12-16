@@ -1,7 +1,6 @@
 function fetchData() {
   const year_no = document.getElementById('year').value;
   const month_no = document.getElementById('month').value;
-  /*const channel = document.getElementById('channel').value;*/
   const Sales = document.getElementById('sales').value;
   const staff = document.getElementById('staff').value;
   let url;
@@ -220,7 +219,7 @@ function updateTable(data) {
     tr.innerHTML = `
       <td>${row.appoint_date ? row.appoint_date : ''}</td>
       <td>${row.customer_name}</td>
-      <td>${row.qt_no}</td>
+      <td><input type="text" class="form-control" id="qt_no${index + 1}"name="qt_no${index + 1}"value="${row.qt_no}" readonly></td>
       <td>${row.so_amount}</td>
       <td>${select1.outerHTML}</td>
       <td><input type="text" class="form-control" id="remark${row.appoint_no}${index + 1}"name="${row.appoint_no}"value="${row.remark ? row.remark : ''}"</td>

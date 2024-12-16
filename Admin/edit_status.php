@@ -8,7 +8,7 @@ $record_datetime = $date->format('Y-m-d H:i:s'); // Current date and time
 
 $data = $_POST;
 $sales = $data['staff'];
-//print_r($data);
+print_r($data);
 // Fetch the user ID associated with the staff
 $uidQuery = "SELECT usrid FROM xuser WHERE staff_id LIKE ?";
 $uidParams = ["%$sales%"];
@@ -95,4 +95,4 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
 }
 
 sqlsrv_close($objCon);
-?>
+

@@ -1,4 +1,5 @@
-<?php include('header.php');
+<?php 
+include('header.php');
 $name = htmlspecialchars($name);
 $staff = htmlspecialchars($staff);
 $level = htmlspecialchars($level);
@@ -219,15 +220,15 @@ if($staff === 0 || $level <= 1){
         <li class="nav-item dropdown pe-3">
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="../assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
-            <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
+            <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
+            <span  class="d-none d-md-block dropdown-toggle ps-2"> <?php echo $name; ?></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-             <li class="dropdown-header">
-              <h6 id="name-display1"></h6>
+              <!--li class="dropdown-header">
+              <h6>Kevin Anderson</h6>
               <span>Web Designer</span>
-            </li>
+            </li-->
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -289,7 +290,7 @@ if($staff === 0 || $level <= 1){
         </a>
         <ul id="dashboards-nav" class="nav-content show" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="../CRM">
+            <a href="index.php">
               <i class="bi bi-circle"></i><span>CRM</span>
             </a>
           </li>
@@ -384,7 +385,7 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <!--li>
+          <li>
             <a href="forms-elements.html">
               <i class="bi bi-circle"></i><span>Form Elements</span>
             </a>
@@ -820,7 +821,6 @@ if($staff === 0 || $level <= 1){
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/maintanance-script.js"></script>
-  <script src="assets/js/api-GPS.js"></script>
 </body>
 
 </html>

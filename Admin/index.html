@@ -1,13 +1,4 @@
-<?php 
-include('header.php');
-$name = htmlspecialchars($name);
-$staff = htmlspecialchars($staff);
-$level = htmlspecialchars($level);
-$Role = htmlspecialchars($role);
-if($staff === 0 || $level <= 1){
-  echo '<script>alert("Can not enter this site");window.location="/pages-login.html";</script>';
-}
-?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -221,14 +212,14 @@ if($staff === 0 || $level <= 1){
 
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
             <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
-            <span class="d-none d-md-block dropdown-toggle ps-2"> <?php echo $name; ?></span>
+            <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
           </a><!-- End Profile Iamge Icon -->
 
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
-             <!--li class="dropdown-header">
-              <h6>Kevin Anderson</h6>
-              <span>Web Designer</span>
-            </li-->
+            <li class="dropdown-header">
+              <h6 id="name-display1"></h6>
+              <span id="position-name"></span>
+            </li>
             <li>
               <hr class="dropdown-divider">
             </li>
@@ -294,7 +285,7 @@ if($staff === 0 || $level <= 1){
               <i class="bi bi-circle"></i><span>CRM</span>
             </a>
           </li>
-          <li>
+          <li id="maintanance-nav" class="d-none">
             <a href="index-Maintanance.php">
               <i class="bi bi-circle"></i><span>Maintanance</span>
             </a>
@@ -486,7 +477,7 @@ if($staff === 0 || $level <= 1){
         </a>
       </li-->
 
-      <li class="nav-item">
+      <li class="nav-item d-none" id="permission-nav">
         <a class="nav-link collapsed" href="permission.php">
           <i class="bi bi-question-circle"></i>
           <span>Permission</span>
@@ -543,9 +534,11 @@ if($staff === 0 || $level <= 1){
         </ol>
         
       </nav>
+      <input type="hidden" id="fetch-level" value="" readonly>
+      <input type="hidden" id="fetch-staff" value="" readonly>
       <div class="col-lg-12">
         <div class="row">
-          <div class="col-xxl-2 col-md-4">
+          <div class="col-xxl-2 col-md-4 d-none" id="select-sale">
             <div class="form-floating mb-3">
               <select class="form-select" id="Sales" aria-label="Sales"onchange="fetchYear()">
                 <option selected value="N">-</option>
@@ -557,8 +550,8 @@ if($staff === 0 || $level <= 1){
             <div class="form-floating mb-3">
               <select class="form-select" id="is_new" aria-label="is_new"onchange="fetchYear()">
                 <option selected value="0">-</option>
-                <option value="Y">NEW</option>
-                <option value="N">OLD</option>
+                <option value="1">NEW</option>
+                <option value="2">OLD</option>
 
               </select>
               <label for="is_new">ประเภทลูกค้า</label>
@@ -732,7 +725,7 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-cash-stack"></i>
         </div>
         <div class="ps-3">
-          <h6 id="so_number"></h6>
+          <h6 id="customer_number"></h6>
           <span id="revenue" class="text-success large pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">THB</span>
 
         </div>
@@ -982,7 +975,7 @@ if($staff === 0 || $level <= 1){
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/script.js"></script>
-  <script src="assets/js/report.js"></script>
+  <!--script src="assets/js/report.js"></script-->
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<?php include('header.php');
+<?php include '../header.php';
 $name = htmlspecialchars($name);
 $staff = htmlspecialchars($staff);
 $level = htmlspecialchars($level);

@@ -91,10 +91,6 @@ $where_clause1 = count($where_conditions1) > 0 ? implode(" AND ", $where_conditi
 $where_clause2 = count($where_conditions2) > 0 ? implode(" AND ", $where_conditions2) : "";
 $where_clause3 = count($where_conditions3) > 0 ? implode(" AND ", $where_conditions3) : "";
 
-echo $where_clause;
-echo $where_clause1;
-echo $where_clause2;
-echo $where_clause3;
 $sqlappoint = "SELECT 
     SUM(appoint_no) AS appoint_no,
     SUM(appoint_quality) AS appoint_quality

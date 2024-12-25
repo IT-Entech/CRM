@@ -1,5 +1,5 @@
 <?php
-include_once('C:\xampp\htdocs\connectDB\connectDB.php');
+include_once '../../../connectDB/connectDB.php';
 $objCon = connectDB();
 /*
 $sales = isset($_GET['channel']) ? $_GET['channel'] : NULL;
@@ -43,7 +43,7 @@ for ($i = 1; $i <= $id_no_count; $i++) {
         die(print_r(sqlsrv_errors(), true));
     }else{
        
-        echo '<script>alert("แก้ไขสิทธิ์แล้ว");window.location="permission.php";</script>';
+        echo '<script>alert("แก้ไขสิทธิ์แล้ว");window.location="index.php";</script>';
      
         }
 }

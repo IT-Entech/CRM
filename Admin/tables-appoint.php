@@ -52,7 +52,7 @@ if($staff === 0 || $level <= 1){
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/Logo_En-Tech_1.png" alt="">
         <span class="d-none d-lg-block">En-technology</span>
       </a>
@@ -283,7 +283,7 @@ if($staff === 0 || $level <= 1){
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link collapsed" href="index.html">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -475,7 +475,7 @@ if($staff === 0 || $level <= 1){
       </li--><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="permission.php">
+        <a class="nav-link collapsed" href="../Admin/permission/index.php">
           <i class="bi bi-question-circle"></i>
           <span>Permission</span>
         </a>

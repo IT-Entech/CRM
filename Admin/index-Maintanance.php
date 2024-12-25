@@ -1,5 +1,5 @@
 <?php 
-include('header.php');
+include '../header.php';
 $name = htmlspecialchars($name);
 $staff = htmlspecialchars($staff);
 $level = htmlspecialchars($level);
@@ -53,7 +53,7 @@ if($staff === 0 || $level <= 1){
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/Logo_En-Tech_1.png" alt="">
         <span class="d-none d-lg-block">En-technology</span>
       </a>
@@ -290,7 +290,7 @@ if($staff === 0 || $level <= 1){
         </a>
         <ul id="dashboards-nav" class="nav-content show" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="index.php">
+            <a href="index.html">
               <i class="bi bi-circle"></i><span>CRM</span>
             </a>
           </li>

@@ -1,4 +1,4 @@
-<?php include('../header.php');
+<?php include '../../header.php';
 $name = htmlspecialchars($name);
 $staff = htmlspecialchars($staff);
 $level = htmlspecialchars($level);
@@ -60,7 +60,7 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="../index.php" class="logo d-flex align-items-center">
+      <a href="../index.html" class="logo d-flex align-items-center">
         <img src="../assets/img/Logo_En-Tech_1.png" alt="">
         <span class="d-none d-lg-block">En-technology</span>
       </a>
@@ -297,12 +297,12 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
         </a>
         <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="index.php">
+            <a href="../index.html">
               <i class="bi bi-circle"></i><span>CRM</span>
             </a>
           </li>
           <li>
-            <a href="index-Maintanance.php">
+            <a href="../index-Maintanance.php">
               <i class="bi bi-circle"></i><span>Maintanance</span>
             </a>
           </li>
@@ -398,7 +398,7 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
             </a>
           </li-->
           <li>
-            <a href="forms-appoint.php">
+            <a href="../forms-appoint.php">
               <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
             </a>
           </li>
@@ -420,14 +420,14 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <!--li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
+        <li>
+            <a href="../tables-appoint.php">
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
             </a>
-          </li-->
+          </li>
           <li>
-            <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>Update Status</span>
+            <a href="../tables-data.php">
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
           <!--li>
@@ -545,7 +545,7 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
       <h1>PERMISSION</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
           <li class="breadcrumb-item active">Permission</li>
         </ol>
       </nav>

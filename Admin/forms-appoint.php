@@ -66,7 +66,7 @@ if($staff === 0 || $level <= 1){
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a href="index.php" class="logo d-flex align-items-center">
+      <a href="index.html" class="logo d-flex align-items-center">
         <img src="assets/img/Logo_En-Tech_1.png" alt="">
         <span class="d-none d-lg-block">En-technology</span>
       </a>
@@ -303,7 +303,7 @@ if($staff === 0 || $level <= 1){
         </a>
         <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
-            <a href="index.php">
+            <a href="index.html">
               <i class="bi bi-circle"></i><span>CRM</span>
             </a>
           </li>
@@ -426,14 +426,14 @@ if($staff === 0 || $level <= 1){
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <!--li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
+        <li>
+            <a href="tables-appoint.php">
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
             </a>
-          </li-->
+          </li>
           <li>
             <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>Update Status</span>
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
           <!--li>
@@ -500,7 +500,7 @@ if($staff === 0 || $level <= 1){
       </li-->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="permission.php">
+        <a class="nav-link collapsed" href="../Admin/permission/index.php">
           <i class="bi bi-question-circle"></i>
           <span>Permission</span>
         </a>
@@ -551,7 +551,7 @@ if($staff === 0 || $level <= 1){
       <h1>Form Appoint</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.php">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
           <li class="breadcrumb-item">Forms</li>
           <li class="breadcrumb-item active">Appoint</li>
         </ol>

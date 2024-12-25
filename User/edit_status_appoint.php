@@ -8,7 +8,7 @@ $record_datetime = $date->format('Y-m-d H:i:s'); // Current date and time
 
 $data = $_POST;
 $sales = $data['staff'];
-print_r($data);
+//print_r($data);
 // Fetch the user ID associated with the staff
 $uidQuery = "SELECT usrid FROM xuser WHERE staff_id LIKE ?";
 $uidParams = ["%$sales%"];
@@ -25,7 +25,7 @@ for ($i = 1; $i <= $appoint_no_count; $i++) {
     $appoint_no = $data["appoint_no$i"] ?? null;
     $status = $data["status$i"] ?? null;
     $remark = $data["remark$i"] ?? null;
-echo $appoint_no;
+
     if ($appoint_no) {
         // Fetch existing data for comparison
         $sqlSelect = "SELECT is_status, remark FROM appoint_head WHERE appoint_no = ?";

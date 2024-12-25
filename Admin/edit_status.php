@@ -88,11 +88,16 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
             if ($stmt === false) {
                 die(print_r(sqlsrv_errors(), true));
             } else {
-                echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
+                $hasChanges = true;
             }
         }
     }
 }
 
 sqlsrv_close($objCon);
-
+// Provide feedback to the user
+if ($hasChanges) {
+    echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
+} else {
+    echo '<script>alert("ไม่มีข้อมูลที่ถูกอัพเดท");window.location="tables-data.php";</script>';
+}

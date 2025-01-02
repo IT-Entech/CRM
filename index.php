@@ -1,5 +1,5 @@
 <?php 
-include('../header.php');
+include './header.php';
 
 $name = isset($name) ? htmlspecialchars($name) : '';
 $staff = isset($staff) ? htmlspecialchars($staff) : 0;

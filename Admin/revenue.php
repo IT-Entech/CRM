@@ -139,14 +139,14 @@ $sqlrevenue = "SELECT
     SUM(so_amount) AS so_amount
 FROM (
     SELECT 
-        A.customer_code AS customer_number,
+        A.so_no AS customer_number,
         SUM(A.total_before_vat) AS so_amount
     FROM 
         View_SO_SUM A
     WHERE 
         $where_clause3
     GROUP BY 
-        A.customer_code
+        A.so_no
 ) AS subquery";
 $sqlsegment = "SELECT 
     b.customer_segment_name, 

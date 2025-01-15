@@ -39,14 +39,14 @@ function updateTable(data) {
       <td>${row.customer_name}</td>
       <td><input type="text" class="form-control" id="appoint_no${index + 1}"name="appoint_no${index + 1}"value="${row.appoint_no}" readonly></td>
     <td>
-  <select id="status-${row.appoint_no}" name="status${index+1}" class="form-select text-center ${row.is_status == 0 ? 'bg-secondary text-white' : row.is_status == 3 ? 'bg-warning text-muted' : row.is_status == 4 ? 'bg-danger text-white' : ''}"  onchange="handleSelectChange('${row.appoint_no}')">
+<select id="status-${row.appoint_no}" name="status${index+1}" class="form-select text-center ${row.is_status == 0 ? 'bg-secondary text-white' : row.is_status == 3 ? 'bg-warning text-muted' : ''}"  onchange="handleSelectChange('${row.appoint_no}')">
     <option value="${row.is_status}">
-      ${row.is_status == 0 ? 'N/A' : row.is_status == 3 ? 'Pending'  : row.is_status}
+      ${row.is_status == 0 ? 'N/A' : row.is_status == 3 ? 'Pending' : row.is_status}
     </option>
-<option value="${row.is_status == 0 ? 3 : row.is_status == 4 ? 'N/A' : '0'}">
-  ${row.is_status == 0 ? 'Pending' : row.is_status == 4 ? 'ไม่เสนอราคา' : 'N/A'}
-</option>
-
+  <option value="${row.is_status == 0 ? 3 : '0'}">
+      ${row.is_status == 0 ? 'Pending' : 'N/A'}
+    </option>
+    <option value="4">ไม่เสนอราคา</option>
   </select>
 </td> 
       <td>
@@ -83,9 +83,13 @@ function handleSelectChange(appointNo) {
    // Add the appropriate class based on the selected value
    if (selectedValue == 0) {
      selectElement.classList.add('bg-secondary', 'text-white'); // Grey for N/A
-   } else if (selectedValue == 3) {
+   } else if (selectedValue == 2) {
+    selectElement.classList.add('bg-danger', 'text-white');   // Yellow for Pending
+  }else if (selectedValue == 3) {
      selectElement.classList.add('bg-warning', 'text-muted');   // Yellow for Pending
-   }
+   }else if (selectedValue == 4) {
+    selectElement.classList.add('bg-danger', 'text-white');   // Yellow for Pending
+  }
 }
 
 document.addEventListener('DOMContentLoaded', fetchData);

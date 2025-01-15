@@ -84,7 +84,9 @@ function handleSelectChange(appointNo) {
    // Add the appropriate class based on the selected value
    if (selectedValue == 0) {
      selectElement.classList.add('bg-secondary', 'text-white'); // Grey for N/A
-   } else if (selectedValue == 3) {
+   } else if (selectedValue == 2) {
+    selectElement.classList.add('bg-danger', 'text-white');   // Yellow for Pending
+  }else if (selectedValue == 3) {
      selectElement.classList.add('bg-warning', 'text-muted');   // Yellow for Pending
    }else if (selectedValue == 4) {
     selectElement.classList.add('bg-danger', 'text-white');   // Yellow for Pending

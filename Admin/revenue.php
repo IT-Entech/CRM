@@ -25,8 +25,9 @@ $where_conditions2 = [];
 $where_conditions3 = [];
 
 $is_new_array = match ($is_new) { 
-  '1' => ['01', '02', '04'],
-  '2' => ['03'],
+  '1' => ['01'],
+  '2' => ['04'],
+  '3' => ['03'],
   default => [] // Optional: handle other cases if needed
 };
 $is_new_list = "'" . implode("','", $is_new_array) . "'";

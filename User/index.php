@@ -545,6 +545,7 @@ if($staff === 0 || $level < 1){
               <select class="form-select" id="is_new" aria-label="is_new"onchange="fetchYear()">
                 <option selected value="0">-</option>
                 <option value="Y">NEW</option>
+                <option value="R">RENEW</option>
                 <option value="N">OLD</option>
 
               </select>

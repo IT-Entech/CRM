@@ -103,9 +103,11 @@ FROM cost_sheet_head
 }elseif($year_no <> 0 && $month_no == 0 && $is_new <> 0){
 
   if ($is_new == 'Y') {
-    $is_new_array = ['01', '04'];
-} else if ($is_new == 'N') {
-    $is_new_array = ['02', '03'];
+    $is_new_array = ['01'];
+} else if ($is_new == 'R') {
+    $is_new_array = ['04'];
+}else if ($is_new == 'N') {
+  $is_new_array = ['03'];
 }
 
 $is_new_list = "'" . implode("','", $is_new_array) . "'";

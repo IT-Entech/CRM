@@ -97,7 +97,7 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
 sqlsrv_close($objCon);
 // Provide feedback to the user
 if ($hasChanges) {
-    echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
+   // echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
 } else {
-    echo '<script>alert("ไม่มีข้อมูลที่ถูกอัพเดท");window.location="tables-data.php";</script>';
+    //echo '<script>alert("ไม่มีข้อมูลที่ถูกอัพเดท");window.location="tables-data.php";</script>';
 }

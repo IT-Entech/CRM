@@ -8,7 +8,7 @@ $record_datetime = $date->format('Y-m-d H:i:s'); // Current date and time
 
 $data = $_POST;
 $sales = $data['staff'];
-//print_r($data);
+$hasChanges = false;  // Initialize hasChanges
 // Fetch the user ID associated with the staff
 $uidQuery = "SELECT usrid FROM xuser WHERE staff_id LIKE ?";
 $uidParams = ["%$sales%"];
@@ -26,7 +26,7 @@ $qt_no_count = count(array_filter(array_keys($data), function($key) {
 for ($i = 1; $i <= $qt_no_count; $i++) {
     $qt_no = $data["qt_no$i"] ?? null;
     $cs_badge = $data["cs-badge-$i"] ?? null;
-    $remark = $data["remark$i"] ?? null;
+    $remark = isset($data["remark$i"]) && $data["remark$i"] !== '' ? $data["remark$i"] : NULL;
     $status_badge = $data["status-badge-$i"] ?? null;
     $reason = isset($data["reason$i"]) && $data["reason$i"] !== '' ? $data["reason$i"] : NULL;
 
@@ -82,6 +82,9 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
             $params[] = $uid;
             $params[] = $qt_no;
 
+            // Trim the trailing comma
+            $sql = rtrim($sql, ', ');
+
             // Execute the query
             $stmt = sqlsrv_query($objCon, $sql, $params);
 
@@ -95,9 +98,11 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
 }
 
 sqlsrv_close($objCon);
+
 // Provide feedback to the user
 if ($hasChanges) {
-   // echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
+    echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
 } else {
-    //echo '<script>alert("ไม่มีข้อมูลที่ถูกอัพเดท");window.location="tables-data.php";</script>';
+    echo '<script>alert("ไม่มีข้อมูลที่ถูกอัพเดท");window.location="tables-data.php";</script>';
 }
+?>

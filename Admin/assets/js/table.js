@@ -222,7 +222,7 @@ function updateTable(data) {
       <td><input type="text" class="form-control" id="qt_no${index + 1}"name="qt_no${index + 1}"value="${row.qt_no}" readonly></td>
       <td>${row.so_amount}</td>
       <td>${select1.outerHTML}</td>
-      <td><input type="text" class="form-control" id="remark${row.appoint_no}${index + 1}"name="${row.appoint_no}"value="${row.remark ? row.remark : ''}"</td>
+      <td><input type="text" class="form-control" id="remark${index + 1}"name="remark${index + 1}"value="${row.remark ? row.remark : ''}"</td>
       <td>${select.outerHTML}</td>
       <td><input type="text" class="form-control" id="reason${index + 1}"name="reason${index + 1}"value="${row.reasoning ? row.reasoning : ''}"></td>
     `;

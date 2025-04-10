@@ -499,7 +499,12 @@ if($staff === 0 && $level < 3 && $role <> 'SUPER ADMIN'){
           <span>Permission</span>
         </a>
       </li>
-
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../Calculate_cost.html">
+          <i class="bi bi-pc-display-horizontal"></i>
+          <span>Cost Calculate</span>
+        </a>
+      </li>
       <!--li class="nav-item">
         <a class="nav-link collapsed" href="pages-contact.html">
           <i class="bi bi-envelope"></i>

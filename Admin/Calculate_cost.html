@@ -367,14 +367,14 @@
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="forms-nav" class="nav-content show" data-bs-parent="#sidebar-nav">
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <!--li>
             <a href="forms-elements.html">
               <i class="bi bi-circle"></i><span>Form Elements</span>
             </a>
           </li-->
           <li>
-            <a href="forms-appoint.php" class="active">
+            <a href="forms-appoint.php" >
               <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
             </a>
           </li>
@@ -476,7 +476,7 @@
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link collapsed" href="../Admin/permission/index.php">
+        <a class="nav-link " href="../Admin/Calculate_cost.html">
           <i class="bi bi-pc-display-horizontal"></i>
           <span>Cost Calculate</span>
         </a>
@@ -602,14 +602,14 @@
             <div class="col-lg-4">
               <input type="radio" class="btn-check" name="options-outlined" id="selected1" autocomplete="off" checked>
               <label class="btn btn-outline-primary" for="selected1">ตัวเลือกที่ 1</label>
-              <div class="info-box card " id="box">
+              <div class="info-box card " id="box1">
                 <i class="bi bi-geo-alt"></i>
-                <h3 id="supplier">ไม่มีข้อมูล </h3>
-                <h6>ปลายทาง : <span id="supplier_code">-</span><span id="account">(0)</span></h6>
-                <h6>รหัสกำจัด : <span id="disposal_code">-</span></h6>
-                <h6>ค่ากำจัด : <span id="disposal_cost">-</span></h6>
-                <h6>ค่าขนส่ง : <span id="transport_cost">-</span></h6>
-                <h6>รวมต้นทุน : <span id="total_cost">-</span></h6>
+                <h3 id="supplier1">ไม่มีข้อมูล </h3>
+                <h6>ปลายทาง : <span id="supplier_code1">-</span><span id="account1">(0)</span></h6>
+                <h6>รหัสกำจัด : <span id="disposal_code1">-</span></h6>
+                <h6>ค่ากำจัด : <span id="disposal_cost1">-</span></h6>
+                <h6>ค่าขนส่ง : <span id="transport_cost1">-</span></h6>
+                <h6>รวมต้นทุน : <span id="total_cost1">-</span></h6>
               </div>
             </div>
             <div class="col-lg-4">
@@ -680,6 +680,7 @@
   <script src="assets/js/main.js"></script>
   <script src="../assets/js/calculate_cost.js"></script>
   <script src="../assets/js/script_cost.js"></script>
+  <script src="../assets/js/getSession.js"></script>
   <script> fetch('../API_KEY.txt')
     .then(response => response.text())
     .then(apiKey => {

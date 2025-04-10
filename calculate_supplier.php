@@ -35,7 +35,7 @@ $sql = "WITH Datadisposal AS (
                 AND YEAR(C.shipment_date) >= 2025
                 AND EXISTS (SELECT 1 FROM so_detail S WHERE S.qt_no = A.qt_no)
         )
-SELECT TOP 3 A.waste_code, MAX(B.waste_name) AS waste_name,
+SELECT  A.waste_code, MAX(B.waste_name) AS waste_name,
 eliminate_code,
 cost_rate,
 A.supplier_code,

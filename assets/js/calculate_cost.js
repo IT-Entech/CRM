@@ -10,6 +10,7 @@ window.initMap = initMap
 // Store supplier markers and data
 var suppliers = []
 var selectedSupplierIndex = 0
+var supplierCosts = [] // Array to store calculated costs for sorting
 
 function initMap() {
   const samutPrakarn = { lat: 13.605, lng: 100.5653 }
@@ -137,6 +138,58 @@ function initMap() {
       fetchSuppliers(this.value)
     })
   }
+
+  // Add event listeners for the radio buttons
+  document.getElementById("selected1").addEventListener("change", function () {
+    if (this.checked && supplierCosts.length > 0) {
+      const supplier = supplierCosts[0].supplier
+      updateMarker3(supplier)
+      selectedSupplierIndex = 0
+
+      // Update directions for the selected supplier
+      if (supplier && supplier.latitude && supplier.longitude) {
+        const supplierPosition = {
+          lat: Number.parseFloat(supplier.latitude),
+          lng: Number.parseFloat(supplier.longitude),
+        }
+        calculateRouteForSupplier(supplierPosition)
+      }
+    }
+  })
+
+  document.getElementById("selected2").addEventListener("change", function () {
+    if (this.checked && supplierCosts.length > 1) {
+      const supplier = supplierCosts[1].supplier
+      updateMarker3(supplier)
+      selectedSupplierIndex = 1
+
+      // Update directions for the selected supplier
+      if (supplier && supplier.latitude && supplier.longitude) {
+        const supplierPosition = {
+          lat: Number.parseFloat(supplier.latitude),
+          lng: Number.parseFloat(supplier.longitude),
+        }
+        calculateRouteForSupplier(supplierPosition)
+      }
+    }
+  })
+
+  document.getElementById("selected3").addEventListener("change", function () {
+    if (this.checked && supplierCosts.length > 2) {
+      const supplier = supplierCosts[2].supplier
+      updateMarker3(supplier)
+      selectedSupplierIndex = 2
+
+      // Update directions for the selected supplier
+      if (supplier && supplier.latitude && supplier.longitude) {
+        const supplierPosition = {
+          lat: Number.parseFloat(supplier.latitude),
+          lng: Number.parseFloat(supplier.longitude),
+        }
+        calculateRouteForSupplier(supplierPosition)
+      }
+    }
+  })
 }
 
 // Function to fetch suppliers based on waste_code
@@ -157,12 +210,8 @@ function fetchSuppliers(wasteCode) {
         // Store all suppliers
         suppliers = data.details
 
-        // Create supplier options for all suppliers
-        createSupplierOptions(suppliers)
-
-        // Set the first supplier as the active one
-        updateMarker3(suppliers[0])
-        selectedSupplierIndex = 0
+        // Reset supplier costs array
+        supplierCosts = []
 
         // Calculate distances for all suppliers
         calculateDistanceForAllSuppliers()
@@ -191,6 +240,9 @@ function updateMarker3(supplier) {
       map: map,
       draggable: true,
       title: supplier.supplier_name || "ปลายทาง",
+      icon: {
+        url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png", // Use a different color to make it more visible
+      },
     })
 
     google.maps.event.addListener(marker3, "dragend", () => {
@@ -200,21 +252,26 @@ function updateMarker3(supplier) {
     // Update existing marker3
     marker3.setPosition(supplierPosition)
     marker3.setTitle(supplier.supplier_name || "ปลายทาง")
+
+    // Make sure marker3 is visible on the map
+    marker3.setMap(map)
   }
+
+  // Pan the map to show the marker
+  map.panTo(supplierPosition)
 }
 
-// Modified function to create supplier options and calculate distance for each
-function createSupplierOptions(suppliers) {
+// Function to update UI with sorted supplier data
+function updateSupplierUI() {
   // Clear existing data in all boxes first
-  for (let i = 0; i < 3; i++) {
-    const boxIndex = i === 0 ? "" : i + 1
-    const supplierEl = document.getElementById(`supplier${boxIndex}`)
-    const supplierCodeEl = document.getElementById(`supplier_code${boxIndex}`)
-    const accountEl = document.getElementById(`account${boxIndex}`)
-    const disposalCodeEl = document.getElementById(`disposal_code${boxIndex}`)
-    const disposalCostEl = document.getElementById(`disposal_cost${boxIndex}`)
-    const transportCostEl = document.getElementById(`transport_cost${boxIndex}`)
-    const totalCostEl = document.getElementById(`total_cost${boxIndex}`)
+  for (let i = 1; i <= 3; i++) {
+    const supplierEl = document.getElementById(`supplier${i}`)
+    const supplierCodeEl = document.getElementById(`supplier_code${i}`)
+    const accountEl = document.getElementById(`account${i}`)
+    const disposalCodeEl = document.getElementById(`disposal_code${i}`)
+    const disposalCostEl = document.getElementById(`disposal_cost${i}`)
+    const transportCostEl = document.getElementById(`transport_cost${i}`)
+    const totalCostEl = document.getElementById(`total_cost${i}`)
 
     if (supplierEl) supplierEl.textContent = "ไม่มีข้อมูล"
     if (accountEl) accountEl.textContent = "(0)"
@@ -225,19 +282,18 @@ function createSupplierOptions(suppliers) {
     if (totalCostEl) totalCostEl.textContent = "-"
   }
 
-  // Now populate with actual supplier data
-  for (let i = 0; i < Math.min(suppliers.length, 3); i++) {
-    const supplier = suppliers[i]
-    if (!supplier) continue
+  // Now populate with sorted supplier data
+  for (let i = 0; i < Math.min(supplierCosts.length, 3); i++) {
+    const supplierData = supplierCosts[i]
+    if (!supplierData || !supplierData.supplier) continue
 
-    // For the first supplier, boxIndex is empty, for others it's the number
-    const boxIndex = i === 0 ? "" : i + 1
+    const supplier = supplierData.supplier
+    const boxIndex = i + 1
 
     const supplierEl = document.getElementById(`supplier${boxIndex}`)
     const supplierCodeEl = document.getElementById(`supplier_code${boxIndex}`)
     const accountEl = document.getElementById(`account${boxIndex}`)
     const disposalCodeEl = document.getElementById(`disposal_code${boxIndex}`)
-    const selectedBtn = document.getElementById(`selected${i + 1}`)
     const disposalCostEl = document.getElementById(`disposal_cost${boxIndex}`)
     const transportCostEl = document.getElementById(`transport_cost${boxIndex}`)
     const totalCostEl = document.getElementById(`total_cost${boxIndex}`)
@@ -245,33 +301,27 @@ function createSupplierOptions(suppliers) {
     if (supplierEl) supplierEl.textContent = supplier.supplier_name || "ไม่มีข้อมูล"
     if (supplierCodeEl) supplierCodeEl.textContent = supplier.supplier_code || "-"
     if (accountEl) accountEl.textContent = `(${supplier.supplier_account_no || 0})`
-    if (disposalCodeEl) disposalCodeEl.textContent = `(${supplier.eliminate_code || 0})`
-
-    if (selectedBtn) {
-      selectedBtn.onclick = () => {
-        updateMarker3(supplier)
-        selectedSupplierIndex = i
-        calculateDistanceForAllSuppliers()
-      }
-    }
-
-    if (disposalCostEl && supplier.cost_rate) {
-      disposalCostEl.innerText = Number.parseFloat(supplier.cost_rate).toFixed(2) + " บาท"
-
-      // We'll calculate transport cost for each supplier separately in calculateDistanceForAllSuppliers()
-      // For now, initialize with placeholder
-      if (transportCostEl) {
-        transportCostEl.innerText = "กำลังคำนวณ..."
-      }
-
-      if (totalCostEl) {
-        totalCostEl.innerText = "กำลังคำนวณ..."
-      }
-    }
+    if (disposalCodeEl) disposalCodeEl.textContent = supplier.eliminate_code || "-"
+    if (disposalCostEl) disposalCostEl.innerText = supplierData.disposalCost.toFixed(2) + " บาท"
+    if (transportCostEl) transportCostEl.innerText = supplierData.transportCost.toFixed(2) + " บาท"
+    if (totalCostEl) totalCostEl.innerText = supplierData.totalCost.toFixed(2) + " บาท"
   }
 
-  // After creating all supplier options, calculate distances for each supplier
-  calculateDistanceForAllSuppliers()
+  // Set the first supplier as active if we have suppliers
+  if (supplierCosts.length > 0) {
+    updateMarker3(supplierCosts[0].supplier)
+    selectedSupplierIndex = 0
+    document.getElementById("selected1").checked = true
+
+    // Render directions for the selected supplier
+    if (supplierCosts[0].supplier && supplierCosts[0].supplier.latitude && supplierCosts[0].supplier.longitude) {
+      const supplierPosition = {
+        lat: Number.parseFloat(supplierCosts[0].supplier.latitude),
+        lng: Number.parseFloat(supplierCosts[0].supplier.longitude),
+      }
+      calculateRouteForSupplier(supplierPosition)
+    }
+  }
 }
 
 // New function to calculate distances for all suppliers
@@ -281,22 +331,42 @@ function calculateDistanceForAllSuppliers() {
     return
   }
 
-  // Calculate for each supplier (up to 3)
-  for (let i = 0; i < Math.min(suppliers.length, 3); i++) {
+  // Reset supplier costs array
+  supplierCosts = []
+
+  // Counter for tracking completed calculations
+  let completedCalculations = 0
+
+  // Calculate for each supplier
+  for (let i = 0; i < suppliers.length; i++) {
     const supplier = suppliers[i]
-    if (!supplier || !supplier.latitude || !supplier.longitude) continue
+    if (!supplier || !supplier.latitude || !supplier.longitude) {
+      completedCalculations++
+      continue
+    }
 
     const supplierPosition = {
       lat: Number.parseFloat(supplier.latitude),
       lng: Number.parseFloat(supplier.longitude),
     }
 
-    calculateDistanceForSupplier(supplierPosition, i)
+    calculateDistanceAndCostForSupplier(supplierPosition, supplier, i, () => {
+      completedCalculations++
+
+      // If all calculations are done, sort and update UI
+      if (completedCalculations === suppliers.length) {
+        // Sort suppliers by total cost (cheapest first)
+        supplierCosts.sort((a, b) => a.totalCost - b.totalCost)
+
+        // Update UI with sorted data
+        updateSupplierUI()
+      }
+    })
   }
 }
 
-// Function to calculate distance for a specific supplier
-function calculateDistanceForSupplier(supplierPosition, index) {
+// Function to calculate route for the selected supplier
+function calculateRouteForSupplier(supplierPosition) {
   if (!marker1 || !marker2 || !marker4) {
     console.log("Missing required markers")
     return
@@ -319,11 +389,38 @@ function calculateDistanceForSupplier(supplierPosition, index) {
   // Calculate route for this supplier
   directionsService.route(request, (response, status) => {
     if (status === "OK") {
-      // Only render directions for the selected supplier
-      if (index === selectedSupplierIndex) {
-        directionsRenderer.setDirections(response)
-      }
+      directionsRenderer.setDirections(response)
+    } else {
+      console.error("Error calculating route: " + status)
+    }
+  })
+}
 
+// Function to calculate distance and cost for a specific supplier
+function calculateDistanceAndCostForSupplier(supplierPosition, supplier, index, callback) {
+  if (!marker1 || !marker2 || !marker4) {
+    console.log("Missing required markers")
+    if (callback) callback()
+    return
+  }
+
+  const origin = marker1.getPosition()
+  const customer = marker2.getPosition()
+  const setpoint = marker4.getPosition()
+
+  const request = {
+    origin: origin,
+    destination: setpoint,
+    waypoints: [
+      { location: customer, stopover: true },
+      { location: supplierPosition, stopover: true },
+    ],
+    travelMode: "DRIVING",
+  }
+
+  // Calculate route for this supplier
+  directionsService.route(request, (response, status) => {
+    if (status === "OK") {
       var totalDistance = 0
 
       // Calculate total distance
@@ -332,15 +429,16 @@ function calculateDistanceForSupplier(supplierPosition, index) {
       })
 
       // Calculate transport cost
-      calculateTransportCostForSupplier(totalDistance, index)
+      calculateTransportCostForSupplier(totalDistance, supplier, index, callback)
     } else {
       console.error("Error calculating route for supplier " + index + ": " + status)
+      if (callback) callback()
     }
   })
 }
 
 // Function to calculate transport cost for a specific supplier
-function calculateTransportCostForSupplier(totalDistance, index) {
+function calculateTransportCostForSupplier(totalDistance, supplier, index, callback) {
   fetch("../transport_cost.php")
     .then((response) => response.json())
     .then((data) => {
@@ -360,7 +458,6 @@ function calculateTransportCostForSupplier(totalDistance, index) {
         },
       }
 
-      // Check if user selected a truck type
       let selectedTruck = ""
       const truckSmallRadio = document.getElementById("gridRadios1")
       const truckLargeRadio = document.getElementById("gridRadios2")
@@ -370,46 +467,42 @@ function calculateTransportCostForSupplier(totalDistance, index) {
       } else if (truckLargeRadio && truckLargeRadio.checked) {
         selectedTruck = "truck"
       } else {
-        // Default to truckSmall if none selected
-        selectedTruck = "truckSmall"
+        selectedTruck = "truckSmall" // fallback
       }
 
-      // Calculate transport cost
-      var distanceInKm = totalDistance / 1000
-      var costPerKm = truckConfig[selectedTruck].divisor
-      var fuelRate = truckConfig[selectedTruck].fuelRate
-      var transportCost = (distanceInKm / costPerKm) * fuelRate
+      const truck = truckConfig[selectedTruck]
+      const fixcost = truck.fixcost
 
-      // Format box index based on your HTML structure
-      // For the first supplier (index 0), boxIndex is empty
-      // For others, it's the number (2, 3)
-      const boxIndex = index === 0 ? "" : index + 1
+      // สกัดค่าคงที่ต่าง ๆ อย่างปลอดภัย
+      const fixDriver = fixcost.Driver || fixcost.Tech || 0
+      const fixAssist = fixcost.Assist || fixcost.TechAssist || 0
+      const fixBase = fixcost.bigtrans || fixcost.smalltrans || 0
+      const fixTotal = fixDriver + fixAssist + fixBase
 
-      // Get elements to update
-      const transportCostEl = document.getElementById(`transport_cost${boxIndex}`)
-      const disposalCostEl = document.getElementById(`disposal_cost${boxIndex}`)
-      const totalCostEl = document.getElementById(`total_cost${boxIndex}`)
+      const distanceInKm = totalDistance / 1000
+      const maintananceCost = distanceInKm * truck.maintanance
+      const transportCost = (distanceInKm / truck.divisor) * truck.fuelRate
+      const fullTransportCost = transportCost + fixTotal + maintananceCost
 
-      // Update transport cost
-      if (transportCostEl) {
-        transportCostEl.innerText = transportCost.toFixed(2) + " บาท"
-      }
+      // Calculate disposal cost
+      const disposalCost = supplier.cost_rate ? Number.parseFloat(supplier.cost_rate) : 0
 
-      // Update total cost if applicable
-      if (totalCostEl && disposalCostEl) {
-        // Extract disposal cost from element
-        let disposalCost = 0
-        const match = disposalCostEl.innerText.match(/(\d+(\.\d+)?)/)
-        if (match) {
-          disposalCost = Number.parseFloat(match[1])
-        }
+      // Calculate total cost
+      const totalCost = fullTransportCost + disposalCost
 
-        // Calculate and update total cost
-        const totalCost = transportCost + disposalCost
-        totalCostEl.innerText = totalCost.toFixed(2) + " บาท"
-      }
+      // Store the calculated costs with the supplier data
+      supplierCosts.push({
+        supplier: supplier,
+        transportCost: fullTransportCost,
+        disposalCost: disposalCost,
+        totalCost: totalCost,
+        originalIndex: index,
+      })
+
+      if (callback) callback()
     })
     .catch((error) => {
       console.error("Error fetching API data:", error)
+      if (callback) callback()
     })
 }

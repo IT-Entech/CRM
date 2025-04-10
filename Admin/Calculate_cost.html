@@ -25,12 +25,12 @@
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBxg3acarUept2geVfm_D_nYrV2aLQL8w0&callback=initMap" async defer></script>
+ 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
-<body onload="initMap()">
+<body>
 
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
@@ -533,82 +533,17 @@
         </ol>
       </nav>
     </div><!-- End Page Title -->
-    <section class="section">
+    <section class="section contact">
       <div class="row">
-        <!--div class="col-lg-6"-->
-
-          <!--div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Horizontal Form</h5>
-
-              <form>
-                <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Your Name</label>
-                  <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputText">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail">
-                  </div>
-                </div>
-                <div class="row mb-3">
-                  <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword">
-                  </div>
-                </div>
-                <fieldset class="row mb-3">
-                  <legend class="col-form-label col-sm-2 pt-0">Radios</legend>
-                  <div class="col-sm-10">
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" value="option1" checked>
-                      <label class="form-check-label" for="gridRadios1">
-                        First radio
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="option2">
-                      <label class="form-check-label" for="gridRadios2">
-                        Second radio
-                      </label>
-                    </div>
-                    <div class="form-check disabled">
-                      <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios3" value="option3" disabled>
-                      <label class="form-check-label" for="gridRadios3">
-                        Third disabled radio
-                      </label>
-                    </div>
-                  </div>
-                </fieldset>
-                <div class="row mb-3">
-                  <div class="col-sm-10 offset-sm-2">
-                    <div class="form-check">
-                      <input class="form-check-input" type="checkbox" id="gridCheck1">
-                      <label class="form-check-label" for="gridCheck1">
-                        Example checkbox
-                      </label>
-                    </div>
-                  </div>
-                </div>
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form>
-
-            </div>
-          </div-->
-
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">Form Appoint</h5>
-              <input id="search-box" class="form-control" type="text" placeholder="Search for a place" style="width: 300px; margin-bottom: 20px;">
+              <input id="search-box" class="form-control" type="search" placeholder="Search for a place" style="width: 300px; margin-bottom: 20px;">
               <div id="map" style="height: 600px; width: 100%;"></div>
+            </div>
+            <div class="row gy-4">
+
               <!-- Multi Columns Form -->
-              <form action="create-appoint.php" method="post" enctype="multipart/form-data" class="row g-3">
                 <div class="col-md-2">
                   <label for="start_point" class="form-label">จุดเริ่มต้น</label>
                   <select  class="form-select" id="start_point" name="start_point">
@@ -625,15 +560,35 @@
                 </div>
                 <div class="col-md-4">
                   <label for="waste_name" class="form-label">Waste Name:</label>
-                  <input type="text" class="form-control" id="waste_name" name="waste_name">
+                  <input type="search" class="form-control" id="waste_name" list="wasteOptions" name="waste_name" required>
+                  <datalist id="wasteOptions"></datalist>
                 </div>
                 <div class="col-md-4">
                   <label for="waste_code" class="form-label">Waste Code:</label>
                   <select class="form-select" id="waste_code" name="waste_code">
-                    <option selected value="">N/A</option>  
+                    <option value="">กรุณาเลือก...</option>
                   </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-10">
+                <fieldset class="row mb-3">
+                  <legend class="col-form-label col-sm-2 pt-0">ประเภทรถ</legend>
+                  <div class="col-sm-10">
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="truckType" id="gridRadios1" value="1" checked>
+                      <label class="form-check-label" for="gridRadios1">
+                        รถเล็ก
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <input class="form-check-input" type="radio" name="truckType" id="gridRadios2" value="3.74">
+                      <label class="form-check-label" for="gridRadios2">
+                        รถใหญ่
+                      </label>
+                    </div>
+                  </div>
+                </fieldset>
+                </div>
+                <!--div class="col-md-2">
                   <label for="supplier_code" class="form-label">ปลายทาง:</label>
                   <select class="form-select" id="supplier_code" name="supplier_code">
                     <option selected value="">N/A</option> 
@@ -642,130 +597,52 @@
                 <div class="col-md-2">
                   <label for="disposal_cost" class="form-label">ค่ากำจัด:</label>
                   <input type="text" class="form-control" id="disposal_cost" name="inputAP_No">
-                </div>
-                <!--div class="col-md-2">
-                  <label for="inputFac_no" class="form-label">ทะเบียนโรงงาน</label>
-                  <input type="text" class="form-control" id="inputFac_no" name="inputFac_no" value="">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputFac-name" class="form-label">ชื่อโรงงาน</label>
-                  <input type="text" class="form-control" id="inputFac-name" name="inputFac_name">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputFac-nation" class="form-label">สัญชาติ</label>
-                  <select class="form-select" id="inputFac-nation" name="inputFac_nation">
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputFac-type" class="form-label">อุตสาหกรรม</label>
-                  <input type="text" class="form-control" id="inputFac-type" name="inputFac_type">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputFac-value" class="form-label">ทุนจดทะเบียน</label>
-                  <input type="text" class="form-control" id="inputFac-value" name="inputFac_value" value="0">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputDate" class="form-label">วันที่</label>
-                  <input type="text" class="form-control" id="inputDate" name="inputDate" value="">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputAddress" class="form-label">ที่อยู่</label>
-                  <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="123/5 หมู่1">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputProvince" class="form-label">จังหวัด</label>
-                  <select class="form-select"  id="inputProvince" name="inputProvince">
-                    <option selected value="00">N/A</option> 
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputCustomer" class="form-label">ผู้ติดต่อ</label>
-                  <input type="text" class="form-control" id="inputCustomer" name="inputCustomer">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputPosition" class="form-label">ตำแหน่ง</label>
-                  <input type="text" class="form-control" id="inputPosition" name="inputPosition">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputEmail" class="form-label">Email</label>
-                  <input type="email" class="form-control" id="inputEmail" name="inputEmail">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputTel" class="form-label">เบอร์โทร</label>
-                  <input type="text" class="form-control" id="inputTel" name="inputTel">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputSegment" class="form-label">Segmnet</label>
-                  <select class="form-select" id="inputSegment" name="inputSegment">
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputCL_type" class="form-label">CL-type</label>
-                  <select class="form-select" id="inputCL_type" name="inputCL_type">
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputSales" class="form-label">พนักงานขาย</label>
-                  <select class="form-select" id="inputSales" aria-label="inputSales" name="inputSales">
-                    <option selected value="">N/A</option>  
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputAppoint" class="form-label">การนัดหมาย</label>
-                  <select class="form-select" id="inputAppoint" name="inputAppoint">
-                    <option selected value="">N/A</option>  
-                  </select>
-                </div>
-                <div class="col-md-2">
-                  <label for="inputVisit" class="form-label">วันที่นัด</label>
-                  <input type="date" class="form-control" id="inputVisit" name="inputVisit">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputCus_status" class="form-label">สถานะลูกค้า</label>
-                  <select class="form-select" id="inputCus_status" name="inputCus_status">
-                  </select>
-                </div>
-                <div class="col-md-4">
-                  <label for="inputInsight" class="form-label">Insight</label>
-                  <input type="text" class="form-control" id="inputInsight" name="inputInsight">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputCompetitor_name" class="form-label">คู่แข่ง</label>
-                  <input type="text" class="form-control" id="inputCompetitor_name" name="inputCompetitor_name">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputCompetitor_value" class="form-label">ราคาคู่แข่ง</label>
-                  <input type="text" class="form-control" id="inputCompetitor_value" name="inputCompetitor_value" value="0.00">
-                </div>
-                <div class="col-md-2">
-                  <label for="inputis_status" class="form-label">สถานะติดตาม</label>
-                  <select class="form-select" id="inputis_status" name="inputis_status">
-                    <option selected value="0">N/A</option>  
-                  </select>
-                </div>
-                <div class="col-md-6">
-                  <label for="inputReason" class="form-label">เหตุผล</label>
-                  <input type="text" class="form-control" id="inputReason" name="inputReason">
-                </div>
-                <div class="col-md-6">
-                  <label for="inputRemark" class="form-label">Remark</label>
-                  <input type="text" class="form-control" id="inputRemark" name="inputRemark">
                 </div-->
-                
-                <!--div class="col-12">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                      Check me out
-                    </label>
-                  </div>
-                </div-->
-                <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
-                </div>
-              </form><!-- End Multi Columns Form -->
-
+                <fieldset class="row mb-3">
+            <div class="col-lg-4">
+              <input type="radio" class="btn-check" name="options-outlined" id="selected1" autocomplete="off" checked>
+              <label class="btn btn-outline-primary" for="selected1">ตัวเลือกที่ 1</label>
+              <div class="info-box card " id="box">
+                <i class="bi bi-geo-alt"></i>
+                <h3 id="supplier">ไม่มีข้อมูล </h3>
+                <h6>ปลายทาง : <span id="supplier_code">-</span><span id="account">(0)</span></h6>
+                <h6>รหัสกำจัด : <span id="disposal_code">-</span></h6>
+                <h6>ค่ากำจัด : <span id="disposal_cost">-</span></h6>
+                <h6>ค่าขนส่ง : <span id="transport_cost">-</span></h6>
+                <h6>รวมต้นทุน : <span id="total_cost">-</span></h6>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <input type="radio" class="btn-check" name="options-outlined" id="selected2" autocomplete="off">
+              <label class="btn btn-outline-primary" for="selected2">ตัวเลือกที่ 2</label>
+              <div class="info-box card"id="box2">
+                <i class="bi bi-geo-alt"></i>
+                <h3 id="supplier2">ไม่มีข้อมูล </h3>
+                <h6>ปลายทาง : <span id="supplier_code2">-</span><span id="account2">(0)</span></h6>
+                <h6>รหัสกำจัด : <span id="disposal_code2">-</span></h6>
+                <h6>ค่ากำจัด : <span id="disposal_cost2">-</span></h6>
+                <h6>ค่าขนส่ง : <span id="transport_cost2">-</span></h6>
+                <h6>รวมต้นทุน : <span id="total_cost2">-</span></h6>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <input type="radio" class="btn-check" name="options-outlined" id="selected3" autocomplete="off">
+              <label class="btn btn-outline-primary" for="selected3">ตัวเลือกที่ 3</label>
+              <div class="info-box card" id="box3">
+                <i class="bi bi-geo-alt"></i>
+                <h3 id="supplier3">ไม่มีข้อมูล </h3>
+                <h6>ปลายทาง : <span id="supplier_code3">-</span><span id="account3">(0)</span></h6>
+                <h6>รหัสกำจัด : <span id="disposal_code3">-</span></h6>
+                <h6>ค่ากำจัด : <span id="disposal_cost3">-</span></h6>
+                <h6>ค่าขนส่ง : <span id="transport_cost3">-</span></h6>
+                <h6>รวมต้นทุน : <span id="total_cost3">-</span></h6>
+              </div>
+            </div>
+          </fieldset>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" id="calculateBtn">Submit</button>
+              <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+            </div>
             </div>
           </div>
       </div>
@@ -776,7 +653,7 @@
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
-      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+      &copy; Copyright <strong><span>En-technology</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
       <!-- All the links in the footer should remain intact. -->
@@ -802,6 +679,22 @@
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="../assets/js/calculate_cost.js"></script>
+  <script src="../assets/js/script_cost.js"></script>
+  <script> fetch('../API_KEY.txt')
+    .then(response => response.text())
+    .then(apiKey => {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey.trim()}&libraries=places&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+    })
+    .catch(error => console.error("Error fetching API key:", error));</script>
+<script>
+  document.getElementById("resetBtn").addEventListener("click", function () {
+      location.reload(); // รีเฟรชหน้าเว็บ
+  });
+</script>
 </body>
 
 </html>

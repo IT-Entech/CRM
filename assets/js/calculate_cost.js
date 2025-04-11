@@ -268,6 +268,7 @@ function updateSupplierUI() {
     const supplierEl = document.getElementById(`supplier${i}`)
     const supplierCodeEl = document.getElementById(`supplier_code${i}`)
     const accountEl = document.getElementById(`account${i}`)
+    const distanceEl = document.getElementById(`distance${i}`)
     const disposalCodeEl = document.getElementById(`disposal_code${i}`)
     const disposalCostEl = document.getElementById(`disposal_cost${i}`)
     const transportCostEl = document.getElementById(`transport_cost${i}`)
@@ -275,6 +276,7 @@ function updateSupplierUI() {
 
     if (supplierEl) supplierEl.textContent = "ไม่มีข้อมูล"
     if (accountEl) accountEl.textContent = "(0)"
+    if (distanceEl) distanceEl.textContent = "-"
     if (supplierCodeEl) supplierCodeEl.textContent = "-"
     if (disposalCodeEl) disposalCodeEl.textContent = "-"
     if (disposalCostEl) disposalCostEl.textContent = "-"
@@ -293,6 +295,7 @@ function updateSupplierUI() {
     const supplierEl = document.getElementById(`supplier${boxIndex}`)
     const supplierCodeEl = document.getElementById(`supplier_code${boxIndex}`)
     const accountEl = document.getElementById(`account${boxIndex}`)
+    const distanceEl = document.getElementById(`distance${boxIndex}`)
     const disposalCodeEl = document.getElementById(`disposal_code${boxIndex}`)
     const disposalCostEl = document.getElementById(`disposal_cost${boxIndex}`)
     const transportCostEl = document.getElementById(`transport_cost${boxIndex}`)
@@ -301,6 +304,7 @@ function updateSupplierUI() {
     if (supplierEl) supplierEl.textContent = supplier.supplier_name || "ไม่มีข้อมูล"
     if (supplierCodeEl) supplierCodeEl.textContent = supplier.supplier_code || "-"
     if (accountEl) accountEl.textContent = `(${supplier.supplier_account_no || 0})`
+    if (distanceEl) distanceEl.textContent = supplierData.Distance.toFixed(2) + " กม."
     if (disposalCodeEl) disposalCodeEl.textContent = supplier.eliminate_code || "-"
     if (disposalCostEl) disposalCostEl.innerText = supplierData.disposalCost.toFixed(2) + " บาท"
     if (transportCostEl) transportCostEl.innerText = supplierData.transportCost.toFixed(2) + " บาท"
@@ -493,6 +497,7 @@ function calculateTransportCostForSupplier(totalDistance, supplier, index, callb
       // Store the calculated costs with the supplier data
       supplierCosts.push({
         supplier: supplier,
+        Distance: distanceInKm,
         transportCost: fullTransportCost,
         disposalCost: disposalCost,
         totalCost: totalCost,

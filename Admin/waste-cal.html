@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Waste Management Calculator</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../Admin/assets/css/wasteCalculator.css">
+</head>
+<body>
+  <main class="container py-4">
+    <div class="pagetitle">
+      <h1>Waste Management Calculator</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Waste Calculator</li>
+        </ol>
+      </nav>
+    </div>
+
+    <section class="section">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Map</h5>
+              <input id="search-box" class="form-control" type="search" placeholder="Search for a place" style="width: 300px; margin-bottom: 20px;">
+              <div id="map" style="height: 400px; width: 100%;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Route Information</h5>
+              
+              <div class="row mb-3">
+                <div class="col-md-6">
+                  <label for="start_point" class="form-label">Start Point</label>
+                  <select class="form-select" id="start_point" name="start_point">
+                    <option selected value="13.561900, 100.653328">ลานจอดแพรกษา</option>  
+                    <option value="13.599536, 101.373371">กรีนพลัส</option>  
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label for="finish_point" class="form-label">End Point</label>
+                  <select class="form-select" id="finish_point" name="finish_point">
+                    <option selected value="13.561900, 100.653328">ลานจอดแพรกษา</option>  
+                    <option value="13.599536, 101.373371">กรีนพลัส</option>  
+                  </select>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-12">
+                  <h5>Waste Items</h5>
+                  <button type="button" class="btn btn-outline-primary btn-add-waste" id="addWasteBtn">
+                    <i class="bi bi-plus-circle"></i> Add Waste Item
+                  </button>
+                  
+                  <div id="wasteItemsContainer">
+                    <!-- Waste items will be added here dynamically -->
+                    <div class="waste-item" data-id="1">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <label for="waste_name_1" class="form-label">Waste Name:</label>
+                          <input type="text" class="form-control waste-name" id="waste_name_1" required>
+                        </div>
+                        <div class="col-md-5">
+                          <label for="waste_code_1" class="form-label">Waste Code:</label>
+                          <select class="form-select waste-code" id="waste_code_1">
+                            <option value="">กรุณาเลือก...</option>
+                          </select>
+                        </div>
+                        <div class="col-md-2">
+                          <button type="button" class="remove-waste-btn" disabled>
+                            <i class="bi bi-trash"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row mb-3">
+                <div class="col-12">
+                  <fieldset class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Truck Type</legend>
+                    <div class="col-sm-10">
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="truckType" id="gridRadios1" value="1" checked>
+                        <label class="form-check-label" for="gridRadios1">
+                          รถเล็ก
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" name="truckType" id="gridRadios2" value="3.74">
+                        <label class="form-check-label" for="gridRadios2">
+                          รถใหญ่
+                        </label>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4" id="calculationResults">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Calculation Results</h5>
+              
+              <fieldset class="row mb-3">
+                <div class="col-lg-4">
+                  <input type="radio" class="btn-check" name="options-outlined" id="selected1" autocomplete="off" checked>
+                  <label class="btn btn-outline-primary" for="selected1">Option 1</label>
+                  <div class="info-box card" id="box1">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3 id="supplier1">No data</h3>
+                    <h6>Destination: <span id="supplier_code1">-</span><span id="account1">(0)</span></h6>
+                    <h6>Disposal Code: <span id="disposal_code1">-</span></h6>
+                    <h6>Distance: <span id="distance1">-</span></h6>
+                    <h6>Disposal Cost: <span id="disposal_cost1">-</span></h6>
+                    <h6>Transport Cost: <span id="transport_cost1">-</span></h6>
+                    <h6>Total Cost: <span id="total_cost1">-</span></h6>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <input type="radio" class="btn-check" name="options-outlined" id="selected2" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="selected2">Option 2</label>
+                  <div class="info-box card" id="box2">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3 id="supplier2">No data</h3>
+                    <h6>Destination: <span id="supplier_code2">-</span><span id="account2">(0)</span></h6>
+                    <h6>Disposal Code: <span id="disposal_code2">-</span></h6>
+                    <h6>Distance: <span id="distance2">-</span></h6>
+                    <h6>Disposal Cost: <span id="disposal_cost2">-</span></h6>
+                    <h6>Transport Cost: <span id="transport_cost2">-</span></h6>
+                    <h6>Total Cost: <span id="total_cost2">-</span></h6>
+                  </div>
+                </div>
+                <div class="col-lg-4">
+                  <input type="radio" class="btn-check" name="options-outlined" id="selected3" autocomplete="off">
+                  <label class="btn btn-outline-primary" for="selected3">Option 3</label>
+                  <div class="info-box card" id="box3">
+                    <i class="bi bi-geo-alt"></i>
+                    <h3 id="supplier3">No data</h3>
+                    <h6>Destination: <span id="supplier_code3">-</span><span id="account3">(0)</span></h6>
+                    <h6>Disposal Code: <span id="disposal_code3">-</span></h6>
+                    <h6>Distance: <span id="distance3">-</span></h6>
+                    <h6>Disposal Cost: <span id="disposal_cost3">-</span></h6>
+                    <h6>Transport Cost: <span id="transport_cost3">-</span></h6>
+                    <h6>Total Cost: <span id="total_cost3">-</span></h6>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-4">
+        <div class="col-12 text-center">
+          <button type="button" class="btn btn-primary" id="calculateBtn">Calculate</button>
+          <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="../Admin/assets/js/waste-Calculator.js"></script>
+  <script>
+    // Load Google Maps API
+    fetch('../API_KEY.txt')
+      .then(response => response.text())
+      .then(apiKey => {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey.trim()}&libraries=places&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+      })
+      .catch(error => console.error("Error fetching API key:", error));
+  </script>
+</body>
+</html>

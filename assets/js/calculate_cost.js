@@ -492,7 +492,7 @@ function calculateTransportCostForSupplier(totalDistance, supplier, index, callb
       const disposalCost = supplier.cost_rate ? Number.parseFloat(supplier.cost_rate) : 0
 
       // Calculate total cost
-      const totalCost = fullTransportCost + disposalCost
+      const totalCost = fullTransportCost + disposalCost + 900
 
       // Store the calculated costs with the supplier data
       supplierCosts.push({

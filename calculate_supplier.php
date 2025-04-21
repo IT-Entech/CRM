@@ -23,7 +23,7 @@ $sql = "WITH Datadisposal AS (
                 A.eliminate_code,
                 A.supplier_code,
                 A.supplier_account_no,
-                ROW_NUMBER() OVER (PARTITION BY A.waste_code, A.supplier_code ORDER BY B.qt_date DESC, A.supplier_code ASC) AS RowNum
+                ROW_NUMBER() OVER (PARTITION BY A.waste_code, A.supplier_code, A.cost_rate ORDER BY B.qt_date DESC, A.supplier_code ASC) AS RowNum
             FROM cost_sheet_detail A
             LEFT JOIN cost_sheet_head B ON A.qt_no = B.qt_no
             LEFT JOIN customer_type_2025 C ON A.customer_code = C.customer_code

@@ -28,7 +28,7 @@ $sql = "WITH Datadisposal AS (
             LEFT JOIN cost_sheet_head B ON A.qt_no = B.qt_no
             LEFT JOIN customer_type_2025 C ON A.customer_code = C.customer_code
             WHERE A.cost_code = '51100'
-                AND YEAR(B.qt_date) >= 2024
+                AND YEAR(B.qt_date) >= 2025
                 AND A.unit_code = '01'
                 AND A.waste_code NOT IN ('000000-S', '', '000002-S')
                 AND A.waste_code LIKE '%-S%'

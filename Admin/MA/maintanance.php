@@ -209,7 +209,7 @@ $sqlgraph = 	"SELECT
 			    GROUP BY A.repair_no
 				) brw_summary ON A.repair_no = brw_summary.repair_no
 				WHERE A.is_status <> 'C' 
-				AND YEAR(A.repair_date) = 2024 
+				AND YEAR(A.repair_date) = 2025
 				GROUP BY 
 			    FORMAT(A.repair_date, 'MMM'), 
 			    MONTH(A.repair_date)

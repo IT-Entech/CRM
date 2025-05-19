@@ -98,7 +98,7 @@ $sqlappoint = "SELECT
 FROM (
 SELECT 
           COUNT(appoint_no) AS appoint_no,
-          CASE WHEN is_status <> '4' THEN COUNT(appoint_no) END AS appoint_quality
+          CASE WHEN staff_id <> '1119900831940' THEN COUNT(appoint_no) END AS appoint_quality
           FROM 
           appoint_head A
           WHERE 

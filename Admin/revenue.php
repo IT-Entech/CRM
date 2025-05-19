@@ -51,7 +51,7 @@ if ($is_new <> '0') {
   }
 } else {
   if ($year_no <> '0') {
-  $where_conditions[] = "A.year_no = ?";
+  $where_conditions[] = "YEAR(A.appoint_date) = ?";
   $where_conditions1[] = "A.year_no = ?";
   $where_conditions2[] = "YEAR(A.shipment_date) = ?";
   $where_conditions3[] = "year_no = ?";

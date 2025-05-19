@@ -104,7 +104,7 @@ SELECT
           WHERE 
            $where_clause
           GROUP BY 
-          is_status
+          staff_id
 ) AS subquery
 ";
 $sqlcostsheet = "SELECT 

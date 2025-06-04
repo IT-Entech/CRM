@@ -461,13 +461,11 @@ function calculateTransportCostForSupplier(totalDistance, supplier, index, callb
           fuelRate: Config.truckSmall.fuelRate,
           divisor: Config.truckSmall.divisor,
           maintanance: Config.truckSmall.maintanance,
-          fixcost: Config.truckSmall.fixcost,
         },
         truck: {
           fuelRate: Config.truck.fuelRate,
           divisor: Config.truck.divisor,
           maintanance: Config.truck.maintanance,
-          fixcost: Config.truck.fixcost,
         },
       }
 
@@ -484,24 +482,18 @@ function calculateTransportCostForSupplier(totalDistance, supplier, index, callb
       }
 
       const truck = truckConfig[selectedTruck]
-      const fixcost = truck.fixcost
 
-      // สกัดค่าคงที่ต่าง ๆ อย่างปลอดภัย
-      const fixDriver = fixcost.Driver || fixcost.Tech || 0
-      const fixAssist = fixcost.Assist || fixcost.TechAssist || 0
-      const fixBase = fixcost.bigtrans || fixcost.smalltrans || 0
-      const fixTotal = fixDriver + fixAssist + fixBase
 
       const distanceInKm = totalDistance / 1000
       const maintananceCost = distanceInKm * truck.maintanance
       const transportCost = (distanceInKm / truck.divisor) * truck.fuelRate
-      const fullTransportCost = transportCost + fixTotal + maintananceCost
+      const fullTransportCost = transportCost +  maintananceCost
 
       // Calculate disposal cost
       const disposalCost = supplier.cost_rate ? Number.parseFloat(supplier.cost_rate) : 0
 
       // Calculate total cost
-      const totalCost = fullTransportCost + disposalCost + 900
+      const totalCost = fullTransportCost + disposalCost
 
       // Store the calculated costs with the supplier data
       supplierCosts.push({

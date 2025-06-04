@@ -558,12 +558,21 @@
                     <option value="13.599536, 101.373371">กรีนพลัส</option>  
                   </select>
                 </div>
-                <div class="col-md-4">
+                  <div class="col-md-2">
+                  <label for="segment" class="form-label">Group product</label>
+                  <select  class="form-select" id="segment" name="segment" required>
+                    <option selected value="">กรุณาเลือก...</option>  
+                    <option value="01">กากตะกอน-ฝุ่นทราย</option>  
+                    <option value="02">Product off spec</option> 
+                    <option value="03">ขยะอันตราย</option>  
+                  </select>
+                </div>
+                <div class="col-md-3">
                   <label for="waste_name" class="form-label">Waste Name:</label>
                   <input type="search" class="form-control" id="waste_name" list="wasteOptions" name="waste_name" required>
                   <datalist id="wasteOptions"></datalist>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                   <label for="waste_code" class="form-label">Waste Code:</label>
                   <select class="form-select" id="waste_code" name="waste_code">
                     <option value="">กรุณาเลือก...</option>
@@ -683,7 +692,7 @@
   <script src="assets/js/main.js"></script>
   <script src="../assets/js/calculate_cost.js"></script>
   <script src="../assets/js/script_cost.js"></script>
-  <script src="../assets/js/getSession.js"></script>
+  <!--script src="../assets/js/getSession.js"></script-->
   <script> fetch('../API_KEY.txt')
     .then(response => response.text())
     .then(apiKey => {

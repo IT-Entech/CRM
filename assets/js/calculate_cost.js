@@ -196,10 +196,19 @@ function initMap() {
 function fetchSuppliers(wasteCode) {
   if (!wasteCode) return
 
+ // ดึงค่า segment จาก DOM
+  const segmentSelect = document.getElementById("segment");
+  const segment = segmentSelect ? segmentSelect.value : "";
+
+  if (!segment) {
+    console.warn("Segment not selected.");
+    return;
+  }
+
   // Create form data for POST request
   const formData = new FormData()
-  formData.append("waste_code", wasteCode)
-
+  formData.append("waste_code", wasteCode);
+  formData.append("segment", segment);
   fetch("../calculate_supplier.php", {
     method: "POST",
     body: formData,

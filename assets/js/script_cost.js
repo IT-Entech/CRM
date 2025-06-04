@@ -7,25 +7,30 @@ function debounce(func, delay) {
   };
 }
 
+// Event: เมื่อพิมพ์ในช่อง waste_name
 document.getElementById("waste_name").addEventListener(
   "input",
   debounce(function () {
     const wasteNameInput = this;
     const wasteCodeSelect = document.getElementById("waste_code");
+    const segmentSelect = document.getElementById("segment");
 
-    if (!wasteCodeSelect) {
-      console.error("Element with ID 'waste_code' not found.");
+    if (!wasteCodeSelect || !segmentSelect) {
+      console.error("Required element(s) not found: 'waste_code' or 'segment'");
       return;
     }
 
-    // Clear previous options, keeping the placeholder
+    // เคลียร์ตัวเลือกเดิม (ยกเว้น placeholder)
     wasteCodeSelect.innerHTML = '<option value="">Select waste code</option>';
 
     const wastename = wasteNameInput.value.trim();
+    const segment = segmentSelect.value.trim();
 
-    if (wastename.length > 0) {
+    // ตรวจสอบว่าทั้ง waste_name และ segment มีค่า
+    if (wastename.length > 0 && segment.length > 0) {
       const data = new FormData();
       data.append("waste_name", wastename);
+      data.append("segment", segment);
 
       fetch("../fetch_cal_cost.php", {
         method: "POST",
@@ -60,5 +65,19 @@ document.getElementById("waste_name").addEventListener(
           alert("Error fetching data. Please try again.");
         });
     }
-  }, 500) // Adjust debounce delay (e.g., 500ms)
+  }, 500) // ปรับเวลา debounce ได้ตามต้องการ
 );
+
+// Event: เมื่อเปลี่ยนค่า segment
+document.getElementById("segment").addEventListener("change", function () {
+  const wasteNameInput = document.getElementById("waste_name");
+  const wasteCodeSelect = document.getElementById("waste_code");
+
+  if (wasteNameInput) {
+    wasteNameInput.value = ""; // ล้างค่าในช่อง waste_name
+  }
+
+  if (wasteCodeSelect) {
+    wasteCodeSelect.innerHTML = '<option value="">Select waste code</option>'; // ล้าง options เดิม
+  }
+});

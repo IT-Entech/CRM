@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: application/json; charset=utf-8');
 include_once '../connectDB/connectDB.php';
 $objCon = connectDB();
 
@@ -8,6 +9,7 @@ if ($objCon === false) {
 }
 
 // Get the wastename from the POST request
+$segment = isset($_POST['segment']) ? $_POST['segment'] : '';
 $wastename = isset($_POST['waste_name']) ? $_POST['waste_name'] : '';
 $search = "%" . $wastename . "%";
 
@@ -22,6 +24,7 @@ $sql = "WITH Datadisposal AS (
                 A.waste_name,
                 A.cost_rate,
                 A.eliminate_code,
+                B.customer_segment_code,
                 A.supplier_code,
                 A.supplier_account_no,
                 ROW_NUMBER() OVER (PARTITION BY A.waste_code, A.supplier_code ORDER BY B.qt_date DESC, A.supplier_code ASC) AS RowNum
@@ -41,11 +44,12 @@ FROM Datadisposal A
 LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
 WHERE RowNum = 1 
 AND A.waste_name LIKE ?
+AND A.customer_segment_code = ?
 GROUP BY A.waste_code
 ORDER BY A.waste_code ASC;";
 
 
-$params = array($search);
+$params = array($search,$segment);
 $stmt = sqlsrv_query($objCon, $sql, $params);
 
 if ($stmt === false) {

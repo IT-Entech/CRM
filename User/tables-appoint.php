@@ -544,11 +544,12 @@ if ($level != 1) {
                   <tr>
                   <th scope="col">#</th>
                     <th scope="col">วันที่ติดต่อ</th>
+                    <th scope="col">วันที่ pre ตั๋ว</th>
                     <th scope="col">Customer</th>
                     <th scope="col">AP No</th>
                     <th scope="col">สถานะ</th>
                     <th scope="col">หมายเหตุ</th>
-                    <th scope="col">ติดตามล่าสุด</th>
+                    <th scope="col">Pre-quotation date</th>
                   </tr>
                 </thead>
                 <tbody>

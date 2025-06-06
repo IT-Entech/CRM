@@ -36,15 +36,15 @@ if ($is_new <> '0') {
 
   if ($year_no <> '0') {
   $where_conditions[] = "year_no = ?";
-  $where_conditions1[] = "YEAR(A.appoint_date) = ?";
+  $where_conditions1[] = "B.year_no = ?";
   $where_conditions2[] = "YEAR(C.appoint_date) = ?";
   $where_conditions3[] = "year_no = ?";
   $params[] = $year_no;  // Use appoint_date year instead of year_no
   }
-  echo $is_new;
+
   if ($month_no <> '0') {
       $where_conditions[] = "month_no = ?";
-      $where_conditions1[] = "MONTH(A.appoint_date) = ?";
+      $where_conditions1[] = "B.month_no = ?";
       $where_conditions2[] = "MONTH(C.appoint_date) = ?";
       $where_conditions3[] = "month_no = ?";
       $params[] = $month_no;  // Use appoint_date month instead of month_no
@@ -52,14 +52,14 @@ if ($is_new <> '0') {
 } else {
   if ($year_no <> '0') {
   $where_conditions[] = "YEAR(A.appoint_date) = ?";
-  $where_conditions1[] = "A.year_no = ?";
+  $where_conditions1[] = "B.year_no = ?";
   $where_conditions2[] = "YEAR(A.shipment_date) = ?";
   $where_conditions3[] = "year_no = ?";
   $params[] = $year_no;
   }
   if ($month_no <> '0') {
       $where_conditions[] = "A.month_no = ?";
-      $where_conditions1[] = "A.month_no = ?";
+      $where_conditions1[] = "B.month_no = ?";
       $where_conditions2[] = "MONTH(A.shipment_date) = ?";
       $where_conditions3[] = "month_no = ?";
       $params[] = $month_no;
@@ -76,7 +76,7 @@ if ($channel <> 'N') {
 
 if ($Sales <> 'N') {
   $where_conditions[] = "A.staff_id = ?";
-  $where_conditions1[] = "A.staff_id = ?";
+  $where_conditions1[] = "B.staff_id = ?";
   $where_conditions2[] = "C.staff_id = ?";
   $where_conditions3[] = "A.staff_id = ?";
   $params[] = $Sales;
@@ -107,23 +107,14 @@ SELECT
           staff_id
 ) AS subquery
 ";
-$sqlcostsheet = "SELECT 
-    COUNT(appoint_no) AS qt_customer,
-     SUM(so_amount) AS so_amount
-FROM (
- SELECT 
-      COUNT(A.appoint_no) AS appoint_no,
-        SUM(ยอดเสนอราคา) AS so_amount
-    FROM 
-        View_cost_sheet_new A
-    LEFT JOIN cost_sheet_head B ON A.qt_no = B.qt_no
-    WHERE 
-B.print_qt_count > 0
+$sqlcostsheet = "SELECT COUNT(DISTINCT(A.appoint_no)) AS qt_customer,SUM(A.so_amount) AS so_amount FROM cost_sheet_head A
+LEFT JOIN appoint_head B ON A.appoint_no = B.appoint_no
+WHERE A.print_qt_count > 0
+AND A.is_pre = 'N'
+AND A.print_qt_id IN (5,50)
 AND
  $where_clause1
-    GROUP BY 
-       A.appoint_no, A.is_prospect
-) AS subquery";
+    ";
 
 $sqlorder = "SELECT SUM(C.so_amount) AS order_amount,COUNT((A.order_no)) AS order_no
                   FROM order_head A

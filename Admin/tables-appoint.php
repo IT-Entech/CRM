@@ -523,7 +523,7 @@ if($staff === 0 || $level <= 1){
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>ตารางการติดตามเสนอราคาลูกค้า</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -538,7 +538,7 @@ if($staff === 0 || $level <= 1){
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
+              <h5 class="card-title">ตารางการติดตามเสนอราคาลูกค้า</h5>
               <div class="col-lg-8">
                 <div class="row">
                   <div class="col-xxl-3 col-md-4">
@@ -590,11 +590,12 @@ if($staff === 0 || $level <= 1){
                   <tr>
                   <th scope="col">#</th>
                     <th scope="col">วันที่ติดต่อ</th>
+                    <th scope="col">วันที่ pre ตั๋ว</th>
                     <th scope="col">Customer</th>
                     <th scope="col">AP No</th>
                     <th scope="col">สถานะ</th>
                     <th scope="col">หมายเหตุ</th>
-                    <th scope="col">ติดตามล่าสุด</th>
+                    <th scope="col">Pre-quotation date</th>
                   </tr>
                 </thead>
                 <tbody>

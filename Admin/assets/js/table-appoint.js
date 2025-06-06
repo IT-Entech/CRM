@@ -37,30 +37,15 @@ function updateTable(data) {
     tr.innerHTML = `
       <th scope='row'>${index+1}</th>
       <td>${row.format_date ? row.format_date : ''}</td>
+      <td>${row.format_qtdate ? row.format_qtdate : ''}</td>
       <td>${row.customer_name}</td>
        <td><input type="text" class="form-control" id="appoint_no${index + 1}"name="appoint_no${index + 1}"value="${row.appoint_no}" readonly></td>
-    <td>
-  <select id="status-${row.appoint_no}" name="status${index+1}" class="form-select text-center ${row.is_status == 0 ? 'bg-secondary text-white' : row.is_status == 3 ? 'bg-warning text-muted' : ''}"  onchange="handleSelectChange('${row.appoint_no}')">
-    <option value="${row.is_status}">
-      ${row.is_status == 0 ? 'N/A' : row.is_status == 3 ? 'Pending' : row.is_status}
-    </option>
-  <option value="${row.is_status == 0 ? 3 : '0'}">
-      ${row.is_status == 0 ? 'Pending' : 'N/A'}
-    </option>
-    <option value="4">ไม่เสนอราคา</option>
-  </select>
+    <td id="status-${row.appoint_no}" name="status${index+1}" class="form-control text-center ${row.status == '-' ? 'bg-secondary text-white' : row.status == 'pre quotation' ? 'bg-warning text-muted' : ''}"  onchange="handleSelectChange('${row.appoint_no}')">${row.status}
 </td> 
       <td>
-  <input 
-    type="text" 
-    name="remark${index+1}" 
-    class="form-control" 
-    value="${row.remark ? row.remark : ''}" 
-    id="remark-${row.appoint_no}"
-    ${row.is_status == 0 ? 'disabled' : ''}
-  >
+  <input type="text" name="remark${index+1}" class="form-control" value="${row.remark ? row.remark : ''}" id="remark-${row.appoint_no}"${row.is_status == 0 ? 'disabled' : ''}>
 </td>
-      <td>${row.update_time}</td>
+      <td class="form-control text-center ${row.update_time >= 10 ? 'bg-danger text-white' : row.update_time < 10 ? ' text-muted' : ''}">${row.update_time}</td>
     `;
     tbody.appendChild(tr);
   });

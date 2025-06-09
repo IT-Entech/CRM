@@ -409,19 +409,19 @@ if($staff === 0 || $level < 1){
         </ul>
       </li>
 
-      <li class="nav-item">
+        <li class="nav-item">
         <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
         <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-          <!--li>
-            <a href="tables-general.html">
-              <i class="bi bi-circle"></i><span>General Tables</span>
+        <li>
+            <a href="tables-appoint.php">
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
             </a>
-          </li-->
+          </li>
           <li>
             <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>Update Status</span>
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
           <!--li>
@@ -430,7 +430,7 @@ if($staff === 0 || $level < 1){
             </a>
           </li-->
         </ul>
-      </li><!-- End Tables Nav -->
+      </li>
 
       <li class="nav-heading">Pages</li>
       <li class="nav-item">

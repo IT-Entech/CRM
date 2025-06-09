@@ -395,11 +395,11 @@ if($staff === 0 || $level < 1){
         </ul>
       </li>
 
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <li class="nav-item">
+        <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+        <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
         <li>
             <a href="tables-appoint.php">
               <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
@@ -407,9 +407,14 @@ if($staff === 0 || $level < 1){
           </li>
           <li>
             <a href="tables-data.php">
-              <i class="bi bi-circle"></i><span>Update Status</span>
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
+          <!--li>
+            <a href="tables-CS.html">
+              <i class="bi bi-circle"></i><span>Data Cost sheet</span>
+            </a>
+          </li-->
         </ul>
       </li>
       <li class="nav-heading">Pages</li>

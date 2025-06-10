@@ -467,16 +467,24 @@ function calculateTransportCostForSupplier(totalDistance, supplier, index, callb
           divisor: Config.truck.divisor,
           maintanance: Config.truck.maintanance,
         },
+          truckB: {
+          fuelRate: Config.truckB.fuelRate,
+          divisor: Config.truckB.divisor,
+          maintanance: Config.truckB.maintanance,
+        },
       }
 
       let selectedTruck = ""
       const truckSmallRadio = document.getElementById("gridRadios1")
       const truckLargeRadio = document.getElementById("gridRadios2")
+      const truckLargeBRadio = document.getElementById("gridRadios3")
 
       if (truckSmallRadio && truckSmallRadio.checked) {
         selectedTruck = "truckSmall"
       } else if (truckLargeRadio && truckLargeRadio.checked) {
         selectedTruck = "truck"
+      } else if (truckLargeBRadio && truckLargeBRadio.checked) {
+        selectedTruck = "truckB"
       } else {
         selectedTruck = "truckSmall" // fallback
       }

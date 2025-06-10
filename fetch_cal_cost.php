@@ -31,9 +31,8 @@ $sql = "WITH Datadisposal AS (
             FROM cost_sheet_detail A
             LEFT JOIN cost_sheet_head B ON A.qt_no = B.qt_no
             LEFT JOIN customer_type_2025 C ON A.customer_code = C.customer_code
-            WHERE A.cost_code = '51100'
+            WHERE A.cost_code = '41100'
                 AND YEAR(B.qt_date) >= 2024
-                AND A.unit_code = '01'
                 AND A.waste_code NOT IN ('000000-S', '', '000002-S')
                 AND A.waste_code LIKE '%-S%'
                 AND YEAR(C.shipment_date) >= 2025
@@ -43,10 +42,10 @@ SELECT A.waste_code, MAX(B.waste_name) AS waste_name
 FROM Datadisposal A
 LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
 WHERE RowNum = 1 
-AND A.waste_name LIKE ?
+AND B.waste_name LIKE ?
 AND A.customer_segment_code = ?
 GROUP BY A.waste_code
-ORDER BY A.waste_code ASC;";
+ORDER BY A.waste_code ASC";
 
 
 $params = array($search,$segment);

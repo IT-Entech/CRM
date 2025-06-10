@@ -283,7 +283,7 @@ if($staff === 0 || $level < 1){
     <ul class="sidebar-nav" id="sidebar-nav">
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="index.php">
+        <a class="nav-link " href="index.php">
           <i class="bi bi-grid"></i>
           <span>Dashboard</span>
         </a>
@@ -396,10 +396,10 @@ if($staff === 0 || $level < 1){
       </li>
 
         <li class="nav-item">
-        <a class="nav-link " data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
-        <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
         <li>
             <a href="tables-appoint.php">
               <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
@@ -501,7 +501,7 @@ if($staff === 0 || $level < 1){
           <div class="row">
 
             <!-- Sales Card -->
-            <div class="col-xxl-4 col-md-6">
+            <div class="col-xxl-6 col-md-6">
               <div class="card info-card customers-card">
 
                 <div class="filter">
@@ -535,7 +535,7 @@ if($staff === 0 || $level < 1){
             </div><!-- End Sales Card -->
 
 <!-- Customers Card -->
-<div class="col-xxl-4 col-md-6">
+<div class="col-xxl-6 col-md-6">
   <div class="card info-card sales-card">
 
     <div class="filter">
@@ -569,9 +569,41 @@ if($staff === 0 || $level < 1){
   </div>
 
 </div><!-- End Customers Card -->
+<div class="col-xxl-6 col-md-6">
+  <div class="card info-card revenue-card">
 
+    <!--div class="filter">
+      <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+      <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+        <li class="dropdown-header text-start">
+          <h6>Filter</h6>
+        </li>
+
+        <li><a class="dropdown-item" href="#">Today</a></li>
+        <li><a class="dropdown-item" href="#">This Month</a></li>
+        <li><a class="dropdown-item" href="#">This Year</a></li>
+      </ul>
+    </div-->
+
+    <div class="card-body">
+      <h5 class="card-title">Estimate Revenue</h5>
+
+      <div class="d-flex align-items-center">
+        <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+          <i class="bi bi-cash-stack"></i>
+        </div>
+        <div class="ps-3">
+          <h6 id="or_number"></h6>
+          <span id="order_est" class="text-success large pt-1 fw-bold"></span> <span class="text-muted small pt-2 ps-1">THB</span>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div><!-- End Revenue Card -->
 <!-- Revenue Card -->
-<div class="col-xxl-4 col-md-6">
+<div class="col-xxl-6 col-md-6">
   <div class="card info-card revenue-card">
 
     <div class="filter">
@@ -605,11 +637,52 @@ if($staff === 0 || $level < 1){
   </div>
 </div><!-- End Revenue Card -->
 
- <!-- Recent Sales -->
  <div class="col-12">
+              <div class="card">
+
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start">
+                      <h6>Product</h6>
+                    </li>
+                    <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="999" onclick="fetchProduct(this)" >All</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="00" onclick="fetchProduct(this)">N/A</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="01" onclick="fetchProduct(this)">กากตะกอน-ฝุ่นทราย</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="02" onclick="fetchProduct(this)">Product off spec</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="03" onclick="fetchProduct(this)">ขยะอันตราย</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="04" onclick="fetchProduct(this)">Cleanning</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="05" onclick="fetchProduct(this)">Cleaning + กำจัด</a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item"  style="cursor: pointer;" data-segment-no="99" onclick="fetchProduct(this)">อื่น ๆ</a>
+                  </li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Revenue Movement <!--span>|Today</span--></h5>
+                  <div id="reportsChart"></div>
+                </div>
+
+              </div>
+            </div>
+             <div class="col-12">
   <div class="card recent-sales overflow-auto">
 
-    <div class="filter">
+    <!--div class="filter">
       <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
       <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
         <li class="dropdown-header text-start">
@@ -620,7 +693,7 @@ if($staff === 0 || $level < 1){
         <li><a class="dropdown-item" href="#">This Month</a></li>
         <li><a class="dropdown-item" href="#">This Year</a></li>
       </ul>
-    </div>
+    </div-->
 
     <div class="card-body">
       <h5 class="card-title">Region</h5>
@@ -628,7 +701,7 @@ if($staff === 0 || $level < 1){
       <table id="region" class="table table-borderless datatable">
         <thead>
           <tr>
-            <th scope="col">Segment</th>
+            <th scope="col">Product</th>
             <th scope="col">North</th>
             <th scope="col">Central</th>
             <th scope="col">East</th>
@@ -645,7 +718,7 @@ if($staff === 0 || $level < 1){
     </div>
 
   </div>
-</div><!-- End Recent Sales -->
+</div><!-- End Reports -->  
             <!-- Recent Sales>
             <div class="col-12">
               <div class="card recent-sales overflow-auto">
@@ -739,17 +812,17 @@ if($staff === 0 || $level < 1){
         </div>
       </div>
       <div style="flex: 1; text-align: center;">
+        <h5 class="card-title">Conversion rate</h5>
+        <div class="ps-2">
+          <h4 id="AT" style="font-weight: 700;"></h4>
+          <span id="AT_percent" class="text-success large pt-1 ps-2 fw-bold">Days</span>
+        </div>
+      </div>
+      <div style="flex: 1; text-align: center;">
         <h5 class="card-title">Winrate</h5>
         <div class="ps-2">
           <h4 id="winrate" style="font-weight: 700;"></h4>
           <span id="winrate_percent" class="text-success large pt-1 fw-bold"></span>
-        </div>
-      </div>
-      <div style="flex: 1; text-align: center;">
-        <h5 class="card-title">Average time</h5>
-        <div class="ps-2">
-          <h4 id="AT" style="font-weight: 700;"></h4>
-          <span id="AT_percent" class="text-success large pt-1 ps-2 fw-bold">Days</span>
         </div>
       </div>
             </div>

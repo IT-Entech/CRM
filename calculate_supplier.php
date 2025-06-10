@@ -169,7 +169,7 @@ A.supplier_account_no,
 D.latitude,
 D.longitude,
 B.supplier_name
-ORDER BY cost_rate ASC;";
+ORDER BY cost_rate ASC";
 
 $params = array($wastecode,$segment);
 $stmt = sqlsrv_query($objCon, $sql, $params);

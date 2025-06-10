@@ -1,13 +1,108 @@
+function toggleMaintenanceNav(isVisible) {
+  var selectSale = document.getElementById('select-sale');
+  if (isVisible) {
+     // Show the item
+    
+    selectSale.classList.remove('d-none');
+  } else {
+      // Hide the item
+
+    selectSale.classList.add('d-none');
+  }
+}
+function getSessionData() {
+  fetch('./header.php')
+    .then(response => response.json()) // Parse the JSON from the response
+    .then(data => {
+      //console.log('Session Data:', data);
+
+      const { name, staff, level, role, position } = data;
+       //console.log(`Name: ${name}, Staff: ${staff}, Level: ${level}, Role: ${role}`);
+      if (staff == 0 || level < 1) {
+        alert("คุณไม่ได้รับสิทธิ์ให้เข้าหน้านี้");
+        window.location = "../pages-login.html";
+        return;
+      }
+         // Set the selected option based on the role
+         const channelSelect = document.getElementById('channel');
+         if (role === 'MK Online') {
+           channelSelect.value = 'I'; // Set "Online" as selected
+         } else if (role === 'MK Offline') {
+           channelSelect.value = 'O'; // Set "Offline" as selected
+         } else {
+           channelSelect.value = 'N'; // Default to "All"
+         }
+      var permissionNav = document.getElementById('permission-nav');
+      var maintenanceNav = document.getElementById('maintanance-nav');
+      if(role == 'MK Online' || role == 'MK Offline'){
+        
+        permissionNav.classList.add('d-none');
+        maintenanceNav.classList.add('d-none'); 
+      }else{
+        permissionNav.classList.remove('d-none');
+        maintenanceNav.classList.remove('d-none');
+      }
+       // Hide the "Online" option for MK Online role
+       const AllOption = document.getElementById('all-select-channel');
+       const onlineOption = document.getElementById('OnL');
+       const offlineOption = document.getElementById('OfL');
+       if (role === 'MK Online') {
+        offlineOption.classList.add('d-none');
+        AllOption.classList.add('d-none');
+       }else if(role === 'MK Offline'){
+        onlineOption.classList.add('d-none');
+        AllOption.classList.add('d-none');
+       }
+      // Conditionally show Maintenance and Permission nav items
+      if (level == 2 || level == 3) {
+        toggleMaintenanceNav(true);
+
+      // Fetch staff data if needed for select options
+      fetch('../staff_id.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const selectElement = document.getElementById('Sales');
+          data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.staff_id;
+            option.textContent = item.fname_e;
+            selectElement.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error fetching staff data:', error));
+      }
+      // Update hidden fields and display the user name
+      document.getElementById('fetch-level').value = level;
+      document.getElementById('name-display').textContent = name;
+      document.getElementById('name-display1').textContent = name;
+      document.getElementById('position-name').textContent = position;
+      document.getElementById('fetch-staff').value = staff;
+
+      // Now call fetchYear() to fetch year-based data
+      fetchYear(); // Ensure session data is available before fetching year data
+    })
+    .catch(error => {
+      console.error('Error fetching session data:', error);
+    });
+}
+
+// Call the function to fetch session data
+getSessionData();
 function fetchYear() {
 const year_no = document.getElementById('year').value;
 const month_no = document.getElementById('month').value;
-/*const channel = document.getElementById('channel').value;*/
+ const channel = document.getElementById('channel').value;
 const staff = document.getElementById('staff').value;
 const is_new = document.getElementById('is_new').value;
 let url;
 
   url = `revenue.php?year_no=${year_no}&month_no=${month_no}&is_new=${is_new}&staff=${staff}`;
-  
+  const url1 = `./reportchart.php?year_no=${year_no}&Sales=${Sales}&is_new=${is_new}&channel=${channel}`;
 
 fetch(url)
 .then(response => {
@@ -23,8 +118,21 @@ fetch(url)
 
 })
 .catch(error => console.error('Error fetching data:', error));
-
+    // Fetch report chart data
+    fetch(url1)
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Error fetching report chart data: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data1 => {
+      //console.log('Report Chart Data:', data1);  // Log the data to check the response
+      updateReport(data1);
+    })
+    .catch(error => console.error('Error fetching report chart data:', error)); 
 }
+
 
 function updateTable(data) {
         let totalSum = 0;
@@ -185,61 +293,58 @@ const tbody = document.querySelector('#region tbody');
         }]
       });
     }
+ let chartInstance = null; // Track the Chart.js instance
+    let apexChart = null;     // Track the ApexCharts instance
+    function updateReport(data1) {
+      const target_revenue = data1.graphData.map(item => item.accumulated_target);
+      const saleorderAccu = data1.graphData.map(item => parseFloat(item.accumulated_so).toFixed(0));
+      const dateAP = data1.graphData.map(item => item.format_date);
+   
 
-    /*function BarChart(RegionData) {
-      const regionCategories = ['North', 'Central', 'East', 'North-East', 'West', 'South'];
-      const Data = RegionData.map(item => ({
-        name: item.segment,
-        data: regionCategories.map(region => item[region] || 0) // Ensure data is an array of region counts
-    }));
-    
-      const chart = new ApexCharts(document.querySelector("#columnChart"), {
-        chart: {
-          type: 'bar',
-          height: 350
-        },
-        plotOptions: {
-          bar: {
-            horizontal: false,
-            columnWidth: '55%',
-            endingShape: 'rounded'
-          },
-        },
-        dataLabels: {
-          enabled: false
-        },
-        stroke: {
-          show: true,
-          width: 2,
-          colors: ['transparent']
-        },
-        xaxis: {
-          categories: regionCategories,
-        },
-        yaxis: {
-          title: {
-            text: 'Customers'
+      // If ApexCharts already exists, update the series
+  if (apexChart !== null) {
+    apexChart.updateSeries([
+      { name: 'Target', data: target_revenue },
+      { name: 'Revenue', data: saleorderAccu }
+    ]);
+  } else {
+    // Initialize ApexCharts
+    apexChart = new ApexCharts(document.querySelector("#reportsChart"), {
+      series: [
+        { name: 'Target', data: target_revenue },
+        { name: 'Revenue', data: saleorderAccu }
+      ],
+      chart: {
+        type: 'area',
+        height: 350,
+        zoom: { enabled: false }
+      },
+      markers: { size: 4 },
+      colors: ['#0d6efd', '#2eca6a'],
+      dataLabels: { enabled: false },
+      stroke: { curve: 'straight', width: 2 },
+      subtitle: { text: 'Revenue Movement', align: 'left' },
+      xaxis: { type: 'category', categories: dateAP },
+      yaxis: {
+        opposite: true,
+        labels: {
+          formatter: function(value) {
+            return value.toLocaleString(undefined, { style: 'currency', currency: 'THB' });
           }
-        },
-        fill: {
-          opacity: 1
-        },
-        tooltip: {
-          y: {
-            formatter: function(val) {
-              return val + " customers";
-            }
+        }
+      },
+      tooltip: {
+        y: {
+          formatter: function(value) {
+            return value.toLocaleString(undefined, { style: 'currency', currency: 'THB' });
           }
-        },
-        legend: {
-          top: '5%',
-          left: 'center'
-        },
-        series: Data
-      });
-    
-      chart.render();
-    }*/
+        }
+      }
+    });
+    apexChart.render();
+  }
+    }
+ 
     document.addEventListener('DOMContentLoaded', fetchYear);
 
   /*  document.addEventListener('DOMContentLoaded', (event) => {

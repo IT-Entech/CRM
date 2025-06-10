@@ -13,6 +13,11 @@ ini_set('display_errors', 1);
             'divisor' => 2.7,
             'maintanance' => 3.74,   
             ],
+            'truckB' => [
+            'fuelRate' => 35,
+            'divisor' => 2.6,
+            'maintanance' => 3.74,   
+            ],
                         ];
                             // ส่งข้อมูลเป็น JSON
     header('Content-Type: application/json');

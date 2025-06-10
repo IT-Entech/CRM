@@ -198,12 +198,14 @@ function updateTable(data) {
     totalSUMOR += soAmount;  // Accumulate so_amount
     totalOR += OrderNumber;  // Accumulate customer_number
   });
+  let uniqueso = new Set();
   data.revenue.forEach(revenue => {
     const soAmount = parseFloat(revenue.so_amount) || 0;
     const customerNumber = parseFloat(revenue.customer_number) || 0;
+     uniqueso.add(revenue.customer_number); 
 
-    totalSoAmount += soAmount;  // Accumulate so_amount
-    totalCustomerNumber += customerNumber;  // Accumulate customer_number
+    totalSoAmount += soAmount;  
+    totalCustomerNumber += customerNumber;  
   });
 
   // Update the revenue element with total customer number
@@ -252,6 +254,14 @@ function updateTable(data) {
   if (countElement2) {
     countElement2.textContent = totalCustomerNumber.toLocaleString('en-US');
   }
+
+        const ratio = totalSoAmount / totalCustomerNumber;
+        const ratioElement = document.getElementById('AOV');
+        ratioElement.textContent = ratio.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+
 
   const tbody = document.querySelector('#region tbody');
   tbody.innerHTML = '';

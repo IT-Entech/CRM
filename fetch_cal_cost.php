@@ -38,13 +38,12 @@ $sql = "WITH Datadisposal AS (
                 AND YEAR(C.shipment_date) >= 2025
                 AND EXISTS (SELECT 1 FROM so_detail S WHERE S.qt_no = A.qt_no)
         )
-SELECT A.waste_code, MAX(B.waste_name) AS waste_name
+SELECT  DISTINCT(A.waste_name) AS waste_name, A.waste_code
 FROM Datadisposal A
 LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
-WHERE RowNum = 1 
-AND B.waste_name LIKE ?
+WHERE  A.waste_name LIKE ?
 AND A.customer_segment_code = ?
-GROUP BY A.waste_code
+GROUP BY A.waste_name, A.waste_code
 ORDER BY A.waste_code ASC";
 
 

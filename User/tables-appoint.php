@@ -408,7 +408,7 @@ if($staff === 0 || $level < 1){
           <li>
           <li>
             <a href="tables-data.php" >
-              <i class="bi bi-circle"></i><span>Update Status</span>
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
           <!--li>

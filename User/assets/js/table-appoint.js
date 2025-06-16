@@ -3,7 +3,7 @@ function fetchData() {
   const year_no = document.getElementById('year').value;
   const month_no = document.getElementById('month').value;
   /*const channel = document.getElementById('channel').value;*/
-  const Sales = document.getElementById('sales').value;
+  const Sales = document.getElementById('staff').value;
   let url;
 
   url = `fetch-appoint.php?year_no=${year_no}&month_no=${month_no}&Sales=${Sales}`;

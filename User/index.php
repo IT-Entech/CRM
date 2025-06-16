@@ -462,7 +462,7 @@ if($staff === 0 || $level < 1){
               <label for="is_new">ประเภทลูกค้า</label>
             </div>
           </div>
-          <!--div class="col-xxl-2 col-md-4">
+          <div class="col-xxl-2 col-md-4">
             <div class="form-floating mb-3">
               <select class="form-select" id="channel" aria-label="channel"onchange="fetchYear()">
                 <option selected value="N">-</option>
@@ -471,7 +471,7 @@ if($staff === 0 || $level < 1){
               </select>
               <label for="channel">Channel</label>
             </div>
-          </div-->
+          </div>
       <div class="col-xxl-2 col-md-4">
         <div class="form-floating mb-3">
           <select class="form-select" id="month" aria-label="Month"onchange="fetchYear()">
@@ -875,6 +875,7 @@ if($staff === 0 || $level < 1){
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
   <script src="assets/js/script.js"></script>
+  <script src="../assets/js/getSession.js"></script>
 </body>
 
 </html>

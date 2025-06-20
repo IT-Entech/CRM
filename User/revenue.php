@@ -21,7 +21,19 @@ $staff = isset($_GET['staff']) ? $_GET['staff'] : NULL;
 
 if ($year_no <> 0 && $month_no == 0  && $is_new == 0) {
     $sqlrevenue = "SELECT so_no,total_before_vat FROM View_SO_SUM WHERE year_no = ? AND staff_id = ?";
-    $sqlappoint = "SELECT appoint_no,customer_name,province_code FROM appoint_head WHERE year_no = ? AND staff_id = ?";
+    $sqlappoint = "SELECT 
+    COUNT(DISTINCT appoint_no) AS appoint_no,
+    COUNT(DISTINCT appoint_qt) AS appoint_qt,
+    SUM(so_amount) AS qt_amount
+FROM (
+SELECT A.appoint_no AS appoint_no,
+CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN  B.appoint_no END AS appoint_qt,
+B.so_amount
+FROM appoint_head A
+LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no
+WHERE year_no = ?
+AND A.staff_id = ?
+) AS subquery";
     $sqlsegment = "SELECT b.customer_segment_name, 
                   FORMAT(SUM(total_before_vat), 'N2') AS total_before_vat, 
                   FORMAT(SUM(total_before_vat) / COUNT(a.customer_segment_code), 'N2') AS aov, 
@@ -62,7 +74,20 @@ GROUP BY
     $params = array($year_no, $staff);
 }elseif($year_no <> 0 && $month_no <> 0 && $is_new == 0){
     $sqlrevenue = "SELECT so_no,total_before_vat FROM View_SO_SUM WHERE year_no = ? AND month_no = ? AND staff_id = ?";
-    $sqlappoint = "SELECT appoint_no,customer_name,province_name FROM appoint_head WHERE year_no = ? AND month_no = ? AND staff_id = ?";
+    $sqlappoint = "SELECT 
+    COUNT(DISTINCT appoint_no) AS appoint_no,
+    COUNT(DISTINCT appoint_qt) AS appoint_qt,
+    SUM(so_amount) AS qt_amount
+FROM (
+SELECT A.appoint_no AS appoint_no,
+CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN  B.appoint_no END AS appoint_qt,
+B.so_amount
+FROM appoint_head A
+LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no
+WHERE year_no = ?
+AND month_no = ?
+AND A.staff_id = ?
+) AS subquery";
     $sqlsegment = "SELECT b.customer_segment_name, 
                   FORMAT(SUM(total_before_vat), 'N2') AS total_before_vat, 
                   FORMAT(SUM(total_before_vat) / COUNT(a.customer_segment_code), 'N2') AS aov, 

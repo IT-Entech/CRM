@@ -76,40 +76,49 @@ function updateTable(data) {
         data.costsheetData.forEach(qt => {
           totalSum1 += parseFloat(qt.amount);
         });
-        const qtElement = document.getElementById('qt_value');
-        qtElement.textContent = totalSum1.toLocaleString('en-US', {
+
+
+        // Process appointment data for 2024
+        let totalAP = 0;
+        let totalappointQT = 0;
+        let totalappointQTamount = 0;
+        data.appointData.forEach(ap => {
+           const appoint = parseFloat(ap.appoint_no) || 0;
+           const appointQT = parseFloat(ap.appoint_qt) || 0;
+           const appointQTamount = parseFloat(ap.qt_amount) || 0;
+           totalAP += appoint;
+           totalappointQT += appointQT;
+           totalappointQTamount += appointQTamount;
+        });
+        
+        const appointElement = document.getElementById('appoint');
+        if (appointElement) {
+        appointElement.textContent = totalAP.toLocaleString('en-US');
+        }
+
+        const appointQTElement = document.getElementById('qt_number');
+         if (appointQTElement) { 
+        appointQTElement.textContent = totalappointQT.toLocaleString('en-US');
+         }
+
+        const appointQTamountElement = document.getElementById('qt_value');
+         if (appointQTamountElement) { 
+        appointQTamountElement.textContent = totalappointQTamount.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }); 
-
-        // Process appointment data for 2024
-        let uniqueAppointNos = new Set();
-        data.appointData.forEach(appoint => {
-            uniqueAppointNos.add(appoint.appoint_no);
-        });
-        
-        const countElement = document.getElementById('appoint');
-        countElement.textContent = uniqueAppointNos.size;
-        
-
+      }
         let uniqueqt = new Set();
         data.costsheetData.forEach(qt => {
           uniqueqt.add(qt.qt_no); 
         });
 
-        const countElement1 = document.getElementById('qt_number');
-        countElement1.textContent = uniqueqt.size; 
+        
 
                 // Calculate and display the ratio (revenue per sales order)
-        const winrate = uniqueso.size;
-        const winrateElement = document.getElementById('winrate');
-        winrateElement.textContent = winrate.toLocaleString('en-US', {
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
-        });
 
         const winrateP = (uniqueso.size / uniqueqt.size) * 100;
-        const winratePElement = document.getElementById('winrate_percent');
+        const winratePElement = document.getElementById('winrate');
         winratePElement.textContent = winrateP.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2

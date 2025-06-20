@@ -29,7 +29,7 @@ fetch(url)
   return response.json();
 })
 .then(data => {
-  console.log('Data:', data); // Log the data to check the response
+  //console.log('Data:', data); // Log the data to check the response
   updateTable(data);
   updateChart(data.segmentData);
 

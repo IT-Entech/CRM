@@ -169,27 +169,37 @@ function fetchYear() {
 function updateTable(data) {
   let totalAP = 0;
   let totalAPQ = 0;
+  let totalAPQT = 0;
+  let totalVC = 0;
   let totalQT = 0;
+  let totalQTnumber = 0;
   let totalSUMQT = 0;
   let totalOR = 0;
   let totalSUMOR = 0;
   let totalSoAmount = 0;
   let totalCustomerNumber = 0;
+ let totalleadNumber = 0;
 
   // Process each revenue data and accumulate the values
   data.appointment.forEach(ap => {
     const app = parseFloat(ap.appoint_no) || 0;
     const appq = parseFloat(ap.appoint_quality) || 0;
+    const appqt = parseFloat(ap.appoint_qt) || 0;
+    const value_customer = parseFloat(ap.value_customer) || 0;
 
     totalAP += app;  // Accumulate so_amount
-    totalAPQ += appq;  // Accumulate customer_number
+    totalAPQ += appq;  
+    totalAPQT += appqt;  
+    totalVC += value_customer;  
   });
   data.costSheets.forEach(qt => {
     const soAmount = parseFloat(qt.so_amount) || 0;
     const customerNumber = parseFloat(qt.qt_customer) || 0;
+    const qtNumber = parseFloat(qt.qt_number) || 0;
 
     totalSUMQT += soAmount;  // Accumulate so_amount
-    totalQT += customerNumber;  // Accumulate customer_number
+    totalQT += customerNumber;  
+    totalQTnumber = qtNumber; 
   });
   data.orders.forEach(order => {
     const soAmount = parseFloat(order.order_amount) || 0;
@@ -202,10 +212,12 @@ function updateTable(data) {
   data.revenue.forEach(revenue => {
     const soAmount = parseFloat(revenue.so_amount) || 0;
     const customerNumber = parseFloat(revenue.customer_number) || 0;
+    const leadnumber = parseFloat(revenue.lead) || 0;
      uniqueso.add(revenue.customer_number); 
 
     totalSoAmount += soAmount;  
     totalCustomerNumber += customerNumber;  
+    totalleadNumber += leadnumber;  
   });
 
   // Update the revenue element with total customer number
@@ -222,13 +234,13 @@ function updateTable(data) {
  // Update the revenue element with total customer number
  const qtElement = document.getElementById('qt_value');
  if (qtElement) {
-  qtElement.textContent = totalSUMQT.toLocaleString('en-US');
+  qtElement.textContent = totalVC.toLocaleString('en-US');
  }
 
  // Update the so_number element with total so amount
  const qtElement2 = document.getElementById('qt_number');
  if (qtElement2) {
-  qtElement2.textContent = totalQT.toLocaleString('en-US');
+  qtElement2.textContent = totalAPQT.toLocaleString('en-US');
  }
  
  
@@ -256,11 +268,18 @@ function updateTable(data) {
   }
 
         const ratio = totalSoAmount / totalCustomerNumber;
+        const winrateratio = (totalCustomerNumber / totalQTnumber);
         const ratioElement = document.getElementById('AOV');
+        const winrateElement = document.getElementById('winrate');  
+
         ratioElement.textContent = ratio.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
+        winrateElement.textContent = (winrateratio * 100).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+}) + '%';
 
 
   const tbody = document.querySelector('#region tbody');

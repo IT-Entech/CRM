@@ -24,19 +24,20 @@ $where_conditions1 = [];
 $where_conditions2 = [];
 $where_conditions3 = [];
 
-$is_new_array = match ($is_new) { 
-  '1' => ['01'],
-  '2' => ['04'],
-  '3' => ['03'],
+$is_new_array = match ($is_new) {   
+  'N' => ['N'],
+  'R' => ['R'],
+  'A' => ['A'],
+  'K' => ['K'],
   default => [] // Optional: handle other cases if needed
 };
 $is_new_list = "'" . implode("','", $is_new_array) . "'";
 if ($is_new <> '0') {
-  $where_conditions3[] = "A.status IN ($is_new_list)";
+  $where_conditions3[] = "A.customer_type IN ($is_new_list)";
 
   if ($year_no <> '0') {
   $where_conditions[] = "year_no = ?";
-  $where_conditions1[] = "B.year_no = ?";
+  $where_conditions1[] = "YEAR(A.qt_date) = ?";
   $where_conditions2[] = "YEAR(C.appoint_date) = ?";
   $where_conditions3[] = "year_no = ?";
   $params[] = $year_no;  // Use appoint_date year instead of year_no
@@ -44,22 +45,22 @@ if ($is_new <> '0') {
 
   if ($month_no <> '0') {
       $where_conditions[] = "month_no = ?";
-      $where_conditions1[] = "B.month_no = ?";
+      $where_conditions1[] = "MONTH(A.qt_date) = ?";
       $where_conditions2[] = "MONTH(C.appoint_date) = ?";
       $where_conditions3[] = "month_no = ?";
       $params[] = $month_no;  // Use appoint_date month instead of month_no
   }
 } else {
   if ($year_no <> '0') {
-  $where_conditions[] = "YEAR(A.appoint_date) = ?";
-  $where_conditions1[] = "B.year_no = ?";
+  $where_conditions[] = "year_no = ?";
+  $where_conditions1[] = "YEAR(A.qt_date) = ?";
   $where_conditions2[] = "YEAR(A.shipment_date) = ?";
   $where_conditions3[] = "year_no = ?";
   $params[] = $year_no;
   }
   if ($month_no <> '0') {
-      $where_conditions[] = "A.month_no = ?";
-      $where_conditions1[] = "B.month_no = ?";
+      $where_conditions[] = "month_no = ?";
+      $where_conditions1[] = "MONTH(A.qt_date) = ?";
       $where_conditions2[] = "MONTH(A.shipment_date) = ?";
       $where_conditions3[] = "month_no = ?";
       $params[] = $month_no;
@@ -76,7 +77,7 @@ if ($channel <> 'N') {
 
 if ($Sales <> 'N') {
   $where_conditions[] = "A.staff_id = ?";
-  $where_conditions1[] = "B.staff_id = ?";
+  $where_conditions1[] = "A.staff_id = ?";
   $where_conditions2[] = "C.staff_id = ?";
   $where_conditions3[] = "A.staff_id = ?";
   $params[] = $Sales;
@@ -93,22 +94,29 @@ $where_clause2 = count($where_conditions2) > 0 ? implode(" AND ", $where_conditi
 $where_clause3 = count($where_conditions3) > 0 ? implode(" AND ", $where_conditions3) : "";
 
 $sqlappoint = "SELECT 
-    SUM(appoint_no) AS appoint_no,
-    SUM(appoint_quality) AS appoint_quality
+    COUNT(DISTINCT appoint_no) AS appoint_no,
+    COUNT(DISTINCT appoint_quality) AS appoint_quality,
+    COUNT(DISTINCT appoint_qt) AS appoint_qt,
+     SUM(so_amount) AS value_customer
 FROM (
 SELECT 
-          COUNT(appoint_no) AS appoint_no,
-          CASE WHEN staff_id <> '1119900831940' THEN COUNT(appoint_no) END AS appoint_quality
+           A.appoint_no AS appoint_no,
+          CASE WHEN A.staff_id <> '1119900831940'  THEN  A.appoint_no END AS appoint_quality,
+          CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN  B.appoint_no END AS appoint_qt,
+           B.so_amount
           FROM 
           appoint_head A
+          LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no 
           WHERE 
            $where_clause
-          GROUP BY 
-          staff_id
 ) AS subquery
 ";
-$sqlcostsheet = "SELECT COUNT(DISTINCT(A.appoint_no)) AS qt_customer,SUM(A.so_amount) AS so_amount FROM cost_sheet_head A
-LEFT JOIN appoint_head B ON A.appoint_no = B.appoint_no
+$sqlcostsheet = "SELECT 
+COUNT(DISTINCT A.appoint_no) AS qt_customer,
+COUNT(DISTINCT A.qt_no) AS qt_number,
+SUM(A.so_amount) AS so_amount
+FROM cost_sheet_head A
+LEFT JOIN View_SO_SUM B ON A.appoint_no = B.appoint_no
 WHERE A.print_qt_count > 0
 AND A.is_pre = 'N'
 AND A.print_qt_id IN (5,50)
@@ -128,17 +136,19 @@ $sqlorder = "SELECT SUM(C.so_amount) AS order_amount,COUNT((A.order_no)) AS orde
 
 $sqlrevenue = "SELECT 
     COUNT(customer_number) AS customer_number,
+    COUNT(DISTINCT CASE WHEN lead IS NOT NULL AND lead <> '' THEN lead END) AS lead,
     SUM(so_amount) AS so_amount
 FROM (
     SELECT 
-        A.so_no AS customer_number,
+        A.qt_no AS customer_number,
+        A.appoint_no AS lead,
         SUM(A.total_before_vat) AS so_amount
     FROM 
         View_SO_SUM A
     WHERE 
         $where_clause3
     GROUP BY 
-        A.so_no
+        A.qt_no, A.appoint_no
 ) AS subquery";
 $sqlsegment = "SELECT 
     b.customer_segment_name, 

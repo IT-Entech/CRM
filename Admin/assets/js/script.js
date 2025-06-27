@@ -227,7 +227,7 @@ function updateTable(data) {
  // Update the revenue element with total customer number
  const qtElement = document.getElementById('qt_value');
  if (qtElement) {
-  qtElement.textContent = totalVC.toLocaleString('en-US');
+  qtElement.textContent = totalSUMQT.toLocaleString('en-US');
  }
 
  // Update the so_number element with total so amount

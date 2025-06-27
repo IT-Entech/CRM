@@ -190,7 +190,7 @@ function updateTable(data) {
     const customerNumber = parseFloat(qt.qt_customer) || 0;
     const qtNumber = parseFloat(qt.qt_number) || 0;
 
-    totalSUMQT += soAmount;  // Accumulate so_amount
+    totalSUMQT += soAmount;  
     totalQT += customerNumber;  
     totalQTnumber = qtNumber; 
   });

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Forms Appoint</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="assets/img/Logo_En-Tech_1.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+  <script>
+    function setCurrentDate() {
+      const inputDate = document.getElementById('inputDate');
+      if (inputDate) {
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0');
+        const day = String(today.getDate()).padStart(2, '0');
+        inputDate.value = `${year}-${month}-${day}`;
+      }
+    }
+    window.onload = setCurrentDate;
+  </script>
+</head>
+
+<body>
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/Logo_En-Tech_1.png" alt="">
+        <span class="d-none d-lg-block">En-technology</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle" href="#"><i class="bi bi-search"></i></a>
+        </li>
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
+            <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+             <li class="dropdown-header">
+              <h6 id="name-display1"></h6>
+              <span id="position-name"></span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/log_out.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li><a href="index.html"><i class="bi bi-circle"></i><span>CRM</span></a></li>
+                    <li id="maintanance-nav" class="d-none">
+            <a href="MA/index.html">
+              <i class="bi bi-circle"></i><span>Maintanance</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-appoint.php" class="active">
+              <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li><a href="tables-appoint.php"><i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span></a></li>
+          <li><a href="tables-data.php"><i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span></a></li>
+        </ul>
+      </li>
+      <li class="nav-heading">Pages</li>
+      <li class="nav-item d-none" id="permission-nav">
+        <a class="nav-link collapsed" href="../Admin/permission/">
+          <i class="bi bi-question-circle"></i>
+          <span>Permission</span>
+        </a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link collapsed" href="../Admin/Calculate_cost.html">
+          <i class="bi bi-pc-display-horizontal"></i>
+          <span>Cost Calculate</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Form Appoint</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Appoint</li>
+        </ol>
+      </nav>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Form Appoint</h5>
+            <form action="create-appoint.php" method="post" enctype="multipart/form-data" class="row g-3">
+              <div class="col-md-2">
+                <label for="inputChannel" class="form-label">ช่องทาง</label>
+                <select class="form-select" id="inputChannel" name="inputChannel">
+                  <option selected value="">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputSocial" class="form-label">ช่องทางที่พบ</label>
+                <select class="form-select" id="inputSocial" name="inputSocial">
+                  <option selected value="">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputContract" class="form-label">ช่องทางติดต่อ</label>
+                <select class="form-select" id="inputContract" name="inputContract">
+                  <option selected value="">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="inputSearch" class="form-label">คำค้นหา</label>
+                <input type="text" class="form-control" id="inputSearch" name="inputSearch">
+              </div>
+              <div class="col-md-2">
+                <label for="inputAP-No" class="form-label">เลข AP</label>
+                <input type="text" class="form-control" id="inputAP-No" name="inputAP_No">
+              </div>
+              <div class="col-md-2">
+                <label for="inputFac_no" class="form-label">ทะเบียนโรงงาน</label>
+                <input type="text" class="form-control" id="inputFac_no" name="inputFac_no" value="">
+              </div>
+              <div class="col-md-2">
+                <label for="inputFac-name" class="form-label">ชื่อโรงงาน</label>
+                <input type="text" class="form-control" id="inputFac-name" name="inputFac_name">
+              </div>
+              <div class="col-md-2">
+                <label for="inputFac-nation" class="form-label">สัญชาติ</label>
+                <select class="form-select" id="inputFac-nation" name="inputFac_nation"></select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputFac-type" class="form-label">อุตสาหกรรม</label>
+                <input type="text" class="form-control" id="inputFac-type" name="inputFac_type">
+              </div>
+              <div class="col-md-2">
+                <label for="inputFac-value" class="form-label">ทุนจดทะเบียน</label>
+                <input type="text" class="form-control" id="inputFac-value" name="inputFac_value" value="0">
+              </div>
+              <div class="col-md-2">
+                <label for="inputDate" class="form-label">วันที่</label>
+                <input type="text" class="form-control" id="inputDate" name="inputDate" value="">
+              </div>
+              <div class="col-md-6">
+                <label for="inputAddress" class="form-label">ที่อยู่</label>
+                <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="123/5 หมู่1">
+              </div>
+              <div class="col-md-2">
+                <label for="inputProvince" class="form-label">จังหวัด</label>
+                <select class="form-select" id="inputProvince" name="inputProvince">
+                  <option selected value="00">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputCustomer" class="form-label">ผู้ติดต่อ</label>
+                <input type="text" class="form-control" id="inputCustomer" name="inputCustomer">
+              </div>
+              <div class="col-md-2">
+                <label for="inputPosition" class="form-label">ตำแหน่ง</label>
+                <input type="text" class="form-control" id="inputPosition" name="inputPosition">
+              </div>
+              <div class="col-md-6">
+                <label for="inputEmail" class="form-label">Email</label>
+                <input type="email" class="form-control" id="inputEmail" name="inputEmail">
+              </div>
+              <div class="col-md-2">
+                <label for="inputTel" class="form-label">เบอร์โทร</label>
+                <input type="text" class="form-control" id="inputTel" name="inputTel">
+              </div>
+              <div class="col-md-2">
+                <label for="inputSegment" class="form-label">Segmnet</label>
+                <select class="form-select" id="inputSegment" name="inputSegment"></select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputCL_type" class="form-label">CL-type</label>
+                <select class="form-select" id="inputCL_type" name="inputCL_type"></select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputSales" class="form-label">พนักงานขาย</label>
+                <select class="form-select" id="inputSales" aria-label="inputSales" name="inputSales">
+                  <option selected value="">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputAppoint" class="form-label">การนัดหมาย</label>
+                <select class="form-select" id="inputAppoint" name="inputAppoint">
+                  <option selected value="">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-2">
+                <label for="inputVisit" class="form-label">วันที่นัด</label>
+                <input type="date" class="form-control" id="inputVisit" name="inputVisit">
+              </div>
+              <div class="col-md-2">
+                <label for="inputCus_status" class="form-label">สถานะลูกค้า</label>
+                <select class="form-select" id="inputCus_status" name="inputCus_status"></select>
+              </div>
+              <div class="col-md-4">
+                <label for="inputInsight" class="form-label">Insight</label>
+                <input type="text" class="form-control" id="inputInsight" name="inputInsight">
+              </div>
+              <div class="col-md-2">
+                <label for="inputCompetitor_name" class="form-label">คู่แข่ง</label>
+                <input type="text" class="form-control" id="inputCompetitor_name" name="inputCompetitor_name">
+              </div>
+              <div class="col-md-2">
+                <label for="inputCompetitor_value" class="form-label">ราคาคู่แข่ง</label>
+                <input type="text" class="form-control" id="inputCompetitor_value" name="inputCompetitor_value" value="0.00">
+              </div>
+              <div class="col-md-2">
+                <label for="inputis_status" class="form-label">สถานะติดตาม</label>
+                <select class="form-select" id="inputis_status" name="inputis_status">
+                  <option selected value="0">N/A</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="inputReason" class="form-label">เหตุผล</label>
+                <input type="text" class="form-control" id="inputReason" name="inputReason">
+              </div>
+              <div class="col-md-6">
+                <label for="inputRemark" class="form-label">Remark</label>
+                <input type="text" class="form-control" id="inputRemark" name="inputRemark">
+              </div>
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+                 <input type="hidden" id="fetch-level" value="" readonly>
+      <input type="hidden" id="fetch-staff" value="" readonly>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/script_form-appoint.js"></script>
+</body>
+
+</html>

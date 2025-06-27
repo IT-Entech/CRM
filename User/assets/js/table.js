@@ -1,10 +1,94 @@
+function getSessionData() {
+  fetch('./header.php')
+    .then(response => response.json()) // Parse the JSON from the response
+    .then(data => {
+      //console.log('Session Data:', data);
+
+      const { name, staff, level, role, position } = data;
+       //console.log(`Name: ${name}, Staff: ${staff}, Level: ${level}, Role: ${role}`);
+      if (staff == 0 || level < 1) {
+        alert("คุณไม่ได้รับสิทธิ์ให้เข้าหน้านี้");
+        window.location = "../pages-login.html";
+        return;
+      }
+
+      var permissionNav = document.getElementById('permission-nav');
+      var maintenanceNav = document.getElementById('maintanance-nav');
+      var selectSale = document.getElementById('select-sales');
+        if(level === 3){
+        permissionNav.classList.remove('d-none');
+        maintenanceNav.classList.remove('d-none');
+        selectSale.classList.remove('d-none');
+      }else if(level === 2){
+        permissionNav.classList.add('d-none');
+        maintenanceNav.classList.add('d-none');
+        selectSale.classList.remove('d-none');
+      }else if(level === 1){
+          permissionNav.classList.add('d-none');
+        maintenanceNav.classList.add('d-none');
+          selectSale.classList.add('d-none');
+      }
+       // Hide the "Online" option for MK Online role
+       const AllOption = document.getElementById('all-select-channel');
+       const onlineOption = document.getElementById('OnL');
+       const offlineOption = document.getElementById('OfL');
+       if (role === 'MK Online') {
+        offlineOption.classList.add('d-none');
+        AllOption.classList.add('d-none');
+       }else if(role === 'MK Offline'){
+        onlineOption.classList.add('d-none');
+        AllOption.classList.add('d-none');
+       }
+      // Conditionally show Maintenance and Permission nav items
+      if (level === 3) { 
+        var maintenanceNav = document.getElementById('maintanance-nav');
+      selectSale.classList.remove('d-none'); // แสดง select-sale เฉพาะ level 3
+  toggleMaintenanceNav(true);
+
+      // Fetch staff data if needed for select options
+      fetch('../staff_id.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const selectElement = document.getElementById('Sales');
+          data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.staff_id;
+            option.textContent = item.fname_e;
+            selectElement.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error fetching staff data:', error));
+      }
+      // Update hidden fields and display the user name
+      document.getElementById('fetch-level').value = level;
+      document.getElementById('name-display').textContent = name;
+      document.getElementById('name-display1').textContent = name;
+      document.getElementById('position-name').textContent = role;
+      document.getElementById('fetch-staff').value = staff;
+
+      // Now call fetchYear() to fetch year-based data
+      fetchData(); // Ensure session data is available before fetching year data
+    })
+    .catch(error => {
+      console.error('Error fetching session data:', error);
+    });
+}
+
+// Call the function to fetch session data
+getSessionData();
 function fetchData() {
   const year_no = document.getElementById('year').value;
   const month_no = document.getElementById('month').value;
-  const staff = document.getElementById('staff').value;
+  const Sales = document.getElementById('sales').value;
+  const staff = document.getElementById('fetch-staff').value;
   let url;
 
-  url = `api.php?year_no=${year_no}&month_no=${month_no}&staff=${staff}`;
+  url = `api.php?year_no=${year_no}&month_no=${month_no}&Sales=${Sales}&staff=${staff}`;
  
 
     fetch(url)
@@ -15,7 +99,7 @@ function fetchData() {
       return response.json();
     })
     .then(data => {
-      console.log('Data:', data); // Log the data to check the response
+      //console.log('Data:', data); // Log the data to check the response
       updateTable(data);
     })
     .catch(error => console.error('Error fetching data:', error));
@@ -26,13 +110,17 @@ function updateTable(data) {
   let totalap = 0;
   let totalapNoqt = 0;
   let totalSumunknown = 0;
+  let totalSumlostunknown = 0;
   let totalvalueunknown = 0;
   let totalSumpotential = 0;
+  let totalSumlostpotential = 0;
   let totalvaluepotential = 0;
   let totalvaluepropect = 0;
   let totalSumpropect = 0;
+  let totalSumlostpropect = 0;
   let totalvaluepipeline = 0;
   let totalSumpipeline= 0;
+  let totalSumlostpipeline= 0;
   let totalSum = 0;
   let totalSumso = 0;
 
@@ -49,12 +137,16 @@ function updateTable(data) {
   data.qtData.forEach(qt => {
     totalvalueunknown += parseFloat(qt.Unknown)|| 0;
     totalSumunknown += parseFloat(qt.Unknown_amount)|| 0;
+    totalSumlostunknown += parseFloat(qt.lost_Unknown_amount)|| 0;
     totalvaluepotential += parseFloat(qt.potential)|| 0;
     totalSumpotential += parseFloat(qt.potential_amount)|| 0;
+    totalSumlostpotential += parseFloat(qt.lost_potential_amount)|| 0;
     totalvaluepropect += parseFloat(qt.prospect)|| 0;
     totalSumpropect += parseFloat(qt.prospect_amount)|| 0;
+    totalSumlostpropect += parseFloat(qt.lost_prospect_amount)|| 0;
     totalvaluepipeline += parseFloat(qt.pipeline)|| 0;
     totalSumpipeline += parseFloat(qt.pipeline_amount)|| 0;
+    totalSumlostpipeline += parseFloat(qt.lost_pipeline_amount)|| 0;
     });
 
         const countElementap = document.getElementById('appoint');
@@ -65,18 +157,30 @@ function updateTable(data) {
         countElementapNoqt.textContent = totalapNoqt.toLocaleString('en-US', {
         }); 
 
-        const UnknownElement = document.getElementById('qt_value');
+        /*const UnknownElement = document.getElementById('qt_value');
         UnknownElement.textContent = totalSumunknown.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }); 
+
+        const UnknownElement2 = document.getElementById('qt_lost_value');
+        UnknownElement2.textContent = totalSumlostunknown.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }); 
 
         const UnknownElement1 = document.getElementById('qt_number');
         UnknownElement1.textContent = totalvalueunknown.toLocaleString('en-US', {
-        }); 
+        }); */
 
         const potentialElement = document.getElementById('qt_potential_value');
         potentialElement.textContent = totalSumpotential.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }); 
+
+        const potentialElement2 = document.getElementById('qt_potential_lost_value');
+        potentialElement2.textContent = totalSumlostpotential.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }); 
@@ -91,12 +195,24 @@ function updateTable(data) {
             maximumFractionDigits: 2
         }); 
 
+        const propectElement2 = document.getElementById('qt_prospect_lost_value');
+        propectElement2.textContent = totalSumlostpropect.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }); 
+
         const propectElement1 = document.getElementById('qt_prospect_number');
         propectElement1.textContent = totalvaluepropect.toLocaleString('en-US', {
         });  
 
         const pipelineElement = document.getElementById('qt_pipeline_value');
         pipelineElement.textContent = totalSumpipeline.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }); 
+
+        const pipelineElement2 = document.getElementById('qt_pipeline_lost_value');
+        pipelineElement2.textContent = totalSumlostpipeline.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         }); 
@@ -119,6 +235,10 @@ function updateTable(data) {
   tbody.innerHTML = '';
 
   data.tableData.forEach((row, index) => {
+    if (!row || !row.qt_no) {
+      console.error(`Row ${index + 1} is invalid:`, row);
+      return; // Skip this row if it's invalid
+    }
     const tr = document.createElement('tr');
 
     const select = document.createElement('select');
@@ -167,8 +287,6 @@ function updateTable(data) {
 
     // Populate the <select> element with options
 
-
-
     optionss.forEach(optionData => {
       const optionss = document.createElement('option');
       optionss.value = optionData.value;
@@ -181,18 +299,16 @@ function updateTable(data) {
       select1.appendChild(optionss);
     });
 
-
     tr.innerHTML = `
       <td>${row.appoint_date ? row.appoint_date : ''}</td>
       <td>${row.customer_name}</td>
       <td><input type="text" class="form-control" id="qt_no${index + 1}"name="qt_no${index + 1}"value="${row.qt_no}" readonly></td>
-       <td>${row.so_amount}</td>
+      <td>${row.so_amount}</td>
       <td>${select1.outerHTML}</td>
-      <td><input type="text" class="form-control" id="remark${index + 1}"name="remark${index + 1}"value="${row.remark ? row.remark : ''}"></td>
+      <td><input type="text" class="form-control" id="remark${index + 1}"name="remark${index + 1}"value="${row.remark ? row.remark : ''}"</td>
       <td>${select.outerHTML}</td>
       <td><input type="text" class="form-control" id="reason${index + 1}"name="reason${index + 1}"value="${row.reasoning ? row.reasoning : ''}"></td>
     `;
-
     tbody.appendChild(tr);
   });
 }
@@ -229,7 +345,7 @@ function getBadgeClass(status1) {
 
 document.addEventListener('DOMContentLoaded', fetchData);
 
-/*document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', (event) => {
   fetch('staff_id.php')
       .then(response => {
           if (!response.ok) {
@@ -238,7 +354,7 @@ document.addEventListener('DOMContentLoaded', fetchData);
           return response.json();
       })
       .then(data => {
-          const selectElement = document.getElementById('Sales');
+          const selectElement = document.getElementById('sales');
           data.forEach(item => {
               const option = document.createElement('option');
               option.value = item.staff_id;
@@ -247,7 +363,7 @@ document.addEventListener('DOMContentLoaded', fetchData);
           });
       })
       .catch(error => console.error('Error fetching data:', error));
-});*/
+});
 const monthSelect = document.getElementById('month');
 const monthNames = [
   "January", "February", "March", "April", "May", "June", 

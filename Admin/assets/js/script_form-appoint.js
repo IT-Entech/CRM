@@ -1,4 +1,57 @@
 
+function getSessionData() {
+  fetch('./header.php')
+    .then(response => response.json()) // Parse the JSON from the response
+    .then(data => {
+      //console.log('Session Data:', data);
+
+      const { name, staff, level, role, position } = data;
+       //console.log(`Name: ${name}, Staff: ${staff}, Level: ${level}, Role: ${role}`);
+      if (staff == 0 || level < 1) {
+        alert("คุณไม่ได้รับสิทธิ์ให้เข้าหน้านี้");
+        window.location = "../pages-login.html";
+        return;
+      }
+
+      var permissionNav = document.getElementById('permission-nav');
+      var maintenanceNav = document.getElementById('maintanance-nav');
+   if(level === 3){
+        
+        permissionNav.classList.add('d-none');
+        maintenanceNav.classList.add('d-none');
+      }else if(level === 2){
+        permissionNav.classList.add('d-none');
+        maintenanceNav.classList.add('d-none');
+      }else{
+          permissionNav.classList.remove('d-none');
+        maintenanceNav.classList.remove('d-none');
+      }
+       // Hide the "Online" option for MK Online role
+       const AllOption = document.getElementById('all-select-channel');
+       const onlineOption = document.getElementById('OnL');
+       const offlineOption = document.getElementById('OfL');
+       if (role === 'MK Online') {
+        offlineOption.classList.add('d-none');
+        AllOption.classList.add('d-none');
+       }else if(role === 'MK Offline'){
+        onlineOption.classList.add('d-none');
+        AllOption.classList.add('d-none');
+       }
+
+      // Update hidden fields and display the user name
+      document.getElementById('fetch-level').value = level;
+      document.getElementById('name-display').textContent = name;
+      document.getElementById('name-display1').textContent = name;
+      document.getElementById('position-name').textContent = role;
+      document.getElementById('fetch-staff').value = staff;
+    })
+    .catch(error => {
+      console.error('Error fetching session data:', error);
+    });
+}
+
+// Call the function to fetch session data
+getSessionData();
     document.addEventListener('DOMContentLoaded', (event) => {
       fetch('./form-appoint.php')
           .then(response => {

@@ -1,15 +1,3 @@
-function toggleMaintenanceNav(isVisible) {
-  var selectSale = document.getElementById('select-sale');
-  if (isVisible) {
-     // Show the item
-    
-    selectSale.classList.remove('d-none');
-  } else {
-      // Hide the item
-
-    selectSale.classList.add('d-none');
-  }
-}
 function getSessionData() {
   fetch('./header.php')
     .then(response => response.json()) // Parse the JSON from the response
@@ -34,12 +22,18 @@ function getSessionData() {
          }
       var permissionNav = document.getElementById('permission-nav');
       var maintenanceNav = document.getElementById('maintanance-nav');
-      if(role == 'MK Online' || role == 'MK Offline'){
+      var selectSale = document.getElementById('select-sale');
+   if(level === 3){
         
-        permissionNav.classList.add('d-none');
-        maintenanceNav.classList.add('d-none'); 
-      }else{
         permissionNav.classList.remove('d-none');
+        maintenanceNav.classList.remove('d-none');
+        selectSale.classList.remove('d-none');
+      }else if(level === 2){
+        permissionNav.classList.add('d-none');
+        maintenanceNav.classList.add('d-none');
+        selectSale.classList.remove('d-none');
+      }else{
+          permissionNav.classList.remove('d-none');
         maintenanceNav.classList.remove('d-none');
       }
        // Hide the "Online" option for MK Online role
@@ -54,8 +48,7 @@ function getSessionData() {
         AllOption.classList.add('d-none');
        }
       // Conditionally show Maintenance and Permission nav items
-      if (level == 2 || level == 3) {
-        toggleMaintenanceNav(true);
+      if (level >= 2) {
 
       // Fetch staff data if needed for select options
       fetch('../staff_id.php')
@@ -80,7 +73,7 @@ function getSessionData() {
       document.getElementById('fetch-level').value = level;
       document.getElementById('name-display').textContent = name;
       document.getElementById('name-display1').textContent = name;
-      document.getElementById('position-name').textContent = position;
+      document.getElementById('position-name').textContent = role;
       document.getElementById('fetch-staff').value = staff;
 
       // Now call fetchYear() to fetch year-based data

@@ -7,10 +7,16 @@
   <title>Dashboard - Appoint</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+
+  <!-- Favicons -->
   <link href="assets/img/Logo_En-Tech_1.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
   <link href="https://fonts.gstatic.com" rel="preconnect">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
   <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
   <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
@@ -18,6 +24,8 @@
   <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 </head>
 
@@ -34,7 +42,9 @@
     <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
         <li class="nav-item d-block d-lg-none">
-          <a class="nav-link nav-icon search-bar-toggle" href="#"><i class="bi bi-search"></i></a>
+          <a class="nav-link nav-icon search-bar-toggle" href="#">
+            <i class="bi bi-search"></i>
+          </a>
         </li>
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
@@ -58,6 +68,8 @@
       </ul>
     </nav>
   </header>
+  <!-- End Header -->
+
   <!-- ======= Sidebar ======= -->
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
@@ -96,18 +108,18 @@
         </a>
         <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
           <li>
-            <a href="tables-appoint.html">
+            <a href="./tables-appoint.html" class="active">
               <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
             </a>
           </li>
           <li>
-            <a href="tables-data.html" class="active">
-              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกค้า</span>
+            <a href="./tables-data.html ">
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
         </ul>
       </li>
-          <li class="nav-heading">Pages</li>
+      <li class="nav-heading">Pages</li>
          <li class="nav-item d-none" id="permission-nav">
         <a class="nav-link collapsed" href="../Admin/permission/">
           <i class="bi bi-question-circle"></i>
@@ -122,12 +134,13 @@
       </li>
     </ul>
   </aside>
-  <!-- ======= Main ======= -->
+  <!-- End Sidebar-->
+
   <main id="main" class="main">
-         <input type="hidden" id="fetch-level" value="" readonly>
+     <input type="hidden" id="fetch-level" value="" readonly>
       <input type="hidden" id="fetch-staff" value="" readonly>
     <div class="pagetitle">
-      <h1>Data Tables</h1>
+      <h1>ตารางการติดตามเสนอราคาลูกค้า</h1>
       <nav>
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -136,12 +149,14 @@
         </ol>
       </nav>
     </div>
+    <!-- End Page Title -->
+
     <section class="section">
       <div class="row">
         <div class="col-lg-12">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Datatables</h5>
+              <h5 class="card-title">ตารางการติดตามเสนอราคาลูกค้า</h5>
               <div class="col-lg-8">
                 <div class="row">
                   <div class="col-xxl-3 col-md-4" id="select-sales">
@@ -166,122 +181,23 @@
                   </div>
                 </div>
               </div>
-              <section class="section dashboard">
-                <div class="row">
-                  <div class="row">
-                    <div class="col-xxl-3 col-md-4">
-                      <div class="card info-card customers-card">
-                        <div class="card-body">
-                          <h5 class="card-title">Appoint</h5>
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="bi bi-people"></i>
-                            </div>
-                            <div class="ps-3">
-                              <a href="tables-appoint.php">
-                                <h6 id="appoint"></h6>
-                              </a>
-                              <span id="apNoqt" class="text-danger large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">ราย</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xxl-2 col-md-4">
-                      <div class="card info-card sales-card">
-                        <div class="card-body">
-                          <h5 class="card-title">Potential</h5>
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="bi bi-cart"></i>
-                            </div>
-                            <div class="ps-3">
-                              <h6 id="qt_potential_number"></h6>
-                              <span id="qt_potential_value" class="text-success large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span><br>
-                              <span id="qt_potential_lost_value" class="text-danger large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xxl-2 col-md-4">
-                      <div class="card info-card sales-card">
-                        <div class="card-body">
-                          <h5 class="card-title">Prospect</h5>
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="bi bi-cart"></i>
-                            </div>
-                            <div class="ps-2">
-                              <h6 id="qt_prospect_number"></h6>
-                              <span id="qt_prospect_value" class="text-success large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span><br>
-                              <span id="qt_prospect_lost_value" class="text-danger large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xxl-2 col-md-4">
-                      <div class="card info-card sales-card">
-                        <div class="card-body">
-                          <h5 class="card-title">Pipeline</h5>
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="bi bi-cart"></i>
-                            </div>
-                            <div class="ps-3">
-                              <h6 id="qt_pipeline_number"></h6>
-                              <span id="qt_pipeline_value" class="text-success large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span><br>
-                              <span id="qt_pipeline_lost_value" class="text-danger large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-xxl-3 col-md-4">
-                      <div class="card info-card revenue-card">
-                        <div class="card-body">
-                          <h5 class="card-title">Revenue</h5>
-                          <div class="d-flex align-items-center">
-                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                              <i class="bi bi-cash-stack"></i>
-                            </div>
-                            <div class="ps-3">
-                              <h6 id="so_number"></h6>
-                              <span id="revenue" class="text-success large pt-1 fw-bold"></span>
-                              <span class="text-muted small pt-2 ps-1">THB</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              <form action="edit_status.php" method="post" enctype="multipart/form-data" class="row g-3">
+              <form action="edit_status_appoint.php" method="post" enctype="multipart/form-data" class="row g-3">
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary" onclick="return confirmUpdate();">Submit</button>
-                  <button type="reset" class="btn btn-secondary">Reset</button>
+                  <!--tton type="submit" class="btn btn-primary" onclick="return confirmUpdate();">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button-->
                 </div>
                 <div class="modal-body">
-                  <table id="tableAP" class="table table-borderless datatable">
+                  <table id="tableAP" class="table table-hover">
                     <thead>
                       <tr>
+                        <th scope="col">#</th>
                         <th scope="col">วันที่ติดต่อ</th>
+                        <th scope="col">วันที่ pre ตั๋ว</th>
                         <th scope="col">Customer</th>
-                        <th scope="col">QT No</th>
-                        <th scope="col">มูลค่างาน</th>
-                        <th scope="col">Process</th>
+                        <th scope="col">AP No</th>
+                        <th scope="col">สถานะ</th>
                         <th scope="col">หมายเหตุ</th>
-                        <th scope="col">Status</th>
-                        <th scope="col">เหตุผล</th>
+                        <th scope="col">Pre-quotation date</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -290,12 +206,15 @@
                   </table>
                 </div>
               </form>
+              <!-- End Table with stripped rows -->
             </div>
           </div>
         </div>
       </div>
     </section>
   </main>
+  <!-- End #main -->
+
   <!-- ======= Footer ======= -->
   <footer id="footer" class="footer">
     <div class="copyright">
@@ -305,7 +224,13 @@
       Designed by <a href="#">-AOM SK-</a>
     </div>
   </footer>
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
+
+  <!-- Vendor JS Files -->
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
@@ -314,7 +239,9 @@
   <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
   <script src="assets/vendor/tinymce/tinymce.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
+  <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
-  <script src="assets/js/table.js"></script>
+  <script src="assets/js/table-appoint.js"></script>
 </body>
+
 </html>

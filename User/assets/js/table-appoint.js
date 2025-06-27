@@ -28,17 +28,7 @@ function getSessionData() {
         maintenanceNav.classList.add('d-none');
           selectSale.classList.add('d-none');
       }
-       // Hide the "Online" option for MK Online role
-       const AllOption = document.getElementById('all-select-channel');
-       const onlineOption = document.getElementById('OnL');
-       const offlineOption = document.getElementById('OfL');
-       if (role === 'MK Online') {
-        offlineOption.classList.add('d-none');
-        AllOption.classList.add('d-none');
-       }else if(role === 'MK Offline'){
-        onlineOption.classList.add('d-none');
-        AllOption.classList.add('d-none');
-       }
+      
       // Conditionally show Maintenance and Permission nav items
       if (level === 3) { 
         var maintenanceNav = document.getElementById('maintanance-nav');

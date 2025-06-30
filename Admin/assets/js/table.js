@@ -22,22 +22,10 @@ function getSessionData() {
         permissionNav.classList.remove('d-none');
         maintenanceNav.classList.remove('d-none');
       }
-       // Hide the "Online" option for MK Online role
-       const AllOption = document.getElementById('all-select-channel');
-       const onlineOption = document.getElementById('OnL');
-       const offlineOption = document.getElementById('OfL');
-       if (role === 'MK Online') {
-        offlineOption.classList.add('d-none');
-        AllOption.classList.add('d-none');
-       }else if(role === 'MK Offline'){
-        onlineOption.classList.add('d-none');
-        AllOption.classList.add('d-none');
-       }
+
       // Conditionally show Maintenance and Permission nav items
       if (level === 3) { 
         var maintenanceNav = document.getElementById('maintanance-nav');
-      selectSale.classList.remove('d-none'); // แสดง select-sale เฉพาะ level 3
-  toggleMaintenanceNav(true);
 
       // Fetch staff data if needed for select options
       fetch('../staff_id.php')

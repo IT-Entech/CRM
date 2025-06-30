@@ -35,15 +35,15 @@ $sql = "WITH Datadisposal AS (
                 AND YEAR(B.qt_date) >= 2024
                 AND A.waste_code NOT IN ('000000-S', '', '000002-S')
                 AND A.waste_code LIKE '%-S%'
-                AND YEAR(C.shipment_date) >= 2025
+                AND YEAR(C.shipment_date) >= 2024
                 AND EXISTS (SELECT 1 FROM so_detail S WHERE S.qt_no = A.qt_no)
         )
-SELECT  DISTINCT(A.waste_name) AS waste_name, A.waste_code
+SELECT  DISTINCT(B.waste_name) AS waste_name, A.waste_code
 FROM Datadisposal A
 LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
 WHERE  A.waste_name LIKE ?
 AND A.customer_segment_code = ?
-GROUP BY A.waste_name, A.waste_code
+GROUP BY B.waste_name, A.waste_code
 ORDER BY A.waste_code ASC";
 
 

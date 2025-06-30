@@ -22,42 +22,8 @@ function getSessionData() {
         permissionNav.classList.remove('d-none');
         maintenanceNav.classList.remove('d-none');
       }
-       // Hide the "Online" option for MK Online role
-       const AllOption = document.getElementById('all-select-channel');
-       const onlineOption = document.getElementById('OnL');
-       const offlineOption = document.getElementById('OfL');
-       if (role === 'MK Online') {
-        offlineOption.classList.add('d-none');
-        AllOption.classList.add('d-none');
-       }else if(role === 'MK Offline'){
-        onlineOption.classList.add('d-none');
-        AllOption.classList.add('d-none');
-       }
-      // Conditionally show Maintenance and Permission nav items
-      if (level === 3) { 
-        var maintenanceNav = document.getElementById('maintanance-nav');
-      selectSale.classList.remove('d-none'); // แสดง select-sale เฉพาะ level 3
-  toggleMaintenanceNav(true);
 
-      // Fetch staff data if needed for select options
-      fetch('../staff_id.php')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          const selectElement = document.getElementById('Sales');
-          data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.staff_id;
-            option.textContent = item.fname_e;
-            selectElement.appendChild(option);
-          });
-        })
-        .catch(error => console.error('Error fetching staff data:', error));
-      }
+
       // Update hidden fields and display the user name
       document.getElementById('fetch-level').value = level;
       document.getElementById('name-display').textContent = name;
@@ -113,7 +79,7 @@ document.getElementById("waste_name").addEventListener(
       })
         .then(response => response.json())
         .then(data => {
-          console.log("Received Data:", data);
+          //console.log("Received Data:", data);
 
           if (data.waste_codes && data.waste_codes.length > 0) {
             const uniqueCodes = new Set();

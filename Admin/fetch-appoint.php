@@ -45,12 +45,14 @@ if($year_no <> 0 && $month_no <> 0 && $Sales == 'N'){
             END AS has_both_pre_n_and_y
         FROM cost_sheet_head B2
         WHERE B2.appoint_no = A.appoint_no
+        AND B2.is_status <> 'C'
     ) AS Sub
     WHERE 
        year_no = ?
        AND month_no = ?
         AND A.staff_id <> '1119900831940'
         AND A.is_status <> '4'
+        AND B.is_status <> 'C'
 )
 SELECT DISTINCT(appoint_no),customer_name,
 CASE WHEN qt_no IS NULL THEN '-'

@@ -19,6 +19,7 @@ $month_no = isset($_GET['month_no']) ? $_GET['month_no'] : $currentMonth;
 if($year_no <> 0 && $month_no <> 0 && $Sales == 'N'){
     $sqlappoint = "WITH adjusted_data AS (
     SELECT 
+     B.is_status,
     FORMAT(A.appoint_date, 'yyyy-MM-dd') AS format_date,
     FORMAT(B.qt_date, 'yyyy-MM-dd') AS format_qtdate,
     A.customer_name,
@@ -62,11 +63,13 @@ else  pre_date END AS update_time,
 remark
 FROM adjusted_data
 WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'
+AND is_status <> 'C'
 ORDER BY adjusted_data.appoint_no DESC";
                    $params = array($year_no, $month_no);
 }else{
     $sqlappoint = "WITH adjusted_data AS (
     SELECT 
+     B.is_status,
     FORMAT(A.appoint_date, 'yyyy-MM-dd') AS format_date,
     FORMAT(B.qt_date, 'yyyy-MM-dd') AS format_qtdate,
     A.customer_name,
@@ -111,6 +114,7 @@ else  pre_date END AS update_time,
 remark
 FROM adjusted_data
 WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'
+AND is_status <> 'C'
 ORDER BY adjusted_data.appoint_no DESC";
 
                    $params = array($year_no, $month_no, $Sales);

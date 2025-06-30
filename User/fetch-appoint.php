@@ -52,8 +52,6 @@ $month_no = isset($_GET['month_no']) ? $_GET['month_no'] : $currentMonth;
        AND month_no = ?
        AND A.staff_id = ?
         AND A.staff_id <> '1119900831940'
-        AND A.is_status <> '4'
-        AND B.is_status <> 'C'
 )
 SELECT DISTINCT(appoint_no),customer_name,
 CASE WHEN qt_no IS NULL THEN '-'
@@ -65,7 +63,7 @@ else  pre_date END AS update_time,
 remark
 FROM adjusted_data
 WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'
-ORDER BY adjusted_data.appoint_no DESC;";
+ORDER BY adjusted_data.appoint_no DESC";
 
                    $params = array($year_no, $month_no, $Sales);
 

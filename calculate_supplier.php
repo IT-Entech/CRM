@@ -11,6 +11,7 @@ if ($objCon === false) {
 // Get the wastename from the POST request
 $segment = isset($_POST['segment']) ? $_POST['segment'] : '';
 $wastecode = isset($_POST['waste_code']) ? $_POST['waste_code'] : '';
+$eliminate = isset($_POST['eliminate']) ? $_POST['eliminate'] : '';
 if (empty($wastecode)) {
     echo json_encode(['error' => 'Missing required parameter: waste_code']);
     exit;
@@ -161,6 +162,7 @@ LEFT JOIN ms_supplier_account C
 LEFT JOIN supplier_coordinate D ON A.supplier_code = D.supplier_code AND A.supplier_account_no = D.supplier_account_no
 WHERE waste_code = ?
 AND customer_segment_code = ?
+AND eliminate_code = ?
 GROUP BY A.waste_code, 
 A.customer_segment_code,
 eliminate_code,
@@ -171,7 +173,7 @@ D.longitude,
 B.supplier_name
 ORDER BY cost_rate ASC";
 
-$params = array($wastecode,$segment);
+$params = array($wastecode,$segment,$eliminate);
 $stmt = sqlsrv_query($objCon, $sql, $params);
 
 if ($stmt === false) {

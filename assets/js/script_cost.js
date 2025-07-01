@@ -53,27 +53,29 @@ document.getElementById("waste_name").addEventListener(
   "input",
   debounce(function () {
     const wasteNameInput = this;
+    const eliminateSelect = document.getElementById("eliminate_code");
     const wasteCodeSelect = document.getElementById("waste_code");
     const segmentSelect = document.getElementById("segment");
 
-    if (!wasteCodeSelect || !segmentSelect) {
+    if (!wasteCodeSelect || !segmentSelect || !eliminateSelect) {
       console.error("Required element(s) not found: 'waste_code' or 'segment'");
       return;
     }
 
     // เคลียร์ตัวเลือกเดิม (ยกเว้น placeholder)
+    eliminateSelect.innerHTML = '<option value="">Select eliminate code</option>';
     wasteCodeSelect.innerHTML = '<option value="">Select waste code</option>';
 
     const wastename = wasteNameInput.value.trim();
     const segment = segmentSelect.value.trim();
+    const eliminate = eliminateSelect.value.trim();
 
-    // ตรวจสอบว่าทั้ง waste_name และ segment มีค่า
-    if (wastename.length > 0 && segment.length > 0) {
+ if (wastename.length > 0 && segment.length > 0) {
       const data = new FormData();
       data.append("waste_name", wastename);
       data.append("segment", segment);
 
-      fetch("../fetch_cal_cost.php", {
+      fetch("../fetch_eliminate.php", {
         method: "POST",
         body: data,
       })
@@ -81,24 +83,24 @@ document.getElementById("waste_name").addEventListener(
         .then(data => {
           //console.log("Received Data:", data);
 
-          if (data.waste_codes && data.waste_codes.length > 0) {
+          if (data.eliminate_codes && data.eliminate_codes.length > 0) {
             const uniqueCodes = new Set();
 
-            data.waste_codes.forEach(waste => {
-              if (!uniqueCodes.has(waste.waste_code)) {
-                uniqueCodes.add(waste.waste_code);
+            data.eliminate_codes.forEach(eliminate => {
+              if (!uniqueCodes.has(eliminate.eliminate_code)) {
+                uniqueCodes.add(eliminate.eliminate_code);
 
                 const option = document.createElement("option");
-                option.value = waste.waste_code;
-                option.textContent = `${waste.waste_code}: ${waste.waste_name}`;
-                wasteCodeSelect.appendChild(option);
+                option.value = eliminate.eliminate_code;
+                option.textContent = `${eliminate.eliminate_code}: ${eliminate.eliminate_name}`;
+                eliminateSelect.appendChild(option);
               }
             });
           } else {
             const option = document.createElement("option");
             option.value = "";
             option.textContent = "No results found";
-            wasteCodeSelect.appendChild(option);
+            eliminateSelect.appendChild(option);
           }
         })
         .catch(error => {
@@ -106,9 +108,54 @@ document.getElementById("waste_name").addEventListener(
           alert("Error fetching data. Please try again.");
         });
     }
+
   }, 500) // ปรับเวลา debounce ได้ตามต้องการ
 );
 
+
+document.getElementById("eliminate_code").addEventListener("change", function () {
+  const eliminate = this.value.trim();
+  const wasteName = document.getElementById("waste_name").value.trim();
+  const segment = document.getElementById("segment").value.trim();
+  const wasteCodeSelect = document.getElementById("waste_code");
+
+  if (wasteName && segment && eliminate) {
+    const data = new FormData();
+    data.append("waste_name", wasteName);
+    data.append("segment", segment);
+    data.append("eliminate", eliminate);
+
+    fetch("../fetch_cal_cost.php", {
+      method: "POST",
+      body: data,
+    })
+      .then(response => response.json())
+      .then(data => {
+        wasteCodeSelect.innerHTML = '<option value="">Select waste code</option>';
+        if (data.waste_codes && data.waste_codes.length > 0) {
+          const uniqueCodes = new Set();
+          data.waste_codes.forEach(waste => {
+            if (!uniqueCodes.has(waste.waste_code)) {
+              uniqueCodes.add(waste.waste_code);
+              const option = document.createElement("option");
+              option.value = waste.waste_code;
+              option.textContent = `${waste.waste_code}: ${waste.waste_name}`;
+              wasteCodeSelect.appendChild(option);
+            }
+          });
+        } else {
+          const option = document.createElement("option");
+          option.value = "";
+          option.textContent = "No results found";
+          wasteCodeSelect.appendChild(option);
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching waste codes:", error);
+        alert("Error fetching waste codes.");
+      });
+  }
+});
 // Event: เมื่อเปลี่ยนค่า segment
 document.getElementById("segment").addEventListener("change", function () {
   const wasteNameInput = document.getElementById("waste_name");
@@ -122,3 +169,5 @@ document.getElementById("segment").addEventListener("change", function () {
     wasteCodeSelect.innerHTML = '<option value="">Select waste code</option>'; // ล้าง options เดิม
   }
 });
+
+

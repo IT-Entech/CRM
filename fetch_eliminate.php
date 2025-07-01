@@ -11,7 +11,6 @@ if ($objCon === false) {
 // Get the wastename from the POST request
 $segment = isset($_POST['segment']) ? $_POST['segment'] : '';
 $wastename = isset($_POST['waste_name']) ? $_POST['waste_name'] : '';
-$eliminate_code = isset($_POST['eliminate']) ? $_POST['eliminate'] : '';
 $search = "%" . $wastename . "%";
 
 // Define the query with a single CTE
@@ -39,17 +38,16 @@ $sql = "WITH Datadisposal AS (
                 AND YEAR(C.shipment_date) >= 2024
                 AND EXISTS (SELECT 1 FROM so_detail S WHERE S.qt_no = A.qt_no)
         )
-SELECT  DISTINCT(B.waste_name) AS waste_name, A.waste_code
+SELECT  DISTINCT(B.eliminate_name) AS eliminate_name ,A.eliminate_code
 FROM Datadisposal A
-LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
+LEFT JOIN ms_eliminate B ON A.eliminate_code = B.eliminate_code
 WHERE  A.waste_name LIKE ?
 AND A.customer_segment_code = ?
-AND A.eliminate_code = ?
-GROUP BY B.waste_name, A.waste_code
-ORDER BY A.waste_code ASC";
+GROUP BY B.eliminate_name, A.eliminate_code
+ORDER BY A.eliminate_code ASC";
 
 
-$params = array($search,$segment,$eliminate_code);
+$params = array($search,$segment);
 $stmt = sqlsrv_query($objCon, $sql, $params);
 
 if ($stmt === false) {
@@ -63,14 +61,14 @@ $result = [];
 
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     $result[] = [
-        'waste_code' => $row['waste_code'],
-        'waste_name' => $row['waste_name']
+         'eliminate_code' => $row['eliminate_code'],
+         'eliminate_name' => $row['eliminate_name']
     ];
 }
 
 // Return JSON response
 echo json_encode([
-    'waste_codes' => $result
+    'eliminate_codes' => $result
 ]);
 
 // Cleanup

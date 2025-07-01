@@ -199,6 +199,8 @@ function fetchSuppliers(wasteCode) {
  // ดึงค่า segment จาก DOM
   const segmentSelect = document.getElementById("segment");
   const segment = segmentSelect ? segmentSelect.value : "";
+    const eliminateSelect = document.getElementById("eliminate_code");
+  const eliminate = eliminateSelect ? eliminateSelect.value : "";
 
   if (!segment) {
     console.warn("Segment not selected.");
@@ -209,6 +211,7 @@ function fetchSuppliers(wasteCode) {
   const formData = new FormData()
   formData.append("waste_code", wasteCode);
   formData.append("segment", segment);
+  formData.append("eliminate", eliminate);
   fetch("../calculate_supplier.php", {
     method: "POST",
     body: formData,

@@ -68,7 +68,7 @@ document.getElementById("waste_name").addEventListener(
 
     const wastename = wasteNameInput.value.trim();
     const segment = segmentSelect.value.trim();
-    const eliminate = eliminateSelect.value.trim();
+
 
  if (wastename.length > 0 && segment.length > 0) {
       const data = new FormData();
@@ -160,13 +160,18 @@ document.getElementById("eliminate_code").addEventListener("change", function ()
 document.getElementById("segment").addEventListener("change", function () {
   const wasteNameInput = document.getElementById("waste_name");
   const wasteCodeSelect = document.getElementById("waste_code");
+   const eliminateCodeSelect = document.getElementById("eliminate_code");
 
   if (wasteNameInput) {
     wasteNameInput.value = ""; // ล้างค่าในช่อง waste_name
   }
 
   if (wasteCodeSelect) {
-    wasteCodeSelect.innerHTML = '<option value="">Select waste code</option>'; // ล้าง options เดิม
+    wasteCodeSelect.innerHTML = '<option value="">เลือกรหัสของเสีย</option>'; // ล้าง options เดิม
+  }
+
+   if (eliminateCodeSelect) {
+    eliminateCodeSelect.innerHTML = '<option value="">เลือกรหัสกำจัด</option>'; // ล้าง options เดิม
   }
 });
 

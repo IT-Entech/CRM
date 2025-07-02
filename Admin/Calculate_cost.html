@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Forms Appoint</title>
+  <title>ประเมินต้นทุนตั๋วต้นทุน</title>
   <link href="assets/img/Logo_En-Tech_1.png" rel="icon">
   <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.gstatic.com" rel="preconnect">
@@ -16,6 +16,8 @@
   <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
   <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
   <link href="assets/css/style.css" rel="stylesheet">
+    <!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
   <!-- ======= Header ======= -->
@@ -27,11 +29,14 @@
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
     </div>
-    <nav class="header-nav ms-auto">
+   <nav class="header-nav ms-auto">
       <ul class="d-flex align-items-center">
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle" href="#"><i class="bi bi-search"></i></a>
+        </li>
         <li class="nav-item dropdown pe-3">
           <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-            <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
+            <img src="../assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
             <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
           </a>
           <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
@@ -39,8 +44,7 @@
               <h6 id="name-display1"></h6>
               <span id="position-name"></span>
             </li>
-            <li><hr class="dropdown-divider">
-            </li>
+            <li><hr class="dropdown-divider"></li>
             <li>
               <a class="dropdown-item d-flex align-items-center" href="/log_out.php">
                 <i class="bi bi-box-arrow-right"></i>
@@ -246,10 +250,11 @@
       &copy; Copyright <strong><span>En-technology</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      Designed by <a href="#">-Aom SK-</a>
     </div>
   </footer>
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
   <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/chart.js/chart.umd.js"></script>
@@ -276,5 +281,22 @@
       location.reload();
     });
   </script>
+  <!-- Modal: No Supplier Found -->
+<div class="modal fade" id="noSupplierModal" tabindex="-1" aria-labelledby="noSupplierLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-warning">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title" id="noSupplierLabel">ไม่พบปลายทาง</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
+      </div>
+      <div class="modal-body">
+        ไม่มีปลายทางสำหรับ Waste Code นี้ กรุณาตรวจสอบข้อมูลอีกครั้ง
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
 </html>

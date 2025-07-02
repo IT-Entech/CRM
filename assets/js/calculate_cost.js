@@ -207,6 +207,11 @@ function fetchSuppliers(wasteCode) {
     return;
   }
 
+    if (!eliminate) {
+    console.warn("Eliminate not selected.");
+    return;
+  }
+
   // Create form data for POST request
   const formData = new FormData()
   formData.append("waste_code", wasteCode);
@@ -228,7 +233,9 @@ function fetchSuppliers(wasteCode) {
         // Calculate distances for all suppliers
         calculateDistanceForAllSuppliers()
       } else {
-        console.log("No suppliers found for this waste code")
+    // แสดง Bootstrap Modal
+    const noSupplierModal = new bootstrap.Modal(document.getElementById('noSupplierModal'));
+    noSupplierModal.show();
       }
     })
     .catch((error) => {
@@ -343,7 +350,7 @@ function updateSupplierUI() {
 // New function to calculate distances for all suppliers
 function calculateDistanceForAllSuppliers() {
   if (!marker1 || !marker2 || !marker4 || suppliers.length === 0) {
-    console.log("Missing required markers or suppliers")
+    //console.log("Missing required markers or suppliers")
     return
   }
 

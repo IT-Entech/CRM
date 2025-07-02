@@ -15,38 +15,40 @@ $eliminate_code = isset($_POST['eliminate']) ? $_POST['eliminate'] : '';
 $search = "%" . $wastename . "%";
 
 // Define the query with a single CTE
-$sql = "WITH Datadisposal AS (
-            SELECT 
-                A.qt_no,
-                B.qt_date,
-                A.customer_code,
-                B.customer_name,
-                A.waste_code,
-                A.waste_name,
-                A.cost_rate,
-                A.eliminate_code,
-                B.customer_segment_code,
-                A.supplier_code,
-                A.supplier_account_no,
-                ROW_NUMBER() OVER (PARTITION BY A.waste_code, A.supplier_code ORDER BY B.qt_date DESC, A.supplier_code ASC) AS RowNum
-            FROM cost_sheet_detail A
-            LEFT JOIN cost_sheet_head B ON A.qt_no = B.qt_no
-            LEFT JOIN customer_type_2025 C ON A.customer_code = C.customer_code
-            WHERE A.cost_code = '41100'
-                AND YEAR(B.qt_date) >= 2024
-                AND A.waste_code NOT IN ('000000-S', '', '000002-S')
-                AND A.waste_code LIKE '%-S%'
-                AND YEAR(C.shipment_date) >= 2024
-                AND EXISTS (SELECT 1 FROM so_detail S WHERE S.qt_no = A.qt_no)
-        )
-SELECT  DISTINCT(B.waste_name) AS waste_name, A.waste_code
-FROM Datadisposal A
-LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
+$sql = "    WITH Datadisposal AS (
+                SELECT 
+                    A.qt_no,
+                    B.qt_date,
+                    A.customer_code,
+                    B.customer_name,
+                    A.waste_code,
+                    A.waste_name,
+                    A.cost_rate,
+                    A.eliminate_code,
+                    B.customer_segment_code,
+                    A.supplier_code,
+                    A.supplier_account_no,
+                    ROW_NUMBER() OVER (PARTITION BY A.waste_code, A.supplier_code ORDER BY B.qt_date DESC, A.supplier_code ASC) AS RowNum
+                FROM cost_sheet_detail A
+                LEFT JOIN cost_sheet_head B ON A.qt_no = B.qt_no
+                LEFT JOIN customer_type_2025 C ON A.customer_code = C.customer_code
+                WHERE A.cost_code = '41100'
+                    AND YEAR(B.qt_date) >= 2024
+                    AND A.waste_code NOT IN ('000000-S', '', '000002-S')
+                    AND A.waste_code LIKE '%-S%'
+                    AND YEAR(C.shipment_date) >= 2025
+                    AND EXISTS (SELECT 1 FROM so_detail S WHERE S.qt_no = A.qt_no)
+            )
+    SELECT  DISTINCT(B.waste_name) AS waste_name, A.waste_code
+    FROM Datadisposal A
+    LEFT JOIN ms_waste B ON A.waste_code = B.waste_code
+    LEFT JOIN supplier_coordinate C ON A.supplier_code = C.supplier_code AND A.supplier_account_no = C.supplier_account_no
 WHERE  A.waste_name LIKE ?
 AND A.customer_segment_code = ?
 AND A.eliminate_code = ?
-GROUP BY B.waste_name, A.waste_code
-ORDER BY A.waste_code ASC";
+  AND latitude IS NOT NULL
+    GROUP BY B.waste_name, A.waste_code, A.supplier_code, A.supplier_account_no,latitude
+    ORDER BY A.waste_code ASC";
 
 
 $params = array($search,$segment,$eliminate_code);

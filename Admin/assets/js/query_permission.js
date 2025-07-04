@@ -6,7 +6,7 @@ function getSessionData() {
 
       if (staff == 0 || level < 1) {
         alert("คุณไม่ได้รับสิทธิ์ให้เข้าหน้านี้");
-        window.location = "../pages-login.html";
+        window.location = "../../pages-login.html";
         return;
       }
 

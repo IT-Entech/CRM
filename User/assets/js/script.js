@@ -8,7 +8,7 @@ function getSessionData() {
        //console.log(`Name: ${name}, Staff: ${staff}, Level: ${level}, Role: ${role}`);
       if (staff == 0 || level < 1) {
         alert("คุณไม่ได้รับสิทธิ์ให้เข้าหน้านี้");
-        window.location = "../pages-login.html";
+        window.location = "../../pages-login.html";
         return;
       }
          // Set the selected option based on the role

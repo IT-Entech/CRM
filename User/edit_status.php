@@ -88,7 +88,7 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
             if ($stmt === false) {
                 die(print_r(sqlsrv_errors(), true));
             } else {
-                echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.php";</script>';
+                echo '<script>alert("อัพเดทข้อมูลแล้ว");window.location="tables-data.html";</script>';
             }
         }
     }

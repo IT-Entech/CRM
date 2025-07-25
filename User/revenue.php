@@ -113,6 +113,7 @@ $sqlcostsheet = "
   WHERE A.print_qt_count > 0
     AND A.is_pre = 'N'
     AND A.print_qt_id IN (5,50)
+    AND is_status = 'A'
     AND $where_clause1
 ";
 

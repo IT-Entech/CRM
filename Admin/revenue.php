@@ -77,7 +77,7 @@ $sqlappoint = "
   FROM (
     SELECT 
       A.appoint_no,
-      CASE WHEN A.staff_id <> '1119900831940' THEN A.appoint_no END AS appoint_quality,
+      CASE WHEN A.staff_id <> '1119700041155' THEN A.appoint_no END AS appoint_quality,
       CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN B.appoint_no END AS appoint_qt,
       B.so_amount
     FROM appoint_head A

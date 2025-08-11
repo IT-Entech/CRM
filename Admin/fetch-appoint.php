@@ -51,7 +51,7 @@ if($year_no <> 0 && $month_no <> 0 && $Sales == 'N'){
     WHERE 
        year_no = ?
        AND month_no = ?
-        AND A.staff_id <> '1119900831940'
+        AND A.staff_id <> '1119700041155'
 )
 SELECT DISTINCT(appoint_no),customer_name,
 CASE WHEN qt_no IS NULL THEN '-'
@@ -102,7 +102,7 @@ ORDER BY adjusted_data.appoint_no DESC";
        year_no = ?
        AND month_no = ?
        AND A.staff_id = ?
-        AND A.staff_id <> '1119900831940'
+        AND A.staff_id <> '1119700041155'
 )
 SELECT DISTINCT(appoint_no),customer_name,
 CASE WHEN qt_no IS NULL THEN '-'

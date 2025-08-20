@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dashboard - Appoint</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="assets/img/Logo_En-Tech_1.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/Logo_En-Tech_1.png" alt="">
+        <span class="d-none d-lg-block">En-technology</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle" href="#"><i class="bi bi-search"></i></a>
+        </li>
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
+            <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="name-display1"></h6>
+              <span id="position-name"></span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/log_out.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Dashboard</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a >
+        <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="index.html">
+              <i class="bi bi-circle"></i><span>CRM</span>
+            </a>
+          </li>
+          <li id="maintanance-nav" class="d-none">
+            <a href="MA/index.html">
+              <i class="bi bi-circle"></i><span>Maintanance</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-appoint.html">
+              <i class="bi bi-circle"></i><span>Form Appoint</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="tables-appoint.html">
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html" class="active">
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกค้า</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+          <li class="nav-heading">Pages</li>
+         <li class="nav-item d-none" id="permission-nav">
+        <a class="nav-link collapsed" href="../Admin/permission/">
+          <i class="bi bi-question-circle"></i>
+          <span>Permission</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../Admin/Calculate_cost.html">
+          <i class="bi bi-pc-display-horizontal"></i>
+          <span>Cost Calculate</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+  <!-- ======= Main ======= -->
+  <main id="main" class="main">
+         <input type="hidden" id="fetch-level" value="" readonly>
+      <input type="hidden" id="fetch-staff" value="" readonly>
+    <div class="pagetitle">
+      <h1>Data Tables</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Tables</li>
+          <li class="breadcrumb-item active">Data</li>
+        </ol>
+      </nav>
+    </div>
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Datatables</h5>
+              <div class="col-lg-8">
+                <div class="row">
+                  <div class="col-xxl-3 col-md-4">
+                    <div class="form-floating mb-3">
+                      <select class="form-select" id="sales" aria-label="Sales" onchange="fetchData()">
+                        <option selected value="N">-</option>
+                      </select>
+                      <label for="sales">Sales</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-3 col-md-6">
+                    <div class="form-floating mb-3">
+                      <select class="form-select" id="month" aria-label="Month" onchange="fetchData()"></select>
+                      <label for="month">Month</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-3 col-md-6">
+                    <div class="form-floating mb-3">
+                      <select class="form-select" id="year" aria-label="Year" onchange="fetchData()"></select>
+                      <label for="year">Year</label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <section class="section dashboard">
+                <div class="row">
+                  <div class="row">
+                    <div class="col-xxl-3 col-md-4">
+                      <div class="card info-card customers-card">
+                        <div class="card-body">
+                          <h5 class="card-title">Appoint</h5>
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-people"></i>
+                            </div>
+                            <div class="ps-3">
+                              <a href="tables-appoint.php">
+                                <h6 id="appoint"></h6>
+                              </a>
+                              <span id="apNoqt" class="text-danger large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">ราย</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xxl-2 col-md-4">
+                      <div class="card info-card sales-card">
+                        <div class="card-body">
+                          <h5 class="card-title">Potential</h5>
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6 id="qt_potential_number"></h6>
+                              <span id="qt_potential_value" class="text-success large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span><br>
+                              <span id="qt_potential_lost_value" class="text-danger large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xxl-2 col-md-4">
+                      <div class="card info-card sales-card">
+                        <div class="card-body">
+                          <h5 class="card-title">Prospect</h5>
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="ps-2">
+                              <h6 id="qt_prospect_number"></h6>
+                              <span id="qt_prospect_value" class="text-success large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span><br>
+                              <span id="qt_prospect_lost_value" class="text-danger large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xxl-2 col-md-4">
+                      <div class="card info-card sales-card">
+                        <div class="card-body">
+                          <h5 class="card-title">Pipeline</h5>
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-cart"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6 id="qt_pipeline_number"></h6>
+                              <span id="qt_pipeline_value" class="text-success large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span><br>
+                              <span id="qt_pipeline_lost_value" class="text-danger large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-xxl-3 col-md-4">
+                      <div class="card info-card revenue-card">
+                        <div class="card-body">
+                          <h5 class="card-title">Revenue</h5>
+                          <div class="d-flex align-items-center">
+                            <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                              <i class="bi bi-cash-stack"></i>
+                            </div>
+                            <div class="ps-3">
+                              <h6 id="so_number"></h6>
+                              <span id="revenue" class="text-success large pt-1 fw-bold"></span>
+                              <span class="text-muted small pt-2 ps-1">THB</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <form action="edit_status.php" method="post" enctype="multipart/form-data" class="row g-3">
+                <div class="text-center">
+                  <button type="submit" class="btn btn-primary" onclick="return confirmUpdate();">Submit</button>
+                  <button type="reset" class="btn btn-secondary">Reset</button>
+                </div>
+                <div class="modal-body">
+                  <table id="tableAP" class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">วันที่ติดต่อ</th>
+                        <th scope="col">Customer</th>
+                        <th scope="col">QT No</th>
+                        <th scope="col">มูลค่างาน</th>
+                        <th scope="col">Process</th>
+                        <th scope="col">หมายเหตุ</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">เหตุผล</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>2024</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="#">-AOM SK-</a>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/table.js"></script>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>ประเมินต้นทุนตั๋วต้นทุน</title>
+  <link href="assets/img/Logo_En-Tech_1.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.php" class="logo d-flex align-items-center">
+        <img src="assets/img/Logo_En-Tech_1.png" alt="">
+        <span class="d-none d-lg-block">En-technology</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle " href="#">
+            <i class="bi bi-search"></i>
+          </a>
+        </li>
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
+            <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+             <li class="dropdown-header">
+              <h6 id="name-display1"></h6>
+              <span id="position-name"></span>
+            </li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/log_out.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- ======= Sidebar ======= -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+            <a href="index.html">
+              <i class="bi bi-circle"></i><span>CRM</span>
+            </a>
+          </li>
+             <li id="maintanance-nav" class="d-none">
+            <a href="MA/index.html">
+              <i class="bi bi-circle"></i><span>Maintanance</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-appoint.html">
+              <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+          <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li><a href="tables-appoint.html"><i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span></a></li>
+          <li><a href="tables-data.html"><i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span></a></li>
+        </ul>
+      </li>
+      <li class="nav-heading">Pages</li>
+        <li class="nav-item d-none" id="permission-nav">
+        <a class="nav-link collapsed" href="../Admin/permission/">
+          <i class="bi bi-question-circle"></i>
+          <span>Permission</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="../User/Calculate_cost.html">
+          <i class="bi bi-pc-display-horizontal"></i>
+          <span>Estimate cost</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+  <main id="main" class="main">
+    <div class="pagetitle">
+        <input type="hidden" id="fetch-level" value="" readonly>
+      <input type="hidden" id="fetch-staff" value="" readonly>
+      <h1>Estimate cost</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item">Forms</li>
+          <li class="breadcrumb-item active">Estimate cost</li>
+        </ol>
+      </nav>
+    </div>
+    <section class="section contact">
+      <div class="row">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Estimate cost</h5>
+            <input id="search-box" class="form-control" type="search" placeholder="Search for a place" style="width: 300px; margin-bottom: 20px;">
+            <div id="map" style="height: 600px; width: 100%;"></div>
+          </div>
+          <div class="row gy-4">
+            <div class="col-md-2">
+              <label for="start_point" class="form-label">จุดเริ่มต้น</label>
+              <select class="form-select" id="start_point" name="start_point">
+                <option selected value="13.561900, 100.653328">ลานจอดแพรกษา</option>
+                <option value="13.599536, 101.373371">กรีนพลัส</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="finish_point" class="form-label">จุดสิ้นสุด</label>
+              <select class="form-select" id="finish_point" name="finish_point">
+                <option selected value="13.561900, 100.653328">ลานจอดแพรกษา</option>
+                <option value="13.599536, 101.373371">กรีนพลัส</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label for="segment" class="form-label">Group product</label>
+              <select class="form-select" id="segment" name="segment" required>
+                <option selected value="">กรุณาเลือก...</option>
+                <option value="01">กากตะกอน-ฝุ่นทราย</option>
+                <option value="02">Product off spec</option>
+                <option value="03">ขยะอันตราย</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="waste_name" class="form-label">Waste Name:</label>
+              <input type="search" class="form-control" id="waste_name" list="wasteOptions" name="waste_name" required>
+              <datalist id="wasteOptions"></datalist>
+            </div>
+            <div class="col-md-3">
+              <label for="waste_code" class="form-label">Waste Code:</label>
+              <select class="form-select" id="waste_code" name="waste_code">
+                <option value="">กรุณาเลือก...</option>
+              </select>
+            </div>
+            <div class="col-md-10">
+              <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-2 pt-0">ประเภทรถ</legend>
+                <div class="col-sm-10">
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="truckType" id="gridRadios1" value="1" checked>
+                    <label class="form-check-label" for="gridRadios1">รถเล็ก</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="truckType" id="gridRadios2" value="3.74">
+                    <label class="form-check-label" for="gridRadios2">รถใหญ่ (เดี่ยว)</label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="truckType" id="gridRadios3" value="3.74">
+                    <label class="form-check-label" for="gridRadios3">รถใหญ่ (พ่วง)</label>
+                  </div>
+                </div>
+              </fieldset>
+            </div>
+            <fieldset class="row mb-3">
+              <div class="col-lg-4">
+                <input type="radio" class="btn-check" name="options-outlined" id="selected1" autocomplete="off" checked>
+                <label class="btn btn-outline-primary" for="selected1">ตัวเลือกที่ 1</label>
+                <div class="info-box card " id="box1">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3 id="supplier1">ไม่มีข้อมูล </h3>
+                  <h6>ปลายทาง : <span id="supplier_code1">-</span><span id="account1">(0)</span></h6>
+                  <h6>รหัสกำจัด : <span id="disposal_code1">-</span></h6>
+                  <h6>ระยะทาง : <span id="distance1">-</span></h6>
+                  <h6>ค่ากำจัด : <span id="disposal_cost1">-</span></h6>
+                  <h6>ค่าขนส่ง : <span id="transport_cost1">-</span></h6>
+                  <h6>รวมต้นทุน : <span id="total_cost1">-</span></h6>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <input type="radio" class="btn-check" name="options-outlined" id="selected2" autocomplete="off">
+                <label class="btn btn-outline-primary" for="selected2">ตัวเลือกที่ 2</label>
+                <div class="info-box card" id="box2">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3 id="supplier2">ไม่มีข้อมูล </h3>
+                  <h6>ปลายทาง : <span id="supplier_code2">-</span><span id="account2">(0)</span></h6>
+                  <h6>รหัสกำจัด : <span id="disposal_code2">-</span></h6>
+                  <h6>ระยะทาง : <span id="distance2">-</span></h6>
+                  <h6>ค่ากำจัด : <span id="disposal_cost2">-</span></h6>
+                  <h6>ค่าขนส่ง : <span id="transport_cost2">-</span></h6>
+                  <h6>รวมต้นทุน : <span id="total_cost2">-</span></h6>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <input type="radio" class="btn-check" name="options-outlined" id="selected3" autocomplete="off">
+                <label class="btn btn-outline-primary" for="selected3">ตัวเลือกที่ 3</label>
+                <div class="info-box card" id="box3">
+                  <i class="bi bi-geo-alt"></i>
+                  <h3 id="supplier3">ไม่มีข้อมูล </h3>
+                  <h6>ปลายทาง : <span id="supplier_code3">-</span><span id="account3">(0)</span></h6>
+                  <h6>รหัสกำจัด : <span id="disposal_code3">-</span></h6>
+                  <h6>ระยะทาง : <span id="distance3">-</span></h6>
+                  <h6>ค่ากำจัด : <span id="disposal_cost3">-</span></h6>
+                  <h6>ค่าขนส่ง : <span id="transport_cost3">-</span></h6>
+                  <h6>รวมต้นทุน : <span id="total_cost3">-</span></h6>
+                </div>
+              </div>
+            </fieldset>
+            <div class="text-center">
+              <button type="button" class="btn btn-primary" id="calculateBtn">Submit</button>
+              <button type="button" class="btn btn-secondary" id="resetBtn">Reset</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- ======= Footer ======= -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>En-technology</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="#">-Aom SK-</a>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="../assets/js/calculate_cost.js"></script>
+  <script src="../assets/js/script_cost.js"></script>
+  <script>
+    fetch('../API_KEY.txt')
+      .then(response => response.text())
+      .then(apiKey => {
+        const script = document.createElement("script");
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey.trim()}&libraries=places&callback=initMap`;
+        script.async = true;
+        script.defer = true;
+        document.body.appendChild(script);
+      })
+      .catch(error => console.error("Error fetching API key:", error));
+    document.getElementById("resetBtn").addEventListener("click", function () {
+      location.reload();
+    });
+  </script>
+    <!-- Modal: No Supplier Found -->
+<div class="modal fade" id="noSupplierModal" tabindex="-1" aria-labelledby="noSupplierLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-warning">
+      <div class="modal-header bg-warning text-dark">
+        <h5 class="modal-title" id="noSupplierLabel">ไม่พบปลายทาง</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="ปิด"></button>
+      </div>
+      <div class="modal-body">
+        ไม่มีปลายทางสำหรับ Waste Code นี้ กรุณาตรวจสอบข้อมูลอีกครั้ง
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Dashboard - CRM</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+  <link href="assets/img/Logo_En-Tech_1.png" rel="icon">
+  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Header -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+      <a href="index.html" class="logo d-flex align-items-center">
+        <img src="assets/img/Logo_En-Tech_1.png" alt="">
+        <span class="d-none d-lg-block">En-technology</span>
+      </a>
+      <i class="bi bi-list toggle-sidebar-btn"></i>
+    </div>
+    <nav class="header-nav ms-auto">
+      <ul class="d-flex align-items-center">
+        <li class="nav-item d-block d-lg-none">
+          <a class="nav-link nav-icon search-bar-toggle" href="#"><i class="bi bi-search"></i></a>
+        </li>
+        <li class="nav-item dropdown pe-3">
+          <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+            <img src="assets/img/person-circle.svg" alt="Profile" class="rounded-circle">
+            <span id="name-display" class="d-none d-md-block dropdown-toggle ps-2"></span>
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+            <li class="dropdown-header">
+              <h6 id="name-display1"></h6>
+              <span id="position-name"></span>
+            </li>
+            <li><hr class="dropdown-divider"></li>
+            <li>
+              <a class="dropdown-item d-flex align-items-center" href="/log_out.php">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Sign Out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- Sidebar -->
+  <aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-grid"></i>
+          <span>Dashboard</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+         <ul id="dashboards-nav" class="nav-content show" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="index.html" class="active">
+              <i class="bi bi-circle"></i><span>CRM</span>
+            </a>
+          </li>
+          <li id="maintanance-nav" class="d-none">
+            <a href="MA/index.html">
+              <i class="bi bi-circle"></i><span>Maintanance</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="forms-appoint.html">
+              <i class="bi bi-circle"></i><span>บันทึกข้อมูลลูกค้า</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+          <i class="bi bi-layout-text-window-reverse"></i><span>Tables</span><i class="bi bi-chevron-down ms-auto"></i>
+        </a>
+        <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+          <li>
+            <a href="tables-appoint.html">
+              <i class="bi bi-circle"></i><span>รายชื่อลูกค้าที่ยังไม่ได้เสนอราคา</span>
+            </a>
+          </li>
+          <li>
+            <a href="tables-data.html">
+              <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-heading">Pages</li>
+      <li class="nav-item d-none" id="permission-nav">
+        <a class="nav-link collapsed" href="../Admin/permission/index.php">
+          <i class="bi bi-question-circle"></i>
+          <span>Permission</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="../Admin/Calculate_cost.html">
+          <i class="bi bi-pc-display-horizontal"></i>
+          <span>Cost Calculate</span>
+        </a>
+      </li>
+    </ul>
+  </aside>
+  <!-- Main -->
+  <main id="main" class="main">
+    <div class="pagetitle">
+      <h1>Dashboard</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active">Dashboard</li>
+        </ol>
+      </nav>
+      <input type="hidden" id="fetch-level" value="" readonly>
+      <input type="hidden" id="fetch-staff" value="">
+      <div class="col-lg-12">
+        <div class="row">
+          <div class="col-xxl-2 col-md-4 d-none" id="select-sale">
+            <div class="form-floating mb-3">
+              <select class="form-select" id="Sales" aria-label="Sales" onchange="fetchYear()">
+                <option selected value="N">-</option>
+              </select>
+              <label for="Sales">Sales</label>
+            </div>
+          </div>
+          <div class="col-xxl-2 col-md-4">
+            <div class="form-floating mb-3">
+              <select class="form-select" id="is_new" aria-label="is_new" onchange="fetchYear()">
+                <option selected value="0">-</option>
+                <option value="N">NEW</option>
+                <option value="R">RENEW</option>
+                <option value="A">ACCOUNT</option>
+                <option value="K">KEY ACCOUNT</option>
+              </select>
+              <label for="is_new">ประเภทลูกค้า</label>
+            </div>
+          </div>
+          <div class="col-xxl-2 col-md-4">
+            <div class="form-floating mb-3">
+              <select class="form-select" id="channel" aria-label="channel" onchange="fetchYear()">
+                <option id="all-select-channel" selected value="N">-</option>
+                <option id="OnL" value="I">Online</option>
+                <option id="OfL" value="O">Offine</option>
+              </select>
+              <label for="channel">Channel</label>
+            </div>
+          </div>
+          <div class="col-xxl-3 col-md-4">
+            <div class="form-floating mb-3">
+              <select class="form-select" id="month" aria-label="Month" onchange="fetchYear()">
+                <option value="0">-</option>
+              </select>
+              <label for="month">Month</label>
+            </div>
+          </div>
+          <div class="col-xxl-3 col-md-4">
+            <div class="form-floating mb-3">
+              <select class="form-select" id="year" aria-label="Year" onchange="fetchYear()"></select>
+              <label for="year">Year</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section class="section dashboard">
+      <div class="row">
+        <!-- Left side columns -->
+        <div class="col-lg-8">
+          <div class="row">
+            <!-- Appoint Card -->
+            <div class="col-xxl-6 col-md-6">
+              <div class="card info-card customers-card">
+                <div class="card-body">
+                  <h5 class="card-title">Appoint</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-people"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id="appoint"></h6>
+                      <span id="ap_quality" class="text-success large pt-1 fw-bold"></span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Quotation Card -->
+            <div class="col-xxl-6 col-md-6">
+              <div class="card info-card sales-card">
+                <div class="card-body">
+                  <h5 class="card-title">Quotation</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-cart"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id="qt_number"></h6>
+                      <span id="qt_value" class="text-success large pt-1 fw-bold"></span>
+                      <span class="text-muted small pt-2 ps-1">THB</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Estimate Revenue Card -->
+            <div class="col-xxl-6 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Estimate Revenue</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-cash-stack"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id="or_number"></h6>
+                      <span id="order_est" class="text-success large pt-1 fw-bold"></span>
+                      <span class="text-muted small pt-2 ps-1">THB</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Revenue Card -->
+            <div class="col-xxl-6 col-md-6">
+              <div class="card info-card revenue-card">
+                <div class="card-body">
+                  <h5 class="card-title">Revenue</h5>
+                  <div class="d-flex align-items-center">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                      <i class="bi bi-cash-stack"></i>
+                    </div>
+                    <div class="ps-3">
+                      <h6 id="customer_number"></h6>
+                      <span id="revenue" class="text-success large pt-1 fw-bold"></span>
+                      <span class="text-muted small pt-2 ps-1">THB</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Reports -->
+            <div class="col-12">
+              <div class="card">
+                <div class="filter">
+                  <a class="icon" href="#" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></a>
+                  <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                    <li class="dropdown-header text-start"><h6>Product</h6></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="999" onclick="fetchProduct(this)">All</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="00" onclick="fetchProduct(this)">N/A</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="01" onclick="fetchProduct(this)">กากตะกอน-ฝุ่นทราย</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="02" onclick="fetchProduct(this)">Product off spec</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="03" onclick="fetchProduct(this)">ขยะอันตราย</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="04" onclick="fetchProduct(this)">Cleanning</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="05" onclick="fetchProduct(this)">Cleaning + กำจัด</a></li>
+                    <li><a class="dropdown-item" style="cursor: pointer;" data-segment-no="99" onclick="fetchProduct(this)">อื่น ๆ</a></li>
+                  </ul>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">Revenue Movement</h5>
+                  <div id="reportsChart"></div>
+                </div>
+              </div>
+            </div>
+            <!-- Region Table -->
+            <div class="col-12">
+              <div class="card recent-sales overflow-auto">
+                <div class="card-body">
+                  <h5 class="card-title">Region</h5>
+                  <table id="region" class="table table-borderless datatable">
+                    <thead>
+                      <tr>
+                        <th scope="col">Product</th>
+                        <th scope="col">North</th>
+                        <th scope="col">Central</th>
+                        <th scope="col">East</th>
+                        <th scope="col">North-East</th>
+                        <th scope="col">West</th>
+                        <th scope="col">South</th>
+                      </tr>
+                    </thead>
+                    <tbody></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right side columns -->
+        <div class="col-lg-4">
+          <!-- AOV & Winrate -->
+          <div class="card">
+            <div class="card-body pb-4" style="display: flex; justify-content: space-between;">
+              <div style="flex: 1;text-align: center;">
+                <h5 class="card-title">AOV</h5>
+                <div class="ps-2">
+                  <h4 id="AOV" style="font-weight: 700;"></h4>
+                  <span id="AOV_percent" class="text-success large pt-1 fw-bold"></span>
+                </div>
+              </div>
+              <div style="flex: 1; text-align: center;">
+                <h5 class="card-title">Winrate</h5>
+                <div class="ps-2">
+                  <h4 id="winrate" style="font-weight: 700;"></h4>
+                  <span id="winrate_percent" class="text-success large pt-1 fw-bold"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Product Chart -->
+          <div class="card">
+            <div class="card-body pb-0">
+              <h5 class="card-title">Product</h5>
+              <div id="trafficChart" style="min-height: 400px;" class="echart"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!-- Footer -->
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>2024</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">-AOM SK-</a>
+    </div>
+  </footer>
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <!-- Vendor JS Files -->
+  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="assets/vendor/echarts/echarts.min.js"></script>
+  <script src="assets/vendor/quill/quill.js"></script>
+  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="assets/vendor/php-email-form/validate.js"></script>
+  <script src="assets/js/main.js"></script>
+  <script src="assets/js/script.js"></script>
+</body>
+</html>

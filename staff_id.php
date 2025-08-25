@@ -84,7 +84,7 @@ $sql = "SELECT A.staff_id, B.fname_e, B.nick_name
           AND usrid NOT IN ($placeholders)
           AND A.isactive = 'Y' 
           AND A.staff_id <> ''
-          AND B.position_code = 067 ";
+          AND B.position_code = 067 ,072";
 
 $stmt1 = sqlsrv_query($objCon, $sql, $usrid);
 

@@ -1,91 +1,52 @@
 function getSessionData() {
   fetch('./header.php')
-    .then(response => response.json()) // Parse the JSON from the response
+    .then(response => response.json())
     .then(data => {
-      //console.log('Session Data:', data);
+      const { name, staff, level, role } = data;
 
-      const { name, staff, level, role, position } = data;
-       //console.log(`Name: ${name}, Staff: ${staff}, Level: ${level}, Role: ${role}`);
       if (staff == 0 || level < 1) {
         alert("คุณไม่ได้รับสิทธิ์ให้เข้าหน้านี้");
         window.location = "../../pages-login.html";
         return;
       }
 
-      var permissionNav = document.getElementById('permission-nav');
-      var maintenanceNav = document.getElementById('maintanance-nav');
-      if(level < 3){
-        
+      const permissionNav = document.getElementById('permission-nav');
+      const maintenanceNav = document.getElementById('maintanance-nav');
+
+      if (level < 3) {
         permissionNav.classList.add('d-none');
         maintenanceNav.classList.add('d-none'); 
-      }else{
+      } else {
         permissionNav.classList.remove('d-none');
         maintenanceNav.classList.remove('d-none');
       }
 
-      // Conditionally show Maintenance and Permission nav items
-      if (level === 3) { 
-        var maintenanceNav = document.getElementById('maintanance-nav');
-
-      // Fetch staff data if needed for select options
-      fetch('../staff_id.php')
-        .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then(data => {
-          const selectElement = document.getElementById('Sales');
-          data.forEach(item => {
-            const option = document.createElement('option');
-            option.value = item.staff_id;
-            option.textContent = item.fname_e;
-            selectElement.appendChild(option);
-          });
-        })
-        .catch(error => console.error('Error fetching staff data:', error));
-      }
-      // Update hidden fields and display the user name
       document.getElementById('fetch-level').value = level;
       document.getElementById('name-display').textContent = name;
       document.getElementById('name-display1').textContent = name;
       document.getElementById('position-name').textContent = role;
       document.getElementById('fetch-staff').value = staff;
 
-      // Now call fetchYear() to fetch year-based data
-      fetchData(); // Ensure session data is available before fetching year data
+      fetchData();
     })
-    .catch(error => {
-      console.error('Error fetching session data:', error);
-    });
+    .catch(error => console.error('Error fetching session data:', error));
 }
 
 // Call the function to fetch session data
-getSessionData();
 function fetchData() {
   const year_no = document.getElementById('year').value;
+  const status = document.getElementById('status').value;
   const month_no = document.getElementById('month').value;
   const Sales = document.getElementById('sales').value;
   const staff = document.getElementById('fetch-staff').value;
-  let url;
 
-  url = `api.php?year_no=${year_no}&month_no=${month_no}&Sales=${Sales}&staff=${staff}`;
- 
-
-    fetch(url)
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return response.json();
-    })
-    .then(data => {
-      //console.log('Data:', data); // Log the data to check the response
-      updateTable(data);
-    })
+  const url = `api.php?year_no=${year_no}&month_no=${month_no}&Status=${status}&Sales=${Sales}&staff=${staff}`;
+  
+  fetch(url)
+    .then(response => response.json())
+    .then(data => updateTable(data))
     .catch(error => console.error('Error fetching data:', error));
-    }
+}
 
 function updateTable(data) {
 
@@ -352,28 +313,35 @@ const monthNames = [
   "July", "August", "September", "October", "November", "December"
 ];
 
+// เพิ่มตัวเลือก “All Year”
+const allYearOption = document.createElement('option');
+allYearOption.value = '00';
+allYearOption.text = 'All Year';
+monthSelect.appendChild(allYearOption);
+
+// เพิ่มเดือน 1–12
 monthNames.forEach((month, index) => {
   const option = document.createElement('option');
-  option.value = index + 1; // 1 for January, 2 for February, etc.
+  option.value = index + 1;
   option.text = month;
   monthSelect.appendChild(option);
 });
 
-// Optionally, set the current month as the selected option
+// ตั้งค่าเดือนปัจจุบันเป็น default
 const currentMonth = new Date().getMonth() + 1;
 monthSelect.value = currentMonth;
 
+// --------------------------- Dropdown ปี ---------------------------
 const yearSelect = document.getElementById('year');
 const currentYear = new Date().getFullYear();
 const startYear = 2023;
-
 for (let year = currentYear; year >= startYear; year--) {
   const option = document.createElement('option');
   option.value = year;
   option.text = year;
   yearSelect.appendChild(option);
 }
-
+document.addEventListener('DOMContentLoaded', getSessionData);
 function confirmUpdate() {
   return confirm("Are you sure you want to update the records?");
 }

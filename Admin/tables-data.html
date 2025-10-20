@@ -152,9 +152,21 @@
                       <label for="sales">Sales</label>
                     </div>
                   </div>
+                   <div class="col-xxl-3 col-md-6">
+                    <div class="form-floating mb-3">
+                      <select class="form-select" id="status" aria-label="Status" onchange="fetchData()">
+                        <option selected value="00">-</option>
+                        <option  value="05">Potential</option>
+                        <option value="04">Prospect</option>
+                        <option  value="06">Pipeline</option>
+                      </select>
+                      <label for="status">Status</label>
+                    </div>
+                  </div>
                   <div class="col-xxl-3 col-md-6">
                     <div class="form-floating mb-3">
-                      <select class="form-select" id="month" aria-label="Month" onchange="fetchData()"></select>
+                      <select class="form-select" id="month" aria-label="Month" onchange="fetchData()">
+                      </select>
                       <label for="month">Month</label>
                     </div>
                   </div>

@@ -257,11 +257,11 @@ function updateTable(data) {
   // Update the so_number element with total so amount
   const countElement2 = document.getElementById('customer_number');
   if (countElement2) {
-    countElement2.textContent = totalCustomerNumber.toLocaleString('en-US');
+    countElement2.textContent = totalleadNumber.toLocaleString('en-US');
   }
 
-        const ratio = totalSoAmount / totalCustomerNumber;
-        const winrateratio = (totalCustomerNumber / totalQTnumber);
+        const ratio = totalSoAmount / totalleadNumber;
+        const winrateratio = (totalleadNumber / totalAPQT);
         const ratioElement = document.getElementById('AOV');
         const winrateElement = document.getElementById('winrate');  
 

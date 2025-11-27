@@ -79,11 +79,13 @@ $sqlappoint = "
       A.appoint_no,
       CASE WHEN A.staff_id <> '1119700041155' THEN A.appoint_no END AS appoint_quality,
       CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN B.appoint_no END AS appoint_qt,
-      CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN B.so_amount END AS so_amount
+      CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50)  THEN B.so_amount END AS so_amount,
+      ROW_NUMBER() OVER (PARTITION BY A.appoint_no, CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN 1 ELSE 0 END ORDER BY B.record_date DESC) AS rn
     FROM appoint_head A
     LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no 
     WHERE $where_clause
   ) AS subquery
+     WHERE rn = 1
 ";
 
 $sqlcostsheet = "

@@ -262,14 +262,20 @@ function updateTable(data) {
 
         const ratio = totalSoAmount / totalleadNumber;
         const winrateratio = (totalleadNumber / totalAPQT);
+        const winrateratioV = (totalSoAmount / totalVC);
         const ratioElement = document.getElementById('AOV');
         const winrateElement = document.getElementById('winrate');  
+         const winrateElementV = document.getElementById('winrateV');  
 
         ratioElement.textContent = ratio.toLocaleString('en-US', {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
         winrateElement.textContent = (winrateratio * 100).toLocaleString('en-US', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+}) + '%';
+        winrateElementV.textContent = (winrateratioV * 100).toLocaleString('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
 }) + '%';

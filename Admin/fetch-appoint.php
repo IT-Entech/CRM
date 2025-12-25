@@ -34,7 +34,8 @@ if($year_no <> 0 && $month_no <> 0 && $Sales == 'N'){
        A.remark,
        A.month_no,
        A.year_no,
-       A.staff_id
+       A.staff_id,
+       DATEDIFF(DAY, A.appoint_date, GETDATE()) AS update_time
     FROM appoint_head A
     LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no
     CROSS APPLY (
@@ -58,8 +59,7 @@ CASE WHEN qt_no IS NULL THEN '-'
 else qt_no END AS qt_no,format_date,format_qtdate,
 CASE WHEN adjusted_is_pre = 'y' THEN 'pre quotation'
 else '-' END AS status,
-CASE WHEN pre_date = 0 THEN '-'
-else  pre_date END AS update_time,
+update_time,
 remark
 FROM adjusted_data
 WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'
@@ -84,7 +84,8 @@ ORDER BY adjusted_data.appoint_no DESC";
        A.remark,
        A.month_no,
        A.year_no,
-       A.staff_id
+       A.staff_id,
+       DATEDIFF(DAY, A.appoint_date, GETDATE()) AS update_time
     FROM appoint_head A
     LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no
     CROSS APPLY (
@@ -109,8 +110,7 @@ CASE WHEN qt_no IS NULL THEN '-'
 else qt_no END AS qt_no,format_date,format_qtdate,
 CASE WHEN adjusted_is_pre = 'y' THEN 'pre quotation'
 else '-' END AS status,
-CASE WHEN pre_date = 0 THEN '-'
-else  pre_date END AS update_time,
+update_time,
 remark
 FROM adjusted_data
 WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'

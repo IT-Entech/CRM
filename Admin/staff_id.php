@@ -80,11 +80,13 @@ $placeholders = implode(',', array_fill(0, count($usrid), '?'));
 $sql = "SELECT A.staff_id, B.fname_e, B.nick_name 
         FROM xuser AS A
         LEFT JOIN hr_staff B ON A.staff_id = B.staff_id
+        LEFT JOIN a_user C ON A.staff_id = C.staff_id
         WHERE gid = '16387' 
           AND usrid NOT IN ($placeholders)
           AND A.isactive = 'Y' 
           AND A.staff_id <> ''
-          AND B.position_code = 067";
+          AND B.position_code = 067
+          AND C.active = 'Y'";
 
 $stmt1 = sqlsrv_query($objCon, $sql, $usrid);
 

@@ -110,7 +110,7 @@ function updateTable(data) {
       <td>
   <input type="text" name="remark${index+1}" class="form-control" value="${row.remark ? row.remark : ''}" id="remark-${row.appoint_no}"${row.is_status == 0 ? 'disabled' : ''}>
 </td>
-      <td class="form-control text-center ${row.update_time >= 3 ? 'bg-warning text-white' : row.update_time >= 13 ? 'bg-danger text-white' : row.update_time < 10 ? ' text-muted' : ''}">${row.update_time}</td>
+      <td class="form-control text-center ${row.update_time <= 3 ? 'bg-warning text-white' : row.update_time > 3 ? 'bg-danger text-white' : row.update_time < 10 ? ' text-muted' : ''}">${row.update_time}</td>
     `;
     tbody.appendChild(tr);
   });

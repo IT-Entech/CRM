@@ -53,6 +53,7 @@ if($year_no <> 0 && $month_no <> 0 && $Sales == 'N'){
        year_no = ?
        AND month_no = ?
         AND A.staff_id <> '1119700041155'
+        AND A.is_status != 4
 )
 SELECT DISTINCT(appoint_no),customer_name,
 CASE WHEN qt_no IS NULL THEN '-'

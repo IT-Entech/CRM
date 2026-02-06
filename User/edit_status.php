@@ -18,9 +18,7 @@ if ($uidStmt === false || !($uid = sqlsrv_fetch_array($uidStmt, SQLSRV_FETCH_ASS
 }
 $uid = $uid['usrid'];
 
-$qt_no_count = count(array_filter(array_keys($data), function($key) {
-    return strpos($key, 'qt_no') === 0;
-}));
+$qt_no_count = count(array_filter(array_keys($data), fn($key) => strpos($key, 'qt_no') === 0));
 
 // Loop over the qt_no entries
 for ($i = 1; $i <= $qt_no_count; $i++) {
@@ -43,12 +41,10 @@ for ($i = 1; $i <= $qt_no_count; $i++) {
         $dataChanged = false;
 
         if ($existingData) {
-            $dataChanged = (
-                ($cs_badge !== null && $cs_badge != $existingData['is_prospect']) ||
-                ($remark !== null && $remark != $existingData['remark']) ||
-                ($status_badge !== null && $status_badge != $existingData['is_tracking']) ||
-                ($reason !== null && $reason != $existingData['reasoning'])
-            );
+            $dataChanged = $cs_badge !== null && $cs_badge != $existingData['is_prospect'] ||
+                $remark !== null && $remark != $existingData['remark'] ||
+                $status_badge !== null && $status_badge != $existingData['is_tracking'] ||
+                $reason !== null && $reason != $existingData['reasoning'];
         }
 
         // Only perform update if data has changed

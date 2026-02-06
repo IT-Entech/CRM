@@ -33,6 +33,9 @@ switch ($combinedKey) {
         $target_haz = '14400000';
         $target_cl = '7000000';
         break; 
+     case '2026_N_0_N':
+        $target = '64000000';
+        break; 
     case '2025_N_Y_N':
         $target = '39150000';
         $target_sludge = '6000000';

@@ -169,6 +169,15 @@
                   </div>
                   <div class="col-xxl-3 col-md-6">
                     <div class="form-floating mb-3">
+                      <select class="form-select" id="channel" aria-label="Channel" onchange="fetchData()">
+                        <option selected value="I">Online</option>
+                        <option value="O">Offline</option>
+                      </select>
+                      <label for="channel">Channel</label>
+                    </div>
+                  </div>
+                  <div class="col-xxl-3 col-md-6">
+                    <div class="form-floating mb-3">
                       <select class="form-select" id="month" aria-label="Month" onchange="fetchData()"></select>
                       <label for="month">Month</label>
                     </div>

@@ -64,8 +64,9 @@ getSessionData();
 function fetchData() {
   const year_no = document.getElementById('year').value;
   const month_no = document.getElementById('month').value;
+  const channel = document.getElementById('channel').value;
   const Sales = document.getElementById('fetch-staff').value;
-  const url = `fetch-appoint.php?year_no=${year_no}&month_no=${month_no}&Sales=${Sales}`;
+  const url = `fetch-appoint.php?year_no=${year_no}&month_no=${month_no}&channel=${channel}&Sales=${Sales}`;
 
   fetch(url)
     .then(response => {

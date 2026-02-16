@@ -14,7 +14,8 @@ $currentMonth = date("m");
 $Sales = isset($_GET['Sales']) ? $_GET['Sales'] : NULL;
 $year_no = isset($_GET['year_no']) ? $_GET['year_no'] : $currentYear;
 $month_no = isset($_GET['month_no']) ? $_GET['month_no'] : $currentMonth;
-/*$channel = isset($_GET['channel']) ? $_GET['channel'] : NULL;*/
+$channel = isset($_GET['channel']) ? $_GET['channel'] : NULL;
+
 
 
     $sqlappoint = "WITH adjusted_data AS (
@@ -53,6 +54,7 @@ $month_no = isset($_GET['month_no']) ? $_GET['month_no'] : $currentMonth;
        year_no = ?
        AND month_no = ?
        AND A.staff_id = ?
+       AND A.is_call = ?
         AND A.staff_id <> '1119700041155'
         AND A.is_status != 4
 )

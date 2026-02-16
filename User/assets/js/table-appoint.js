@@ -15,38 +15,38 @@ function getSessionData() {
       var selectSale = document.getElementById('select-sales');
       
       if(level === 3){
-        permissionNav.classList.remove('d-none');
-        maintenanceNav.classList.remove('d-none');
-        selectSale.classList.remove('d-none');
+        if (permissionNav) permissionNav.classList.remove('d-none');
+        if (maintenanceNav) maintenanceNav.classList.remove('d-none');
+        if (selectSale) selectSale.classList.remove('d-none');
       }else if(level === 2){
-        permissionNav.classList.add('d-none');
-        maintenanceNav.classList.add('d-none');
-        selectSale.classList.remove('d-none');
+        if (permissionNav) permissionNav.classList.add('d-none');
+        if (maintenanceNav) maintenanceNav.classList.add('d-none');
+        if (selectSale) selectSale.classList.remove('d-none');
       }else if(level === 1){
-        permissionNav.classList.add('d-none');
-        maintenanceNav.classList.add('d-none');
-        selectSale.classList.add('d-none');
+        if (permissionNav) permissionNav.classList.add('d-none');
+        if (maintenanceNav) maintenanceNav.classList.add('d-none');
+        if (selectSale) selectSale.classList.add('d-none');
       }
       
-      if (level === 3) { 
-        fetch('../staff_id.php')
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then(data => {
-            const selectElement = document.getElementById('Sales');
-            data.forEach(item => {
-              const option = document.createElement('option');
-              option.value = item.staff_id;
-              option.textContent = item.fname_e;
-              selectElement.appendChild(option);
-            });
-          })
-          .catch(error => console.error('Error fetching staff data:', error));
-      }
+      fetch('staff_id.php')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          const selectElement = document.getElementById('sales');
+          if (!selectElement) return;
+          selectElement.querySelectorAll('option:not([value="N"])').forEach(o => o.remove());
+          data.forEach(item => {
+            const option = document.createElement('option');
+            option.value = item.staff_id;
+            option.textContent = item.fname_e || item.nick_name || item.staff_id;
+            selectElement.appendChild(option);
+          });
+        })
+        .catch(error => console.error('Error fetching staff data:', error));
       
       document.getElementById('fetch-level').value = level;
       document.getElementById('name-display').textContent = name;
@@ -65,8 +65,11 @@ function fetchData() {
   const year_no = document.getElementById('year').value;
   const month_no = document.getElementById('month').value;
   const channel = document.getElementById('channel').value;
-  const Sales = document.getElementById('fetch-staff').value;
-  const url = `fetch-appoint.php?year_no=${year_no}&month_no=${month_no}&channel=${channel}&Sales=${Sales}`;
+  const salesSelect = document.getElementById('sales');
+  const Sales = (salesSelect && salesSelect.value && salesSelect.value !== 'N')
+    ? salesSelect.value
+    : document.getElementById('fetch-staff').value;
+  const url = `fetch-appoint.php?year_no=${encodeURIComponent(year_no)}&month_no=${encodeURIComponent(month_no)}&channel=${encodeURIComponent(channel)}&Sales=${encodeURIComponent(Sales)}`;
 
   fetch(url)
     .then(response => {
@@ -97,7 +100,12 @@ function updateTable(data) {
       <td>${row.format_qtdate ? row.format_qtdate : ''}</td>
       <td>${row.customer_name}</td>
       <td><input type="text" class="form-control" id="appoint_no${index + 1}" name="appoint_no${index + 1}" value="${row.appoint_no}" readonly></td>
-      <td id="status-${row.appoint_no}" name="status${index+1}" class="form-control text-center ${row.status == '-' ? 'bg-secondary text-white' : row.status == 'pre quotation' ? 'bg-warning text-muted' : ''}" onchange="handleSelectChange('${row.appoint_no}')">${row.status}</td> 
+      <td>
+        <select id="status-${row.appoint_no}" name="status${index+1}" class="form-select text-center ${row.status == '-' ? 'bg-secondary text-white' : row.status == 'pre quotation' ? 'bg-warning text-muted' : ''}" onchange="handleSelectChange('${row.appoint_no}')">
+          <option value="-" ${row.status == '-' ? 'selected' : ''}>-</option>
+          <option value="pre quotation" ${row.status == 'pre quotation' ? 'selected' : ''}>pre quotation</option>
+        </select>
+      </td>
       <td><input type="text" name="remark${index+1}" class="form-control" value="${row.remark ? row.remark : ''}" id="remark-${row.appoint_no}"${row.is_status == 0 ? ' disabled' : ''}></td>
       <td class="form-control text-center ${row.update_time <= 3 ? 'bg-warning text-white' : row.update_time >= 4 ? 'bg-danger text-white' : row.update_time < 10 ? ' text-muted' : ''}">${row.update_time}</td>
     `;
@@ -108,42 +116,21 @@ function updateTable(data) {
 function handleSelectChange(appointNo) {                              
   const selectElement = document.getElementById(`status-${appointNo}`);
   const inputElement = document.getElementById(`remark-${appointNo}`);
+  if (!selectElement || !inputElement) return;
   const selectedValue = selectElement.value;
 
-  inputElement.disabled = selectedValue == 0;
+  inputElement.disabled = selectedValue === '-';
   
   selectElement.classList.remove('bg-secondary', 'bg-warning', 'bg-danger', 'text-white', 'text-muted');
 
-  if (selectedValue == 0) {
+  if (selectedValue === '-') {
     selectElement.classList.add('bg-secondary', 'text-white');
-  } else if (selectedValue == 2 || selectedValue == 4) {
-    selectElement.classList.add('bg-danger', 'text-white');
-  } else if (selectedValue == 3) {
+  } else if (selectedValue === 'pre quotation') {
     selectElement.classList.add('bg-warning', 'text-muted');
   }
 }
 
 document.addEventListener('DOMContentLoaded', fetchData);
-
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('staff_id.php')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => {
-      const selectElement = document.getElementById('sales');
-      data.forEach(item => {
-        const option = document.createElement('option');
-        option.value = item.staff_id;
-        option.textContent = item.fname_e || item.nick_name || item.staff_id; 
-        selectElement.appendChild(option);
-      });
-    })
-    .catch(error => console.error('Error fetching data:', error));
-});
 
 const monthSelect = document.getElementById('month');
 const monthNames = [

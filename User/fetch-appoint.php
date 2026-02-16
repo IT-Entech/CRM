@@ -70,7 +70,7 @@ WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'
 AND is_status <> 'C'
 ORDER BY adjusted_data.appoint_no DESC";
 
-                   $params = array($year_no, $month_no, $Sales);
+                   $params = array($year_no, $month_no, $Sales, $channel);
 
 
 $stmt = sqlsrv_query($objCon, $sqlappoint, $params);

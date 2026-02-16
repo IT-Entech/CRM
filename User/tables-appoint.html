@@ -74,9 +74,9 @@
   <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
       <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
+        <a class="nav-link collapsed" data-bs-target="#dashboards-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Dashboard</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a >
+        </a>
         <ul id="dashboards-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
           <li>
             <a href="index.html">
@@ -113,14 +113,14 @@
             </a>
           </li>
           <li>
-            <a href="./tables-data.html ">
+            <a href="./tables-data.html">
               <i class="bi bi-circle"></i><span>อัพเดทใบเสนอราคาลูกต้า</span>
             </a>
           </li>
         </ul>
       </li>
       <li class="nav-heading">Pages</li>
-         <li class="nav-item d-none" id="permission-nav">
+      <li class="nav-item d-none" id="permission-nav">
         <a class="nav-link collapsed" href="../Admin/permission/">
           <i class="bi bi-question-circle"></i>
           <span>Permission</span>
@@ -137,8 +137,8 @@
   <!-- End Sidebar-->
 
   <main id="main" class="main">
-     <input type="hidden" id="fetch-level" value="" readonly>
-      <input type="hidden" id="fetch-staff" value="" readonly>
+    <input type="hidden" id="fetch-level" value="" readonly>
+    <input type="hidden" id="fetch-staff" value="" readonly>
     <div class="pagetitle">
       <h1>ตารางการติดตามเสนอราคาลูกค้า</h1>
       <nav>
@@ -157,35 +157,37 @@
           <div class="card">
             <div class="card-body">
               <h5 class="card-title">ตารางการติดตามเสนอราคาลูกค้า</h5>
-              <div class="col-lg-8">
-                <div class="row">
-                  <div class="col-xxl-3 col-md-4" id="select-sales">
-                    <div class="form-floating mb-3">
-                      <select class="form-select" id="sales" aria-label="Sales" onchange="fetchData()">
-                        <option selected value="N">-</option>
-                      </select>
-                      <label for="sales">Sales</label>
+              <div class="row g-3 mb-2">
+                <div class="col-lg-8">
+                  <div class="row g-3">
+                    <div class="col-xxl-3 col-md-4" id="select-sales">
+                      <div class="form-floating">
+                        <select class="form-select" id="sales" aria-label="Sales" onchange="fetchData()">
+                          <option selected value="N">-</option>
+                        </select>
+                        <label for="sales">Sales</label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xxl-3 col-md-6">
-                    <div class="form-floating mb-3">
-                      <select class="form-select" id="channel" aria-label="Channel" onchange="fetchData()">
-                        <option selected value="I">Online</option>
-                        <option value="O">Offline</option>
-                      </select>
-                      <label for="channel">Channel</label>
+                    <div class="col-xxl-3 col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="channel" aria-label="Channel" onchange="fetchData()">
+                          <option selected value="I">Online</option>
+                          <option value="O">Offline</option>
+                        </select>
+                        <label for="channel">Channel</label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xxl-3 col-md-6">
-                    <div class="form-floating mb-3">
-                      <select class="form-select" id="month" aria-label="Month" onchange="fetchData()"></select>
-                      <label for="month">Month</label>
+                    <div class="col-xxl-3 col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="month" aria-label="Month" onchange="fetchData()"></select>
+                        <label for="month">Month</label>
+                      </div>
                     </div>
-                  </div>
-                  <div class="col-xxl-3 col-md-6">
-                    <div class="form-floating mb-3">
-                      <select class="form-select" id="year" aria-label="Year" onchange="fetchData()"></select>
-                      <label for="year">Year</label>
+                    <div class="col-xxl-3 col-md-6">
+                      <div class="form-floating">
+                        <select class="form-select" id="year" aria-label="Year" onchange="fetchData()"></select>
+                        <label for="year">Year</label>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -196,23 +198,25 @@
                   <button type="reset" class="btn btn-secondary">Reset</button-->
                 </div>
                 <div class="modal-body">
-                  <table id="tableAP" class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">วันที่ติดต่อ</th>
-                        <th scope="col">วันที่ pre ตั๋ว</th>
-                        <th scope="col">Customer</th>
-                        <th scope="col">AP No</th>
-                        <th scope="col">สถานะ</th>
-                        <th scope="col">หมายเหตุ</th>
-                        <th scope="col">Pre-quotation date</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr></tr>
-                    </tbody>
-                  </table>
+                  <div class="table-responsive">
+                    <table id="tableAP" class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">วันที่ติดต่อ</th>
+                          <th scope="col">วันที่ pre ตั๋ว</th>
+                          <th scope="col">Customer</th>
+                          <th scope="col">AP No</th>
+                          <th scope="col">สถานะ</th>
+                          <th scope="col">หมายเหตุ</th>
+                          <th scope="col">Pre-quotation date</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr></tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </form>
               <!-- End Table with stripped rows -->

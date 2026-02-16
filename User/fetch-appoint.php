@@ -1,12 +1,14 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 1);
+ini_set('display_errors', 0);
 
 include_once '../../connectDB/connectDB.php';
 $objCon = connectDB(); // Connect to the database
 
 if ($objCon === false) {
-    die(json_encode(["error" => sqlsrv_errors()]));
+    header('Content-Type: application/json');
+    echo json_encode(["error" => sqlsrv_errors()]);
+    exit;
 }
 
 $currentYear = date("Y");
@@ -76,7 +78,9 @@ ORDER BY adjusted_data.appoint_no DESC";
 $stmt = sqlsrv_query($objCon, $sqlappoint, $params);
 
 if ($stmt === false) {
-    die(json_encode(["error" => sqlsrv_errors()]));
+    header('Content-Type: application/json');
+    echo json_encode(["error" => sqlsrv_errors()]);
+    exit;
 }
 
 $tableData = [];
@@ -92,4 +96,7 @@ sqlsrv_free_stmt($stmt);
 sqlsrv_close($objCon);
 
 header('Content-Type: application/json');
+if (ob_get_length()) {
+    ob_clean();
+}
 echo json_encode($data);

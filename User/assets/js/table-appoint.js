@@ -37,7 +37,7 @@ function getSessionData() {
             return response.json();
           })
           .then(data => {
-            const selectElement = document.getElementById('Sales');
+            const selectElement = document.getElementById('sales');
             data.forEach(item => {
               const option = document.createElement('option');
               option.value = item.staff_id;

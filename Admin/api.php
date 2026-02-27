@@ -11,7 +11,7 @@ if ($objCon === false) {
 $year_no = $_GET['year_no'] ?? date('Y');
 $month_no = $_GET['month_no'] ?? date('m');
 $Status = $_GET['Status'] ?? '00';
-$Sales = $_GET['Sales'] ?? 'N'; // 'N' หมายถึงไม่กรอง
+$Sales = $_GET['Sales'] ?? 'N'; 
 $staff = $_GET['staff'] ?? null;
 
 // ตรวจสอบทั้งปี

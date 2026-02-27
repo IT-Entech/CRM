@@ -93,14 +93,16 @@ $sqlappoint = "
     SUM(so_amount) AS value_customer
   FROM (
     SELECT 
-      A.appoint_no AS appoint_no,
-      CASE WHEN A.staff_id <> '1119900831940' THEN A.appoint_no END AS appoint_quality,
-      CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5,50) THEN B.appoint_no END AS appoint_qt,
-      B.so_amount
+      A.appoint_no,
+      CASE WHEN A.staff_id <> '1119700041155' THEN A.appoint_no END AS appoint_quality,
+      CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5) THEN B.appoint_no END AS appoint_qt,
+      CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5)  THEN B.so_amount END AS so_amount,
+      ROW_NUMBER() OVER (PARTITION BY A.appoint_no, CASE WHEN B.print_qt_count > 0 AND B.is_pre = 'N' AND B.print_qt_id IN (5) THEN 1 ELSE 0 END ORDER BY B.record_date DESC) AS rn
     FROM appoint_head A
     LEFT JOIN cost_sheet_head B ON A.appoint_no = B.appoint_no 
     WHERE $where_clause
   ) AS subquery
+     WHERE rn = 1
 ";
 
 $sqlcostsheet = "
@@ -112,7 +114,7 @@ $sqlcostsheet = "
   LEFT JOIN View_SO_SUM B ON A.appoint_no = B.appoint_no
   WHERE A.print_qt_count > 0
     AND A.is_pre = 'N'
-    AND A.print_qt_id IN (5,50)
+    AND A.print_qt_id IN (5)
     AND is_status = 'A'
     AND $where_clause1
 ";

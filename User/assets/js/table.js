@@ -74,11 +74,11 @@ getSessionData();
 function fetchData() {
   const year_no = document.getElementById('year').value;
   const month_no = document.getElementById('month').value;
+  const status = document.getElementById('status').value;
   const Sales = document.getElementById('sales').value;
   const staff = document.getElementById('fetch-staff').value;
-  let url;
 
-  url = `api.php?year_no=${year_no}&month_no=${month_no}&Sales=${Sales}&staff=${staff}`;
+  const url = `api.php?year_no=${year_no}&month_no=${month_no}&Status=${status}&Sales=${Sales}&staff=${staff}`;
  
 
     fetch(url)

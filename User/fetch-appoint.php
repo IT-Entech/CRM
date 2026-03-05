@@ -1,6 +1,6 @@
 <?php
 error_reporting(E_ALL);
-ini_set('display_errors', 0);
+ini_set('display_errors', 0); // Disable displaying errors
 
 include_once '../../connectDB/connectDB.php';
 $objCon = connectDB(); // Connect to the database
@@ -18,9 +18,7 @@ $year_no = isset($_GET['year_no']) ? $_GET['year_no'] : $currentYear;
 $month_no = isset($_GET['month_no']) ? $_GET['month_no'] : $currentMonth;
 $channel = isset($_GET['channel']) ? $_GET['channel'] : NULL;
 
-
-
-    $sqlappoint = "WITH adjusted_data AS (
+$sqlappoint = "WITH adjusted_data AS (
     SELECT 
      B.is_status,
     FORMAT(A.appoint_date, 'yyyy-MM-dd') AS format_date,
@@ -68,12 +66,11 @@ else '-' END AS status,
 update_time,
 remark
 FROM adjusted_data
-WHERE adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y'
-AND is_status <> 'C'
-ORDER BY adjusted_data.appoint_no DESC";
+WHERE (adjusted_is_pre IS NULL OR adjusted_is_pre = 'Y')
+AND (is_status IS NULL OR is_status <> 'C')
+ORDER BY appoint_no DESC";
 
-                   $params = array($year_no, $month_no, $Sales, $channel);
-
+$params = array($year_no, $month_no, $Sales, $channel);
 
 $stmt = sqlsrv_query($objCon, $sqlappoint, $params);
 
